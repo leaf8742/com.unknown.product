@@ -1,7 +1,7 @@
 #import "MainMenuViewController.h"
-#import "UserInformation.h"
-#import "ObjectGeneral.h"
+#import "Model.h"
 #import "MainMenuCell.h"
+#import "DeviceManager.h"
 
 NSString *const BluetoothObject = @"BluetoothObject";
 NSString *const RadarObject = @"RadarObject";
@@ -19,39 +19,25 @@ NSString *const LocaltionObject = @"LocaltionObject";
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.edgesForExtendedLayout = UIRectEdgeAll;
     [[UserInformation sharedInstance] addObserver:self forKeyPath:@"objects" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopScan:) name:StopScan object:nil];
+
     self.title = @"主菜单";
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshViewControlEventValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    [self.refreshControl beginRefreshing];
+    [self.refreshControl sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
-- (IBAction)find:(UIButton *)sender {
-    id object = [[UserInformation sharedInstance] objects][sender.tag];
-    [[NSNotificationCenter defaultCenter] postNotificationName:LocaltionObject object:object];
-}
-
-- (IBAction)alert:(UIButton *)sender {
-    __block NSString *title = [sender titleForState:UIControlStateNormal];
-    [sender setEnabled:NO];
-    [sender setTitle:@"" forState:UIControlStateNormal];
-    
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    indicator.frame = CGRectMake((sender.frame.size.width - indicator.frame.size.width) / 2,
-                                 (sender.frame.size.height - indicator.frame.size.height) / 2,
-                                 indicator.frame.size.width, indicator.frame.size.height);
-    [sender addSubview:indicator];
-    [indicator startAnimating];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [sender setEnabled:YES];
-        [sender setTitle:title forState:UIControlStateNormal];
-        [indicator removeFromSuperview];
+- (void)refreshViewControlEventValueChanged:(UIRefreshControl *)sender {
+    [DeviceManager scan];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [DeviceManager stopScan];
     });
 }
 
-- (IBAction)distance:(UIButton *)sender {
-    id object = [[UserInformation sharedInstance] objects][sender.tag];
-    [[NSNotificationCenter defaultCenter] postNotificationName:RadarObject object:object];
-}
-
+#pragma mark - NSKeyValueObserving
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 //    NSNumber *kindValue = [change objectForKey:NSKeyValueChangeKindKey];
 //    id newValue = [change objectForKey:NSKeyValueChangeNewKey];
@@ -65,6 +51,10 @@ NSString *const LocaltionObject = @"LocaltionObject";
     if ([keyPath isEqualToString:@"objects"]) {
         [self.tableView reloadData];
     }
+}
+
+- (void)stopScan:(NSNotification *)notification {
+    [self.refreshControl endRefreshing];
 }
 
 #pragma mark - CoordinatingControllerDelegate
@@ -83,17 +73,21 @@ NSString *const LocaltionObject = @"LocaltionObject";
     MainMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainMenuCellIdentifier" forIndexPath:indexPath];
     
     id<ObjectGeneral> object = [[UserInformation sharedInstance] objects][indexPath.row];
-    cell.title.text = object.title;
-    cell.currentDistance.text = @"距离手机50米";
-    cell.alertDistance.text = @"距离手机100米报警";
-    cell.find.tag = [indexPath row];
-    cell.alert.tag = [indexPath row];
-    cell.distance.tag = [indexPath row];
-
+    [cell buildWithObject:object];
+    
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    id object = [[UserInformation sharedInstance] objects][indexPath.row];
+    if ([[(CameraInformation *)object peripheral] state] == CBPeripheralStateDisconnected) {
+        [DeviceManager connectPeripheral:[(CameraInformation *)object peripheral]];
+    } else if ([[(CameraInformation *)object peripheral] state] == CBPeripheralStateConnecting ||
+               [[(CameraInformation *)object peripheral] state] == CBPeripheralStateConnected) {
+        [DeviceManager cancelPeripheralConnection:[(CameraInformation *)object peripheral]];
+    }
+}
 
 #pragma mark - Memory Management
 - (void)didReceiveMemoryWarning {
@@ -103,6 +97,7 @@ NSString *const LocaltionObject = @"LocaltionObject";
 
 - (void)dealloc {
     [[UserInformation sharedInstance] removeObserver:self forKeyPath:@"objects"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

@@ -6,6 +6,7 @@
 - (id)init {
     if (self = [super init]) {
         self.objects = [NSMutableArray array];
+        [self addObserver:self forKeyPath:@"objects" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     }
     return self;
 }
@@ -33,6 +34,21 @@
         }
         return result;
     }
+}
+
+#pragma mark - NSKeyValueObserving
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+//    NSNumber *kindValue = [change objectForKey:NSKeyValueChangeKindKey];
+//    id newValue = [change objectForKey:NSKeyValueChangeNewKey];
+//    id oldValue = [change objectForKey:NSKeyValueChangeOldKey];
+//    id indexesValue = [change objectForKey:NSKeyValueChangeIndexesKey];
+//
+//    if ([kindValue isEqual:[NSNumber numberWithInteger:NSKeyValueChangeInsertion]]) {
+//    }
+
+//    if ([keyPath isEqualToString:@"objects"]) {
+//        [self.tableView reloadData];
+//    }
 }
 
 #pragma mark - Signleton Implementation

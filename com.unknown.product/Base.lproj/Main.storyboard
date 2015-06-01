@@ -66,7 +66,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="find:" destination="xl5-sK-qWr" eventType="touchUpInside" id="lp0-cs-910"/>
+                                                <action selector="find:" destination="B55-SP-iMI" eventType="touchUpInside" id="FUe-HA-jdc"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxn-Ad-Pny">
@@ -86,7 +86,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="alert:" destination="xl5-sK-qWr" eventType="touchUpInside" id="4Dm-3j-Wcf"/>
+                                                <action selector="alert:" destination="B55-SP-iMI" eventType="touchUpInside" id="CIt-Yo-PHo"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRs-Wa-S7s">
@@ -106,7 +106,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="distance:" destination="xl5-sK-qWr" eventType="touchUpInside" id="eBx-Td-olD"/>
+                                                <action selector="distance:" destination="B55-SP-iMI" eventType="touchUpInside" id="ivm-yF-sfb"/>
                                             </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UjZ-nx-c8A">
@@ -160,11 +160,11 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="alert" destination="Cxn-Ad-Pny" id="Lya-ra-yva"/>
+                                    <outlet property="alert" destination="Cxn-Ad-Pny" id="JMa-YN-cKb"/>
                                     <outlet property="alertDistance" destination="vAl-xd-i8R" id="hBL-WR-E0O"/>
                                     <outlet property="currentDistance" destination="tdK-iY-NTb" id="hm3-Zd-D7G"/>
-                                    <outlet property="distance" destination="oRs-Wa-S7s" id="D0C-Kl-Ixt"/>
-                                    <outlet property="find" destination="vwC-gX-npG" id="mzR-Im-tYt"/>
+                                    <outlet property="distance" destination="oRs-Wa-S7s" id="gJl-Az-DWS"/>
+                                    <outlet property="find" destination="vwC-gX-npG" id="GkW-3F-IOx"/>
                                     <outlet property="title" destination="hZC-WU-6Z8" id="TNb-S1-O8n"/>
                                 </connections>
                             </tableViewCell>

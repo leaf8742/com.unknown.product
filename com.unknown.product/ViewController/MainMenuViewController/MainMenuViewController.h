@@ -18,8 +18,4 @@ FOUNDATION_EXPORT NSString *const LocaltionObject;
  */
 @interface MainMenuViewController : UITableViewController<CoordinatingControllerDelegate>
 
-- (IBAction)find:(UIButton *)sender;
-- (IBAction)alert:(UIButton *)sender;
-- (IBAction)distance:(UIButton *)sender;
-
 @end

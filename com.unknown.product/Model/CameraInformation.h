@@ -14,4 +14,6 @@
  */
 @interface CameraInformation : NSObject<ObjectGeneral>
 
+@property (strong, nonatomic) CBPeripheral *peripheral;
+
 @end

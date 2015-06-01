@@ -1,13 +1,11 @@
 #import "DeviceManager.h"
-#import <CoreBluetooth/CoreBluetooth.h>
-#import "UserInformation.h"
-#import "CameraInformation.h"
+#import "Model.h"
+
+NSString *const StopScan = @"StopScan";
 
 @interface DeviceManager()<CBCentralManagerDelegate, CBPeripheralDelegate>
 
 @property (strong, nonatomic) CBCentralManager *manager;
-
-@property (strong, nonatomic) CBPeripheral *peripheral;
 
 @end
 
@@ -34,26 +32,42 @@
     return self;
 }
 
-- (void)cleanup {
-    // See if we are subscribed to a characteristic on the peripheral
-    if (self.peripheral.services != nil) {
-        for (CBService *service in self.peripheral.services) {
++ (void)scan {
+    [[DeviceManager sharedInstance].manager scanForPeripheralsWithServices:nil
+                                                                   options:@{CBCentralManagerScanOptionAllowDuplicatesKey: @YES}];
+}
+
++ (void)stopScan {
+    [[DeviceManager sharedInstance].manager stopScan];
+    [[NSNotificationCenter defaultCenter] postNotificationName:StopScan object:nil];
+}
+
++ (void)connectPeripheral:(CBPeripheral *)peripheral {
+    [[DeviceManager sharedInstance].manager connectPeripheral:peripheral options:nil];
+}
+
++ (void)cancelPeripheralConnection:(CBPeripheral *)peripheral {
+    if (peripheral.services != nil) {
+        for (CBService *service in peripheral.services) {
             if (service.characteristics != nil) {
                 for (CBCharacteristic *characteristic in service.characteristics) {
                     if (characteristic.isNotifying) {
                         // It is notifying, so unsubscribe
-                        [self.peripheral setNotifyValue:NO forCharacteristic:characteristic];
+                        [peripheral setNotifyValue:NO forCharacteristic:characteristic];
                         
                         // And we're done.
-                        return;
+//                        return;
                     }
                 }
             }
         }
     }
     
-    // If we've got this far, we're connected, but we're not subscribed, so we just disconnect
-    [self.manager cancelPeripheralConnection:self.peripheral];
+    [[DeviceManager sharedInstance].manager cancelPeripheralConnection:peripheral];
+}
+
++ (void)alert:(CBPeripheral *)peripheral {
+    
 }
 
 #pragma mark - Signleton Implementation
@@ -99,9 +113,9 @@
     switch (central.state) {
         case CBCentralManagerStatePoweredOn:
             // Scans for any peripheral
-            [self.manager scanForPeripheralsWithServices:nil
-                                                 options:@{CBCentralManagerScanOptionAllowDuplicatesKey :
-                                                               @YES}];
+//            [self.manager scanForPeripheralsWithServices:nil
+//                                                 options:@{CBCentralManagerScanOptionAllowDuplicatesKey :
+//                                                               @YES}];
             break;
         default:
             NSLog(@"Central Manager did change state");
@@ -110,21 +124,26 @@
 }
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
+    if (![peripheral.name isEqualToString:@"ITAG"]) {
+        return;
+    }
+    
     // Stops scanning for peripheral
-//    [self.manager stopScan];
+    [DeviceManager stopScan];
     
     CameraInformation *camera = [UserInformation objectWithIdentifier:peripheral.identifier type:kObjectTypeCamera];
+    camera.peripheral = peripheral;
     camera.title = peripheral.name;
     if (![[[UserInformation sharedInstance] objects] containsObject:camera]) {
         [[[UserInformation sharedInstance] mutableArrayValueForKey:@"objects"] addObject:camera];
     }
     
-    if (self.peripheral != peripheral) {
-        self.peripheral = peripheral;
-        NSLog(@"Connecting to peripheral %@", peripheral);
-        // Connects to the discovered peripheral
-        [self.manager connectPeripheral:peripheral options:nil];
-    }
+//    if (self.peripheral != peripheral) {
+//        self.peripheral = peripheral;
+//        NSLog(@"Connecting to peripheral %@", peripheral);
+//        // Connects to the discovered peripheral
+//        [self.manager connectPeripheral:peripheral options:nil];
+//    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
@@ -134,30 +153,30 @@
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     // Clears the data that we may already have
     // Sets the peripheral delegate
-    [self.peripheral setDelegate:self];
+    [peripheral setDelegate:self];
     // Asks the peripheral to discover the service
-    [self.peripheral discoverServices:nil];
+    [peripheral discoverServices:nil];
 }
 
 #pragma mark - CBPeripheralDelegate
 - (void)peripheral:(CBPeripheral *)aPeripheral didDiscoverServices:(NSError *)error {
     if (error) {
         NSLog(@"Error discovering service:%@", [error localizedDescription]);
-        [self cleanup];
+        [DeviceManager cancelPeripheralConnection:aPeripheral];
         return;
     }
     for (CBService *service in aPeripheral.services) {
         NSLog(@"Service found with UUID: %@",
               service.UUID);
         // Discovers the characteristics for a given service
-        [self.peripheral discoverCharacteristics:service.characteristics forService:service];
+        [aPeripheral discoverCharacteristics:service.characteristics forService:service];
     }
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
     if (error) {
         NSLog(@"Error discovering characteristic: %@", [error localizedDescription]);
-        [self cleanup];
+        [DeviceManager cancelPeripheralConnection:peripheral];
         return;
     }
     for (CBCharacteristic *characteristic in service.characteristics) {
@@ -188,7 +207,6 @@
     // Notification has started
     if (characteristic.isNotifying) {
         [peripheral discoverDescriptorsForCharacteristic:characteristic];
-        
     } else { // Notification has stopped
 //        [self.manager cancelPeripheralConnection:self.peripheral];
     }

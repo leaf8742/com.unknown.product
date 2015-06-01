@@ -4,6 +4,7 @@
  * @date 2015-04-15
  */
 #import <UIKit/UIKit.h>
+#import "Model.h"
 
 /**
  * @class MainMenuCell
@@ -29,5 +30,13 @@
 
 /// @brief 距离
 @property (weak, nonatomic) IBOutlet UIButton *distance;
+
+- (void)buildWithObject:(id<ObjectGeneral>)object;
+
+- (IBAction)distance:(UIButton *)sender;
+
+- (IBAction)find:(UIButton *)sender;
+
+- (IBAction)alert:(UIButton *)sender;
 
 @end

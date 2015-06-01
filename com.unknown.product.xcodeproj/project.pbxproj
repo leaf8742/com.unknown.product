@@ -85,6 +85,7 @@
 		09066F071ADD0F6400FF56BB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		091909611AEDBDD40009183E /* zhuanhuan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhuanhuan@2x.png"; sourceTree = "<group>"; };
 		091909631AEDC4950009183E /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		0942ECD51B15B74200DF3028 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		0954D1321AED173B00431477 /* SCRecordSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRecordSessionManager.h; sourceTree = "<group>"; };
 		0954D1331AED173B00431477 /* SCRecordSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRecordSessionManager.m; sourceTree = "<group>"; };
 		0954D1351AED1E6700431477 /* location_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location_highlighted@2x.png"; sourceTree = "<group>"; };
@@ -271,6 +272,7 @@
 				09BC2C051ADE16EB00DC4F2E /* ObjectGeneral.h */,
 				09BC2C021ADE16B500DC4F2E /* UserInformation.h */,
 				09BC2C031ADE16B500DC4F2E /* UserInformation.m */,
+				0942ECD51B15B74200DF3028 /* Model.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
