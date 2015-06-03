@@ -7,6 +7,7 @@
 NSString *const BluetoothObject = @"BluetoothObject";
 NSString *const RadarObject = @"RadarObject";
 NSString *const LocaltionObject = @"LocaltionObject";
+NSString *const UpdateObject = @"UpdateObject";
 
 @interface MainMenuViewController ()
 

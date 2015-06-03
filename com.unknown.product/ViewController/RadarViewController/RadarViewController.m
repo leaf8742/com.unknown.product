@@ -27,7 +27,7 @@
     self.distance.text = [NSString stringWithFormat:@"%.1f", self.camera.distance];
 }
 
-- (void)radarObject:(NSNotification *)notification {
+- (void)updateObject:(NSNotification *)notification {
     self.camera = [notification object];
     [self.camera addObserver:self forKeyPath:@"RSSI" options:NSKeyValueObservingOptionNew context:nil];
 
@@ -46,7 +46,8 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     id result = [storyboard instantiateViewControllerWithIdentifier:@"RadarViewController"];
     
-    [[NSNotificationCenter defaultCenter] addObserver:result selector:@selector(radarObject:) name:RadarObject object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:result selector:@selector(updateObject:) name:RadarObject object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:result selector:@selector(updateObject:) name:UpdateObject object:nil];
     
     return result;
 }

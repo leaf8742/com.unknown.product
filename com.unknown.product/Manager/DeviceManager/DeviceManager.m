@@ -34,30 +34,30 @@ NSString *const KeyStateService = @"KeyStateService";
 
 @implementation DeviceManager
 
-@synthesize alertDistance = _alertDistance;
+@synthesize alarmDistance = _alarmDistance;
 
 - (id)init {
     if (self = [super init]) {
         self.manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         id alertDistance = [[NSUserDefaults standardUserDefaults] valueForKey:@"alertDistance"];
         if (alertDistance) {
-            self.alertDistance = [alertDistance integerValue];
+            self.alarmDistance = [alertDistance integerValue];
         } else {
-            self.alertDistance = 100;
+            self.alarmDistance = 100;
         }
     }
     return self;
 }
 
-- (NSInteger)alertDistance {
-    return _alertDistance;
+- (NSInteger)alarmDistance {
+    return _alarmDistance;
 }
 
-- (void)setAlertDistance:(NSInteger)alertDistance {
+- (void)setAlarmDistance:(NSInteger)alertDistance {
     [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInteger:alertDistance] forKey:@"alertDistance"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    _alertDistance = alertDistance;
+    _alarmDistance = alertDistance;
 }
 
 + (void)scan {
@@ -190,7 +190,7 @@ NSString *const KeyStateService = @"KeyStateService";
     [peripheral discoverServices:nil];
     
     CameraInformation *camera = [UserInformation objectWithIdentifier:peripheral.identifier type:kObjectTypeCamera];
-    [[NSNotificationCenter defaultCenter] postNotificationName:RadarObject object:camera];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UpdateObject object:camera];
 }
 
 #pragma mark - CBPeripheralDelegate

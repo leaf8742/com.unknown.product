@@ -9,6 +9,7 @@
 FOUNDATION_EXPORT NSString *const BluetoothObject;
 FOUNDATION_EXPORT NSString *const RadarObject;
 FOUNDATION_EXPORT NSString *const LocaltionObject;
+FOUNDATION_EXPORT NSString *const UpdateObject;
 
 /**
  * @class MainMenuViewController

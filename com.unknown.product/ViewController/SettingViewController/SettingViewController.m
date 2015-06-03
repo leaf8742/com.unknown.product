@@ -25,13 +25,13 @@
     [self.tableView setFrame:frame];
     
     self.titles = @[
-                    /*[LocalizationManager localizedStringForKey:@"Radar Frequency" comment:nil],
-                    [LocalizationManager localizedStringForKey:@"Radar Unit" comment:nil],*/
+                    [LocalizationManager localizedStringForKey:@"Radar Frequency" comment:nil],
+                    [LocalizationManager localizedStringForKey:@"Radar Unit" comment:nil],
                     [LocalizationManager localizedStringForKey:@"Anti lost distance" comment:nil],
                                           [LocalizationManager localizedStringForKey:@"Alarm Way" comment:nil],
                                           [LocalizationManager localizedStringForKey:@"Language" comment:nil]];
-    self.selectors = @[/*@"radarRate", @"radarUnit", */@"distance", @"alertMode", @"language"];
-    self.images = @[/*@"radarRate", @"radarUnit", */@"distance", @"alertMode", @"language"];
+    self.selectors = @[@"radarRate", @"radarUnit", @"distance", @"alertMode", @"language"];
+    self.images = @[@"radarRate", @"radarUnit", @"distance", @"alertMode", @"language"];
 }
 
 #pragma mark - CoordinatingControllerDelegate
