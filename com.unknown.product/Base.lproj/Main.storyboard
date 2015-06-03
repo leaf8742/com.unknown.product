@@ -311,6 +311,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="distance" destination="OWc-si-Tv6" id="nVB-IK-Yc6"/>
                         <outlet property="mapView" destination="KRX-45-FEu" id="pAD-pN-ssa"/>
                     </connections>
                 </viewController>

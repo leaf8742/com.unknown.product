@@ -5,6 +5,7 @@
  */
 #import <UIKit/UIKit.h>
 #import <CoordinatingController/CoordinatingController.h>
+#import "CameraInformation.h"
 
 /**
  * @class RadarViewController
@@ -13,5 +14,7 @@
  * @date 2015-04-15
  */
 @interface RadarViewController : UIViewController<CoordinatingControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UILabel *distance;
 
 @end

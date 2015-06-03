@@ -1,5 +1,6 @@
 #import "DeviceManager.h"
 #import "Model.h"
+#import "MainMenuViewController.h"
 
 NSString *const StopScan = @"StopScan";
 NSString *const KeyStateService = @"KeyStateService";
@@ -9,6 +10,8 @@ NSString *const KeyStateService = @"KeyStateService";
 @property (strong, nonatomic) CBCentralManager *manager;
 
 @property (strong, nonatomic) CBCharacteristic *alertCharacteristic;
+
+@property (strong, nonatomic) NSTimer *timer;
 
 @end
 
@@ -31,11 +34,30 @@ NSString *const KeyStateService = @"KeyStateService";
 
 @implementation DeviceManager
 
+@synthesize alertDistance = _alertDistance;
+
 - (id)init {
     if (self = [super init]) {
         self.manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        id alertDistance = [[NSUserDefaults standardUserDefaults] valueForKey:@"alertDistance"];
+        if (alertDistance) {
+            self.alertDistance = [alertDistance integerValue];
+        } else {
+            self.alertDistance = 100;
+        }
     }
     return self;
+}
+
+- (NSInteger)alertDistance {
+    return _alertDistance;
+}
+
+- (void)setAlertDistance:(NSInteger)alertDistance {
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInteger:alertDistance] forKey:@"alertDistance"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    _alertDistance = alertDistance;
 }
 
 + (void)scan {
@@ -146,7 +168,8 @@ NSString *const KeyStateService = @"KeyStateService";
     if (![[[UserInformation sharedInstance] objects] containsObject:camera]) {
         [[[UserInformation sharedInstance] mutableArrayValueForKey:@"objects"] addObject:camera];
     }
-    
+    [DeviceManager connectPeripheral:peripheral];
+
 //    if (self.peripheral != peripheral) {
 //        self.peripheral = peripheral;
 //        NSLog(@"Connecting to peripheral %@", peripheral);
@@ -165,9 +188,22 @@ NSString *const KeyStateService = @"KeyStateService";
     [peripheral setDelegate:self];
     // Asks the peripheral to discover the service
     [peripheral discoverServices:nil];
+    
+    CameraInformation *camera = [UserInformation objectWithIdentifier:peripheral.identifier type:kObjectTypeCamera];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RadarObject object:camera];
 }
 
 #pragma mark - CBPeripheralDelegate
+- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
+    CameraInformation *camera = [UserInformation objectWithIdentifier:peripheral.identifier type:kObjectTypeCamera];
+    camera.RSSI = peripheral.RSSI;
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didReadRSSI:(NSNumber *)RSSI error:(NSError *)error {
+    CameraInformation *camera = [UserInformation objectWithIdentifier:peripheral.identifier type:kObjectTypeCamera];
+    camera.RSSI = RSSI;
+}
+
 - (void)peripheral:(CBPeripheral *)aPeripheral didDiscoverServices:(NSError *)error {
     if (error) {
         NSLog(@"Error discovering service:%@", [error localizedDescription]);

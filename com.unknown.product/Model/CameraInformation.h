@@ -16,4 +16,8 @@
 
 @property (strong, nonatomic) CBPeripheral *peripheral;
 
+@property (strong, nonatomic) NSNumber *RSSI;
+
+- (CGFloat)distance;
+
 @end

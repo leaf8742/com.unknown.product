@@ -17,7 +17,8 @@
 "Alarm" = "Alarm";
 "Distance" = "Distance";
 "BT Connection Device" = "BT Connection Device";
-"How long ... from the mobile" = "How long ... from the mobile";
+"How long ... from the mobile" = "How long ... from the mobile: %.1f metre";
+"Distance for How long ... from the mobile alarm" = "Distance for How long ... from the mobile alarm: %d metre";
 "metre" = "metre";
 "Auto Alarm" = "Auto Alarm";
 "Distance" = "Distance";

@@ -17,7 +17,8 @@
 "Alarm" = "报警";
 "Distance" = "距离";
 "BT Connection Device" = "蓝牙已连接设备";
-"How long ... from the mobile" = "距离手机";
+"How long ... from the mobile" = "距离手机%.1f米";
+"Distance for How long ... from the mobile alarm" = "距离手机%d米报警";
 "metre" = "米";
 "Auto Alarm" = "自动报警";
 "Distance" = "距离";

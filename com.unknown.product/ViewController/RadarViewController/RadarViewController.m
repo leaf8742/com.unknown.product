@@ -1,6 +1,7 @@
 #import "RadarViewController.h"
 #import "LocationManager.h"
 #import "LocalizationManager.h"
+#import "MainMenuViewController.h"
 
 @interface RadarViewController ()
 
@@ -9,6 +10,8 @@
 @property (nonatomic, strong) CLGeocoder *geocoder;
 
 @property (nonatomic, strong) MKPlacemark *placemark;
+
+@property (strong, nonatomic) CameraInformation *camera;
 
 @end
 
@@ -20,12 +23,31 @@
     
     self.title = [LocalizationManager localizedStringForKey:@"Radar" comment:nil];
     self.geocoder = [[CLGeocoder alloc] init];
+    
+    self.distance.text = [NSString stringWithFormat:@"%.1f", self.camera.distance];
+}
+
+- (void)radarObject:(NSNotification *)notification {
+    self.camera = [notification object];
+    [self.camera addObserver:self forKeyPath:@"RSSI" options:NSKeyValueObservingOptionNew context:nil];
+
+//    self.selectedIndex = 1;
+//    [self tabBar:self.tabBar didSelectItem:self.radarTab];
+}
+
+#pragma mark - NSKeyValueObserving
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    self.distance.text = [NSString stringWithFormat:@"%.1f", self.camera.distance];
 }
 
 #pragma mark - CoordinatingControllerDelegate
 + (instancetype)buildViewController {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     id result = [storyboard instantiateViewControllerWithIdentifier:@"RadarViewController"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:result selector:@selector(radarObject:) name:RadarObject object:nil];
+    
     return result;
 }
 
@@ -51,6 +73,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

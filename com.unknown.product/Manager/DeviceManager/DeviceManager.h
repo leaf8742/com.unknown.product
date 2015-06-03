@@ -29,4 +29,6 @@ FOUNDATION_EXPORT NSString *const KeyStateService;
 
 + (void)alert:(CBPeripheral *)peripheral;
 
+@property (assign, nonatomic) NSInteger alertDistance;
+
 @end
