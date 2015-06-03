@@ -22,6 +22,7 @@
 		0954D1381AED1E6700431477 /* location_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0954D1361AED1E6700431477 /* location_normal@2x.png */; };
 		0954D13B1AED1F9400431477 /* bluetooth_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0954D1391AED1F9400431477 /* bluetooth_highlighted@2x.png */; };
 		0954D13C1AED1F9400431477 /* bluetooth_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0954D13A1AED1F9400431477 /* bluetooth_normal@2x.png */; };
+		096C728B1B1EEBAF00839D8A /* LELocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096C728A1B1EEBAF00839D8A /* LELocation.framework */; };
 		098399841AED95D100EDE6EF /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 098399831AED95D100EDE6EF /* setting@2x.png */; };
 		098399871AED97D500EDE6EF /* VideoMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 098399861AED97D500EDE6EF /* VideoMenu.m */; };
 		0983998A1AED9AFE00EDE6EF /* CapturePhotoMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 098399891AED9AFE00EDE6EF /* CapturePhotoMenu.m */; };
@@ -92,6 +93,7 @@
 		0954D1361AED1E6700431477 /* location_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location_normal@2x.png"; sourceTree = "<group>"; };
 		0954D1391AED1F9400431477 /* bluetooth_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth_highlighted@2x.png"; sourceTree = "<group>"; };
 		0954D13A1AED1F9400431477 /* bluetooth_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth_normal@2x.png"; sourceTree = "<group>"; };
+		096C728A1B1EEBAF00839D8A /* LELocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LELocation.framework; sourceTree = "<group>"; };
 		098399831AED95D100EDE6EF /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		098399851AED97D500EDE6EF /* VideoMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoMenu.h; sourceTree = "<group>"; };
 		098399861AED97D500EDE6EF /* VideoMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoMenu.m; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				091909641AEDC4950009183E /* AssetsLibrary.framework in Frameworks */,
 				09DC3DA31B0088D500602B2A /* CoreBluetooth.framework in Frameworks */,
 				09BC2C0A1ADE19F500DC4F2E /* CoreGraphics.framework in Frameworks */,
+				096C728B1B1EEBAF00839D8A /* LELocation.framework in Frameworks */,
 				09066F081ADD0F6400FF56BB /* CoreLocation.framework in Frameworks */,
 				09066F061ADD058600FF56BB /* MapKit.framework in Frameworks */,
 				6302DE4E30958E9CDB773FA6 /* libPods.a in Frameworks */,
@@ -195,6 +198,7 @@
 			children = (
 				09066ED41ADCED8300FF56BB /* AppDelegate.h */,
 				09066ED51ADCED8300FF56BB /* AppDelegate.m */,
+				096C72891B1EEBAF00839D8A /* Component */,
 				09D8D6181ADDF64B00AB939D /* Manager */,
 				09BC2BFD1ADE157C00DC4F2E /* Model */,
 				09BC2C151ADE6F5D00DC4F2E /* Resources */,
@@ -236,6 +240,14 @@
 				09066EFC1ADCF2EC00FF56BB /* MainViewController.m */,
 			);
 			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		096C72891B1EEBAF00839D8A /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				096C728A1B1EEBAF00839D8A /* LELocation.framework */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		099F3C2B1AE9E4760083D387 /* RecorderViewController */ = {
@@ -670,6 +682,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/com.unknown.product/Component",
+				);
 				INFOPLIST_FILE = com.unknown.product/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -685,6 +701,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/com.unknown.product/Component",
+				);
 				INFOPLIST_FILE = com.unknown.product/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

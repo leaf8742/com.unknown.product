@@ -1,9 +1,11 @@
 #import "RecorderViewController.h"
 #import "SCRecordSessionManager.h"
 #import "MainMenuViewController.h"
+#import "DeviceManager.h"
 #import <SCRecorder/SCRecorder.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
+#import <CoordinatingController/CoordinatingController.h>
 
 /**
  * @enum kCameraMode
@@ -123,6 +125,8 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self library];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyStateService:) name:KeyStateService object:nil];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -289,6 +293,18 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 - (void)applicationDidEnterBackground:(NSNotification *)notification {
     if (self.cameraMode == kCameraModeRecording) {
         [self recordVideo:nil];
+    }
+}
+
+- (void)keyStateService:(NSNotification *)notification {
+    if ([[[CoordinatingController sharedInstance] rootViewController].topViewController isEqual:self]) {
+        switch (self.cameraMode) {
+            case kCameraModePhoto:
+                [self capturePhoto:nil];
+                break;
+            default:
+                [self recordVideo:nil];
+        }
     }
 }
 

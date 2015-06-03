@@ -2,10 +2,13 @@
 #import "Model.h"
 
 NSString *const StopScan = @"StopScan";
+NSString *const KeyStateService = @"KeyStateService";
 
 @interface DeviceManager()<CBCentralManagerDelegate, CBPeripheralDelegate>
 
 @property (strong, nonatomic) CBCentralManager *manager;
+
+@property (strong, nonatomic) CBCharacteristic *alertCharacteristic;
 
 @end
 
@@ -19,6 +22,9 @@ NSString *const StopScan = @"StopScan";
 
 /// ^ BLE_UUID_IMMEDIATE_ALERT_SERVICE
 #define     BLE_UUID_IMMEDIATE_ALERT_SERVICE   @"1802"
+
+///
+#define     BLE_UUID_ALERT_LEVEL_SERVICE   @"2A06"
 
 /// ^ BLE_UUID_KEY_STATE_SERVICE
 #define     BLE_UUID_KEY_STATE_SERVICE   @"FFE0"
@@ -67,7 +73,10 @@ NSString *const StopScan = @"StopScan";
 }
 
 + (void)alert:(CBPeripheral *)peripheral {
-    
+    if ([DeviceManager sharedInstance].alertCharacteristic) {
+        Byte byte = 2;
+        [peripheral writeValue:[NSData dataWithBytes:&byte length:1] forCharacteristic:[DeviceManager sharedInstance].alertCharacteristic type:CBCharacteristicWriteWithoutResponse];
+    }
 }
 
 #pragma mark - Signleton Implementation
@@ -196,6 +205,8 @@ NSString *const StopScan = @"StopScan";
         } else {
             [peripheral readValueForCharacteristic:characteristic];
         }
+        
+        CBCharacteristic *characteristic = characteristic;
     }
 }
 
@@ -218,6 +229,17 @@ NSString *const StopScan = @"StopScan";
         NSLog(@"characteristic: %@", characteristic);
         NSLog(@"value: %@", [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding]);
     } else {
+        if ([characteristic.service.UUID.UUIDString isEqualToString:@"FFE0"] &&
+            [characteristic.UUID.UUIDString isEqualToString:@"FFE1"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:KeyStateService object:nil];
+        } else if ([characteristic.service.UUID.UUIDString isEqualToString:@"180F"] &&
+                   [characteristic.UUID.UUIDString isEqualToString:@"2A19"]) {
+#warning 更新电量
+        } else if ([characteristic.service.UUID.UUIDString isEqualToString:BLE_UUID_IMMEDIATE_ALERT_SERVICE] &&
+                   [characteristic.UUID.UUIDString isEqualToString:BLE_UUID_ALERT_LEVEL_SERVICE]) {
+            self.alertCharacteristic = characteristic;
+        }
+        
         NSLog(@"characteristic: %@", characteristic);
     }
 }

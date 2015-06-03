@@ -7,6 +7,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 FOUNDATION_EXPORT NSString *const StopScan;
+FOUNDATION_EXPORT NSString *const KeyStateService;
 
 /**
  * @class DeviceManager

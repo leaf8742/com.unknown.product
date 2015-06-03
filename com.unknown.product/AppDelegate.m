@@ -3,6 +3,10 @@
 #import "DeviceManager.h"
 #import <CoordinatingController/CoordinatingController.h>
 
+#import <LELocation/LELocationManager.h>
+#import <LELocation/LELocationManagerDelegate.h>
+
+
 @interface AppDelegate ()
 
 @end
@@ -16,9 +20,7 @@
     [self.window makeKeyAndVisible];
     
     [DeviceManager sharedInstance];
-    
     [self appearance];
-    
     [[CoordinatingController sharedInstance] pushViewControllerWithClass:[MainViewController class] animated:NO];
     
     return YES;

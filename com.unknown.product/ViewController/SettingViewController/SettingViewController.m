@@ -23,12 +23,10 @@
     frame.size.height -= 64;
     [self.tableView setFrame:frame];
     
-    self.titles = @[@"雷达频率", @"雷达单位", @"防丢距离", @"报警方式", @"语言"];
-    self.selectors = @[@"radarRate", @"radarUnit", @"distance", @"alertMode", @"language"];
-    self.images = @[@"radarRate", @"radarUnit", @"distance", @"alertMode", @"language"];
+    self.titles = @[/*@"雷达频率", @"雷达单位", */@"防丢距离", @"报警方式", @"语言"];
+    self.selectors = @[/*@"radarRate", @"radarUnit", */@"distance", @"alertMode", @"language"];
+    self.images = @[/*@"radarRate", @"radarUnit", */@"distance", @"alertMode", @"language"];
 }
-
-#pragma mark -
 
 #pragma mark - CoordinatingControllerDelegate
 + (instancetype)buildViewController {
