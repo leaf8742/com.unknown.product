@@ -53,7 +53,7 @@ NSString *const kEnglishLanguage = @"en";
 
 + (NSString *)localizedStringForKey:(NSString *)key comment:(NSString *)comment {
     NSBundle *bundle = [[LocalizationManager sharedInstance] bundle];
-    NSString *result = [bundle localizedStringForKey:key value:nil table:@"Localizable"];
+    NSString *result = [bundle localizedStringForKey:key value:nil table:@"Localization"];
     if (result == nil)
         result = NSLocalizedString(key, comment);
     return result;
