@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "距离"; ObjectID = "28D-Rz-UyP"; */
+"28D-Rz-UyP.text" = "距离";
+
+/* Class = "UIButton"; normalTitle = "报警"; ObjectID = "Cxn-Ad-Pny"; */
+"Cxn-Ad-Pny.normalTitle" = "报警";
+
+/* Class = "UILabel"; text = "999"; ObjectID = "OWc-si-Tv6"; */
+"OWc-si-Tv6.text" = "999";
+
+/* Class = "UILabel"; text = "米"; ObjectID = "Pqx-Of-GiN"; */
+"Pqx-Of-GiN.text" = "米";
+
+/* Class = "UILabel"; text = "距离数值"; ObjectID = "RCB-v7-xeU"; */
+"RCB-v7-xeU.text" = "距离数值";
+
+/* Class = "UIButton"; normalTitle = "距离"; ObjectID = "oRs-Wa-S7s"; */
+"oRs-Wa-S7s.normalTitle" = "距离";
+
+/* Class = "UIButton"; normalTitle = "寻找"; ObjectID = "vwC-gX-npG"; */
+"vwC-gX-npG.normalTitle" = "寻找";

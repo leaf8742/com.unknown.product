@@ -2,6 +2,7 @@
 #import "Model.h"
 #import "MainMenuCell.h"
 #import "DeviceManager.h"
+#import "LocalizationManager.h"
 
 NSString *const BluetoothObject = @"BluetoothObject";
 NSString *const RadarObject = @"RadarObject";
@@ -21,7 +22,7 @@ NSString *const LocaltionObject = @"LocaltionObject";
     [[UserInformation sharedInstance] addObserver:self forKeyPath:@"objects" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopScan:) name:StopScan object:nil];
 
-    self.title = @"主菜单";
+    self.title = [LocalizationManager localizedStringForKey:@"Menu" comment:nil];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshViewControlEventValueChanged:) forControlEvents:UIControlEventValueChanged];

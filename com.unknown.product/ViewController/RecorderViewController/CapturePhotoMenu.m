@@ -1,4 +1,5 @@
 #import "CapturePhotoMenu.h"
+#import "LocalizationManager.h"
 
 @interface CapturePhotoMenu()<UITableViewDataSource, UITableViewDelegate>
 
@@ -36,17 +37,18 @@
         switch (indexPath.row) {
             case 0:
                 cell.imageView.image = [UIImage imageNamed:@"baoguang"];
-                cell.textLabel.text = @"曝光";
+                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Exposure" comment:nil];
                 cell.accessoryView = [[UISwitch alloc] init];
                 break;
             case 1:
                 cell.imageView.image = [UIImage imageNamed:@"shanguang"];
-                cell.textLabel.text = @"跟随手机";
+                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Tracking Mobile" comment:nil];
                 cell.accessoryView = [[UISwitch alloc] init];
                 break;
             case 2:
+#warning TODO 天气模式英文
                 cell.imageView.image = [UIImage imageNamed:@"moshi"];
-                cell.textLabel.text = @"天气模式";
+                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"天气模式" comment:nil];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             default:
                 break;
@@ -55,27 +57,27 @@
         switch (indexPath.row) {
             case 0:
                 cell.imageView.image = [UIImage imageNamed:@"yintian"];
-                cell.textLabel.text = @"阴天";
+                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Overcast" comment:nil];
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 break;
             case 1:
                 cell.imageView.image = [UIImage imageNamed:@"yinyutian"];
-                cell.textLabel.text = @"阴雨天";
+                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Rain Days" comment:nil];
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 break;
             case 2:
                 cell.imageView.image = [UIImage imageNamed:@"yutian"];
-                cell.textLabel.text = @"雨天";
+                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Wet" comment:nil];
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 break;
             case 3:
                 cell.imageView.image = [UIImage imageNamed:@"bangwan"];
-                cell.textLabel.text = @"傍晚";
+                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Dusk" comment:nil];
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 break;
             case 4:
                 cell.imageView.image = [UIImage imageNamed:@"yewan"];
-                cell.textLabel.text = @"夜晚";
+                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Night" comment:nil];
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 break;
             default:

@@ -17,6 +17,8 @@
 		09066F081ADD0F6400FF56BB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09066F071ADD0F6400FF56BB /* CoreLocation.framework */; };
 		091909621AEDBDD40009183E /* zhuanhuan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 091909611AEDBDD40009183E /* zhuanhuan@2x.png */; };
 		091909641AEDC4950009183E /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 091909631AEDC4950009183E /* AssetsLibrary.framework */; };
+		092AB9E41B1F491100B99E3D /* LocalizationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 092AB9E31B1F491100B99E3D /* LocalizationManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		092AB9EF1B1F4C6A00B99E3D /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 092AB9F11B1F4C6A00B99E3D /* Localization.strings */; };
 		0954D1341AED173B00431477 /* SCRecordSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0954D1331AED173B00431477 /* SCRecordSessionManager.m */; };
 		0954D1371AED1E6700431477 /* location_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0954D1351AED1E6700431477 /* location_highlighted@2x.png */; };
 		0954D1381AED1E6700431477 /* location_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0954D1361AED1E6700431477 /* location_normal@2x.png */; };
@@ -86,6 +88,15 @@
 		09066F071ADD0F6400FF56BB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		091909611AEDBDD40009183E /* zhuanhuan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhuanhuan@2x.png"; sourceTree = "<group>"; };
 		091909631AEDC4950009183E /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		092AB9E21B1F491100B99E3D /* LocalizationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizationManager.h; sourceTree = "<group>"; };
+		092AB9E31B1F491100B99E3D /* LocalizationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizationManager.m; sourceTree = "<group>"; };
+		092AB9F21B1F4C7500B99E3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localization.strings; sourceTree = "<group>"; };
+		092AB9F31B1F4C9A00B99E3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		092AB9F41B1F4C9A00B99E3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		092AB9F51B1F4C9A00B99E3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localization.strings"; sourceTree = "<group>"; };
+		092AB9F61B1F4CAF00B99E3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
+		092AB9F81B1F4CB700B99E3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		092AB9FA1B1F4CBF00B99E3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		0942ECD51B15B74200DF3028 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		0954D1321AED173B00431477 /* SCRecordSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRecordSessionManager.h; sourceTree = "<group>"; };
 		0954D1331AED173B00431477 /* SCRecordSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRecordSessionManager.m; sourceTree = "<group>"; };
@@ -216,6 +227,7 @@
 			children = (
 				09066ED11ADCED8300FF56BB /* Info.plist */,
 				09066ED21ADCED8300FF56BB /* main.m */,
+				092AB9F11B1F4C6A00B99E3D /* Localization.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -240,6 +252,15 @@
 				09066EFC1ADCF2EC00FF56BB /* MainViewController.m */,
 			);
 			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		092AB9E11B1F491100B99E3D /* LocalizationManager */ = {
+			isa = PBXGroup;
+			children = (
+				092AB9E21B1F491100B99E3D /* LocalizationManager.h */,
+				092AB9E31B1F491100B99E3D /* LocalizationManager.m */,
+			);
+			path = LocalizationManager;
 			sourceTree = "<group>";
 		};
 		096C72891B1EEBAF00839D8A /* Component */ = {
@@ -363,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				09DC3DA71B008C3800602B2A /* DeviceManager */,
+				092AB9E11B1F491100B99E3D /* LocalizationManager */,
 				09D8D6191ADDF64B00AB939D /* LocationManager */,
 			);
 			path = Manager;
@@ -452,6 +474,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 09066EC41ADCED8300FF56BB;
 			productRefGroup = 09066ECE1ADCED8300FF56BB /* Products */;
@@ -505,6 +528,7 @@
 				098399901AEDA67C00EDE6EF /* moshi@2x.png in Resources */,
 				09EC5F831ADEA7F10023C5A1 /* arrow@2x.png in Resources */,
 				099F3C401AE9FDE60083D387 /* recordVideo_large_normal@2x.png in Resources */,
+				092AB9EF1B1F4C6A00B99E3D /* Localization.strings in Resources */,
 				09BC2C1F1ADE6F5D00DC4F2E /* radarUnit@2x.png in Resources */,
 				098399841AED95D100EDE6EF /* setting@2x.png in Resources */,
 			);
@@ -558,6 +582,7 @@
 				09DC3DAA1B008C3800602B2A /* DeviceManager.m in Sources */,
 				09BC2C081ADE18B900DC4F2E /* CameraInformation.m in Sources */,
 				098399871AED97D500EDE6EF /* VideoMenu.m in Sources */,
+				092AB9E41B1F491100B99E3D /* LocalizationManager.m in Sources */,
 				09BC2C0D1ADE1C9E00DC4F2E /* MainMenuCell.m in Sources */,
 				09066ED31ADCED8300FF56BB /* main.m in Sources */,
 				09D8D6101ADDF43F00AB939D /* RadarViewController.m in Sources */,
@@ -576,6 +601,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				09066EDB1ADCED8300FF56BB /* Base */,
+				092AB9F31B1F4C9A00B99E3D /* zh-Hans */,
+				092AB9FA1B1F4CBF00B99E3D /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -584,8 +611,20 @@
 			isa = PBXVariantGroup;
 			children = (
 				09066EE01ADCED8300FF56BB /* Base */,
+				092AB9F41B1F4C9A00B99E3D /* zh-Hans */,
+				092AB9F81B1F4CB700B99E3D /* en */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		092AB9F11B1F4C6A00B99E3D /* Localization.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				092AB9F21B1F4C7500B99E3D /* Base */,
+				092AB9F51B1F4C9A00B99E3D /* zh-Hans */,
+				092AB9F61B1F4CAF00B99E3D /* en */,
+			);
+			name = Localization.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

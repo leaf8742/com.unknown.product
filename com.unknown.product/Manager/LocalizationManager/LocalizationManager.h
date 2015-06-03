@@ -4,6 +4,7 @@
  * @date 2014/02/13
  * @copyright 大连一丁芯智能技术有限公司
  */
+#import <Foundation/Foundation.h>
 
 /// @brief 跟随系统
 FOUNDATION_EXPORT NSString *const kDefaultLanguage;

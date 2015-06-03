@@ -1,5 +1,6 @@
 #import "LocationViewController.h"
 #import "LocationManager.h"
+#import "LocalizationManager.h"
 
 @interface LocationViewController ()<CLLocationManagerDelegate, MKMapViewDelegate>
 
@@ -17,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"定位";
+    self.title = [LocalizationManager localizedStringForKey:@"Location" comment:nil];
     self.geocoder = [[CLGeocoder alloc] init];
 }
 

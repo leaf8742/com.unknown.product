@@ -1,0 +1,50 @@
+/* 
+  Localization.strings
+  com.unknown.product
+
+  Created by LEAF on 15/6/3.
+  Copyright (c) 2015年 LEAF. All rights reserved.
+*/
+
+"Smart Camera" = "智拍";
+"Location" = "定位";
+"Menu" = "主菜单";
+"Radar" = "雷达";
+"Setting" = "设置";
+"Condition of Road" = "路况";
+"BT Connection Setting" = "蓝牙连接设置";
+"Search" = "寻找";
+"Alarm" = "报警";
+"Distance" = "距离";
+"BT Connection Device" = "蓝牙已连接设备";
+"How long ... from the mobile" = "距离手机";
+"metre" = "米";
+"Auto Alarm" = "自动报警";
+"Distance" = "距离";
+"BT Audio/Speaker" = "蓝牙音响";
+"Music Playing" = "音乐播放";
+"Smart Bracelet " = "智能手环";
+"Sport Shooes with position" = "定位运动鞋";
+"Data of Distance " = "距离数值";
+"Radar Frequency" = "雷达频率";
+"Radar Unit" = "雷达单位";
+"Meter" = "公尺";
+"Anti lost distance" = "防丢距离";
+"Alarm Way" = "报警方式";
+"Voice" = "声音";
+"Vibrate" = "手机震动";
+"Voice & Vibrate" = "声音+震动";
+"Language" = "语言";
+"Chinese" = "中文";
+"English" = "英文";
+"Exposure" = "曝光";
+"Tracking Mobile" = "跟随手机";
+"Overcast" = "阴天";
+"Wet" = "雨天";
+"Rain Days" = "阴雨天";
+"Dusk" = "傍晚";
+"Night" = "夜晚";
+"Share" = "分享";
+"Wechat" = "微信";
+"Sina Weibo" = "新浪微博";
+"Twitter" = "推特";

@@ -1,4 +1,5 @@
 #import "SettingViewController.h"
+#import "LocalizationManager.h"
 
 @interface SettingViewController()
 
@@ -16,14 +17,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"设置";
+    self.title = [LocalizationManager localizedStringForKey:@"Setting" comment:nil];
     
     CGRect frame = self.tableView.frame;
     frame.origin.y = 64;
     frame.size.height -= 64;
     [self.tableView setFrame:frame];
     
-    self.titles = @[/*@"雷达频率", @"雷达单位", */@"防丢距离", @"报警方式", @"语言"];
+    self.titles = @[
+                    /*[LocalizationManager localizedStringForKey:@"Radar Frequency" comment:nil],
+                    [LocalizationManager localizedStringForKey:@"Radar Unit" comment:nil],*/
+                    [LocalizationManager localizedStringForKey:@"Anti lost distance" comment:nil],
+                                          [LocalizationManager localizedStringForKey:@"Alarm Way" comment:nil],
+                                          [LocalizationManager localizedStringForKey:@"Language" comment:nil]];
     self.selectors = @[/*@"radarRate", @"radarUnit", */@"distance", @"alertMode", @"language"];
     self.images = @[/*@"radarRate", @"radarUnit", */@"distance", @"alertMode", @"language"];
 }

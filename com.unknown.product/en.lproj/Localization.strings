@@ -1,0 +1,50 @@
+/* 
+  Localization.strings
+  com.unknown.product
+
+  Created by LEAF on 15/6/3.
+  Copyright (c) 2015年 LEAF. All rights reserved.
+*/
+
+"Smart Camera" = "Smart Camera";
+"Location" = "Location";
+"Menu" = "Menu";
+"Radar" = "Radar";
+"Setting" = "Setting";
+"Condition of Road" = "Condition of Road";
+"BT Connection Setting" = "BT Connection Setting";
+"Search" = "Search";
+"Alarm" = "Alarm";
+"Distance" = "Distance";
+"BT Connection Device" = "BT Connection Device";
+"How long ... from the mobile" = "How long ... from the mobile";
+"metre" = "metre";
+"Auto Alarm" = "Auto Alarm";
+"Distance" = "Distance";
+"BT Audio/Speaker" = "BT Audio/Speaker";
+"Music Playing" = "Music Playing";
+"Smart Bracelet " = "Smart Bracelet ";
+"Sport Shooes with position" = "Sport Shooes with position";
+"Data of Distance " = "Data of Distance ";
+"Radar Frequency" = "Radar Frequency";
+"Radar Unit" = "Radar Unit";
+"Meter" = "Meter";
+"Anti lost distance" = "Anti lost distance";
+"Alarm Way" = "Alarm Way";
+"Voice" = "Voice";
+"Vibrate" = "Vibrate";
+"Voice & Vibrate" = "Voice & Vibrate";
+"Language" = "Language";
+"Chinese" = "Chinese";
+"English" = "English";
+"Exposure" = "Exposure";
+"Tracking Mobile" = "Tracking Mobile";
+"Overcast" = "Overcast";
+"Wet" = "Wet";
+"Rain Days" = "Rain Days";
+"Dusk" = "Dusk";
+"Night" = "Night";
+"Share" = "Share";
+"Wechat" = "Wechat";
+"Sina Weibo" = "Sina Weibo";
+"Twitter" = "Twitter";

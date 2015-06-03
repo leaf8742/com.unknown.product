@@ -14,6 +14,8 @@
 - (void)buildWithObject:(id<ObjectGeneral>)object {
     self.object = object;
     self.title.text = object.title;
+    
+#warning TODO 国际化
     self.currentDistance.text = @"距离手机50米";
     self.alertDistance.text = @"距离手机100米报警";
 }

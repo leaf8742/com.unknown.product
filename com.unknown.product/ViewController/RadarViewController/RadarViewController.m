@@ -1,5 +1,6 @@
 #import "RadarViewController.h"
 #import "LocationManager.h"
+#import "LocalizationManager.h"
 
 @interface RadarViewController ()
 
@@ -17,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"雷达";
+    self.title = [LocalizationManager localizedStringForKey:@"Radar" comment:nil];
     self.geocoder = [[CLGeocoder alloc] init];
 }
 

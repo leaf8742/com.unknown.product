@@ -5,6 +5,7 @@
 #import "SettingViewController.h"
 #import "RecorderViewController.h"
 #import <DocumentManager/DocumentManager.h>
+#import "LocalizationManager.h"
 
 @interface MainViewController () <UITabBarControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -24,27 +25,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setTitle:@"主菜单"];
+    [self setTitle:[LocalizationManager localizedStringForKey:@"Menu" comment:nil]];
     
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.edgesForExtendedLayout = UIRectEdgeAll;
     
-    self.mainMenuTab = [[UITabBarItem alloc] initWithTitle:@"主菜单" image:[UIImage imageNamed:@"mainMenuTab_normal"] selectedImage:[UIImage imageNamed:@"mainMenuTab_selected"]];
+    self.mainMenuTab = [[UITabBarItem alloc] initWithTitle:[LocalizationManager localizedStringForKey:@"Menu" comment:nil]
+                                                     image:[UIImage imageNamed:@"mainMenuTab_normal"]
+                                             selectedImage:[UIImage imageNamed:@"mainMenuTab_selected"]];
     UIViewController *mainMenu = [MainMenuViewController buildViewController];
     [mainMenu setTabBarItem:self.mainMenuTab];
     UINavigationController *mainNavigation = [[UINavigationController alloc] initWithRootViewController:mainMenu];
     
-    self.radarTab = [[UITabBarItem alloc] initWithTitle:@"雷达" image:[UIImage imageNamed:@"radarTab_normal"] selectedImage:[UIImage imageNamed:@"radarTab_selected"]];
+    self.radarTab = [[UITabBarItem alloc] initWithTitle:[LocalizationManager localizedStringForKey:@"Radar" comment:nil]
+                                                  image:[UIImage imageNamed:@"radarTab_normal"]
+                                          selectedImage:[UIImage imageNamed:@"radarTab_selected"]];
     UIViewController *radar = [RadarViewController buildViewController];
     [radar setTabBarItem:self.radarTab];
     UINavigationController *radarNavigation = [[UINavigationController alloc] initWithRootViewController:radar];
     
-    self.locationTab = [[UITabBarItem alloc] initWithTitle:@"定位" image:[UIImage imageNamed:@"locationTab_normal"] selectedImage:[UIImage imageNamed:@"locationTab_selected"]];
+    self.locationTab = [[UITabBarItem alloc] initWithTitle:[LocalizationManager localizedStringForKey:@"Location" comment:nil]
+                                                     image:[UIImage imageNamed:@"locationTab_normal"]
+                                             selectedImage:[UIImage imageNamed:@"locationTab_selected"]];
     UIViewController *location = [LocationViewController buildViewController];
     [location setTabBarItem:self.locationTab];
     UINavigationController *locationNavigation = [[UINavigationController alloc] initWithRootViewController:location];
     
-    self.settingTab = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"settingTab_normal"] selectedImage:[UIImage imageNamed:@"settingTab_selected"]];
+    self.settingTab = [[UITabBarItem alloc] initWithTitle:[LocalizationManager localizedStringForKey:@"Setting" comment:nil]
+                                                    image:[UIImage imageNamed:@"settingTab_normal"]
+                                            selectedImage:[UIImage imageNamed:@"settingTab_selected"]];
     UIViewController *setting = [SettingViewController buildViewController];
     [setting setTabBarItem:self.settingTab];
     UINavigationController *settingNavigation = [[UINavigationController alloc] initWithRootViewController:setting];
@@ -87,13 +96,13 @@
 #pragma mark - UITabBarDelegate
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     if ([item isEqual:self.mainMenuTab]) {
-        [self setTitle:@"主菜单"];
+        [self setTitle:[LocalizationManager localizedStringForKey:@"Menu" comment:nil]];
     } else if ([item isEqual:self.radarTab]) {
-        [self setTitle:@"雷达"];
+        [self setTitle:[LocalizationManager localizedStringForKey:@"Radar" comment:nil]];
     } else if ([item isEqual:self.locationTab]) {
-        [self setTitle:@"定位"];
+        [self setTitle:[LocalizationManager localizedStringForKey:@"Location" comment:nil]];
     } else if ([item isEqual:self.settingTab]) {
-        [self setTitle:@"设置"];
+        [self setTitle:[LocalizationManager localizedStringForKey:@"Setting" comment:nil]];
     }
 }
 
