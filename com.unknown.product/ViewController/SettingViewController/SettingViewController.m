@@ -1,5 +1,6 @@
 #import "SettingViewController.h"
 #import "LocalizationManager.h"
+#import "LanguageViewController.h"
 
 @interface SettingViewController()
 
@@ -34,6 +35,26 @@
     self.images = @[@"radarRate", @"radarUnit", @"distance", @"alertMode", @"language"];
 }
 
+- (void)radarRate {
+    
+}
+
+- (void)radarUnit {
+    
+}
+
+- (void)distance {
+    
+}
+
+- (void)alertMode {
+    
+}
+
+- (void)language {
+    [[CoordinatingController sharedInstance] pushViewControllerWithClass:[LanguageViewController class] animated:YES];
+}
+
 #pragma mark - CoordinatingControllerDelegate
 + (instancetype)buildViewController {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -56,13 +77,13 @@
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    SEL selector = NSSelectorFromString(self.selectors[indexPath.row]);
-//    if ([self respondsToSelector:selector]) {
-//#pragma clang diagnostic push
-//#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-//        [self performSelector:selector];
-//#pragma clang diagnostic pop
-//    }
+    SEL selector = NSSelectorFromString(self.selectors[indexPath.row]);
+    if ([self respondsToSelector:selector]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [self performSelector:selector];
+#pragma clang diagnostic pop
+    }
 }
 
 #pragma mark - Memory Management

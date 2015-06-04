@@ -19,7 +19,7 @@
     [self.object addObserver:self forKeyPath:@"RSSI" options:NSKeyValueObservingOptionNew context:nil];
 
     self.currentDistance.text = [NSString stringWithFormat:[LocalizationManager localizedStringForKey:@"How long ... from the mobile" comment:nil], [(CameraInformation *)self.object distance]];
-    self.alertDistance.text = [NSString stringWithFormat:[LocalizationManager localizedStringForKey:@"Distance for How long ... from the mobile alarm" comment:nil], [DeviceManager sharedInstance].alertDistance];
+    self.alertDistance.text = [NSString stringWithFormat:[LocalizationManager localizedStringForKey:@"Distance for How long ... from the mobile alarm" comment:nil], [DeviceManager sharedInstance].alarmDistance];
 }
 
 - (IBAction)distance:(UIButton *)sender {

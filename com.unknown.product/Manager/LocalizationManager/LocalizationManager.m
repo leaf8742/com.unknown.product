@@ -17,10 +17,13 @@ NSString *const kEnglishLanguage = @"en";
     self = [super init];
     if (self) {
         NSString *localization = [[NSUserDefaults standardUserDefaults] valueForKey:@"localizationLanguage"];
-        localization = kChineseSimplifiedLanguage;
+//        localization = kChineseSimplifiedLanguage;
         if (!localization || [localization isEqualToString:@"default"]) {
             NSArray* languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
             NSString *defaultLanguage = [languages objectAtIndex:0];
+            if ([defaultLanguage containsString:@"zh_cn"]) {
+                defaultLanguage = kChineseSimplifiedLanguage;
+            }
             NSString *path = [[NSBundle mainBundle] pathForResource:defaultLanguage ofType:@"lproj"];
             self.bundle = [NSBundle bundleWithPath:path];
         } else {
@@ -29,17 +32,6 @@ NSString *const kEnglishLanguage = @"en";
         }
     }
     return self;
-}
-
-- (NSBundle *)bundle {
-    NSString *language = [[NSUserDefaults standardUserDefaults] valueForKey:@"localizationLanguage"];
-    language = kChineseSimplifiedLanguage;
-    if (!language) {
-        language = kDefaultLanguage;
-    }
-    NSString *path = [[NSBundle mainBundle] pathForResource:language ofType:@"lproj"];
-    self.bundle = [NSBundle bundleWithPath:path];
-    return _bundle;
 }
 
 + (LocalizationManager *)sharedInstance {
@@ -60,8 +52,12 @@ NSString *const kEnglishLanguage = @"en";
 }
 
 + (NSString *)language {
-    NSString *language = [[NSUserDefaults standardUserDefaults] valueForKey:@"localizationLanguage"];
-    return [self sysLanguageFrom:language];
+    NSString *localization = [[NSUserDefaults standardUserDefaults] valueForKey:@"localizationLanguage"];
+    if (!localization) {
+        return @"default";
+    } else {
+        return localization;
+    }
 }
 
 + (NSString *)sysLanguageFrom:(NSString *)appLanguage {

@@ -57,7 +57,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 //    id newValue = [change objectForKey:NSKeyValueChangeNewKey];
     
-    if (self.distance > [DeviceManager sharedInstance].alertDistance) {
+    if (self.distance > [DeviceManager sharedInstance].alarmDistance) {
         [DeviceManager alert:self.peripheral];
     }
 }
