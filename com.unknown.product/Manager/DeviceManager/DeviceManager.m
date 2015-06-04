@@ -1,6 +1,7 @@
 #import "DeviceManager.h"
 #import "Model.h"
 #import "MainMenuViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 NSString *const StopScan = @"StopScan";
 NSString *const KeyStateService = @"KeyStateService";
@@ -37,6 +38,8 @@ NSString *const KeyStateService = @"KeyStateService";
 @synthesize alarmDistance = _alarmDistance;
 @synthesize radarUnit = _radarUnit;
 @synthesize radarFrequency = _radarFrequency;
+@synthesize vibrateEnabled = _vibrateEnabled;
+@synthesize audioEnabled = _audioEnabled;
 
 - (id)init {
     if (self = [super init]) {
@@ -60,6 +63,20 @@ NSString *const KeyStateService = @"KeyStateService";
             self.radarFrequency = [radarFrequency floatValue];
         } else {
             self.radarFrequency = 0.5;
+        }
+        
+        id vibrateEnabled = [[NSUserDefaults standardUserDefaults] valueForKey:@"vibrateEnabled"];
+        if (vibrateEnabled) {
+            self.vibrateEnabled = [vibrateEnabled boolValue];
+        } else {
+            self.vibrateEnabled = YES;
+        }
+        
+        id audioEnabled = [[NSUserDefaults standardUserDefaults] valueForKey:@"audioEnabled"];
+        if (audioEnabled) {
+            self.audioEnabled = [audioEnabled boolValue];
+        } else {
+            self.audioEnabled = YES;
         }
     }
     return self;
@@ -96,6 +113,28 @@ NSString *const KeyStateService = @"KeyStateService";
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     _radarFrequency = radarFrequency;
+}
+
+- (BOOL)vibrateEnabled {
+    return _vibrateEnabled;
+}
+
+- (void)setVibrateEnabled:(BOOL)vibrateEnabled {
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithFloat:vibrateEnabled] forKey:@"vibrateEnabled"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    _vibrateEnabled = vibrateEnabled;
+}
+
+- (BOOL)audioEnabled {
+    return _audioEnabled;
+}
+
+- (void)setAudioEnabled:(BOOL)audioEnabled {
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithFloat:audioEnabled] forKey:@"audioEnabled"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    _audioEnabled = audioEnabled;
 }
 
 + (void)scan {
@@ -136,6 +175,16 @@ NSString *const KeyStateService = @"KeyStateService";
     if ([DeviceManager sharedInstance].alertCharacteristic) {
         Byte byte = 2;
         [peripheral writeValue:[NSData dataWithBytes:&byte length:1] forCharacteristic:[DeviceManager sharedInstance].alertCharacteristic type:CBCharacteristicWriteWithoutResponse];
+    }
+}
+
++ (void)playAudio {
+    if ([DeviceManager sharedInstance].vibrateEnabled) {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
+    
+    if ([DeviceManager sharedInstance].audioEnabled) {
+        AudioServicesPlaySystemSound(1005);
     }
 }
 

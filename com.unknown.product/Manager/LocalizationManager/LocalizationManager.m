@@ -21,7 +21,7 @@ NSString *const kEnglishLanguage = @"en";
         if (!localization || [localization isEqualToString:@"default"]) {
             NSArray* languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
             NSString *defaultLanguage = [languages objectAtIndex:0];
-            if ([defaultLanguage containsString:@"zh_cn"]) {
+            if ([defaultLanguage isEqualToString:@"zh_cn"]) {
                 defaultLanguage = kChineseSimplifiedLanguage;
             }
             NSString *path = [[NSBundle mainBundle] pathForResource:defaultLanguage ofType:@"lproj"];

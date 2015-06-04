@@ -4,6 +4,7 @@
 #import "AlarmDistanceViewController.h"
 #import "RadarUnitViewController.h"
 #import "RadarFrequencyViewController.h"
+#import "AlarmModeViewController.h"
 
 @interface SettingViewController()
 
@@ -51,7 +52,7 @@
 }
 
 - (void)alertMode {
-    
+    [[CoordinatingController sharedInstance] pushViewControllerWithClass:[AlarmModeViewController class] animated:YES];
 }
 
 - (void)language {

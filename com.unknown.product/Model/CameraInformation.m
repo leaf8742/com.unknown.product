@@ -60,7 +60,7 @@
         [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
     } else {
         if (self.distance > [DeviceManager sharedInstance].alarmDistance) {
-            [DeviceManager alert:self.peripheral];
+            [DeviceManager playAudio];
         }
     }
 }

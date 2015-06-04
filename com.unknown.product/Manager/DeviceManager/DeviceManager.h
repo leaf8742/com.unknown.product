@@ -30,6 +30,8 @@ FOUNDATION_EXPORT NSString *const KeyStateService;
 
 + (void)alert:(CBPeripheral *)peripheral;
 
++ (void)playAudio;
+
 /// @brief 防丢距离
 @property (assign, nonatomic) NSInteger alarmDistance;
 
@@ -38,5 +40,11 @@ FOUNDATION_EXPORT NSString *const KeyStateService;
 
 /// @brief 雷达频率
 @property (assign, nonatomic) CGFloat radarFrequency;
+
+/// @brief 启用震动
+@property (assign, nonatomic) BOOL vibrateEnabled;
+
+/// @brief 启用声音
+@property (assign, nonatomic) BOOL audioEnabled;
 
 @end

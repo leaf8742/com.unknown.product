@@ -40,6 +40,8 @@
 		099A643D1B1FDDD200EFF47E /* AlarmDistanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 099A643C1B1FDDD200EFF47E /* AlarmDistanceViewController.m */; };
 		099A64441B1FE17600EFF47E /* RadarUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 099A64431B1FE17600EFF47E /* RadarUnitViewController.m */; };
 		099A644B1B1FE74D00EFF47E /* RadarFrequencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 099A644A1B1FE74D00EFF47E /* RadarFrequencyViewController.m */; };
+		099A64521B200AAE00EFF47E /* AlarmModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 099A64511B200AAE00EFF47E /* AlarmModeViewController.m */; };
+		099A64541B20175200EFF47E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099A64531B20175200EFF47E /* AudioToolbox.framework */; };
 		099F3C2E1AE9E4760083D387 /* RecorderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 099F3C2D1AE9E4760083D387 /* RecorderViewController.m */; };
 		099F3C331AE9EDFB0083D387 /* capturePhoto_large_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099F3C311AE9EDFB0083D387 /* capturePhoto_large_highlighted@2x.png */; };
 		099F3C341AE9EDFB0083D387 /* capturePhoto_large_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099F3C321AE9EDFB0083D387 /* capturePhoto_large_normal@2x.png */; };
@@ -100,7 +102,6 @@
 		092AB9F51B1F4C9A00B99E3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localization.strings"; sourceTree = "<group>"; };
 		092AB9F61B1F4CAF00B99E3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
 		092AB9F81B1F4CB700B99E3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		092AB9FA1B1F4CBF00B99E3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		0942ECD51B15B74200DF3028 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		0954D1321AED173B00431477 /* SCRecordSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRecordSessionManager.h; sourceTree = "<group>"; };
 		0954D1331AED173B00431477 /* SCRecordSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRecordSessionManager.m; sourceTree = "<group>"; };
@@ -130,6 +131,10 @@
 		099A64431B1FE17600EFF47E /* RadarUnitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadarUnitViewController.m; sourceTree = "<group>"; };
 		099A64491B1FE74D00EFF47E /* RadarFrequencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadarFrequencyViewController.h; sourceTree = "<group>"; };
 		099A644A1B1FE74D00EFF47E /* RadarFrequencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadarFrequencyViewController.m; sourceTree = "<group>"; };
+		099A64501B200AAE00EFF47E /* AlarmModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmModeViewController.h; sourceTree = "<group>"; };
+		099A64511B200AAE00EFF47E /* AlarmModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmModeViewController.m; sourceTree = "<group>"; };
+		099A64531B20175200EFF47E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		099A64551B20192C00EFF47E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		099F3C2C1AE9E4760083D387 /* RecorderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecorderViewController.h; sourceTree = "<group>"; };
 		099F3C2D1AE9E4760083D387 /* RecorderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecorderViewController.m; sourceTree = "<group>"; };
 		099F3C311AE9EDFB0083D387 /* capturePhoto_large_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "capturePhoto_large_highlighted@2x.png"; sourceTree = "<group>"; };
@@ -185,6 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				099A64541B20175200EFF47E /* AudioToolbox.framework in Frameworks */,
 				091909641AEDC4950009183E /* AssetsLibrary.framework in Frameworks */,
 				09DC3DA31B0088D500602B2A /* CoreBluetooth.framework in Frameworks */,
 				09BC2C0A1ADE19F500DC4F2E /* CoreGraphics.framework in Frameworks */,
@@ -248,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				099A643A1B1FDDD200EFF47E /* AlarmDistanceViewController */,
+				099A644F1B200AAE00EFF47E /* AlarmModeViewController */,
 				099A64331B1FD34900EFF47E /* LanguageViewController */,
 				09D8D6111ADDF4A800AB939D /* LocationViewController */,
 				09BC2BF61ADE11BF00DC4F2E /* MainMenuViewController */,
@@ -321,6 +328,15 @@
 				099A644A1B1FE74D00EFF47E /* RadarFrequencyViewController.m */,
 			);
 			path = RadarFrequencyViewController;
+			sourceTree = "<group>";
+		};
+		099A644F1B200AAE00EFF47E /* AlarmModeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				099A64501B200AAE00EFF47E /* AlarmModeViewController.h */,
+				099A64511B200AAE00EFF47E /* AlarmModeViewController.m */,
+			);
+			path = AlarmModeViewController;
 			sourceTree = "<group>";
 		};
 		099F3C2B1AE9E4760083D387 /* RecorderViewController */ = {
@@ -472,6 +488,7 @@
 		E02905BBD3A9DD183EA4FC5A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				099A64531B20175200EFF47E /* AudioToolbox.framework */,
 				091909631AEDC4950009183E /* AssetsLibrary.framework */,
 				09DC3DA21B0088D500602B2A /* CoreBluetooth.framework */,
 				09BC2C091ADE19F500DC4F2E /* CoreGraphics.framework */,
@@ -631,6 +648,7 @@
 				09BC2C041ADE16B500DC4F2E /* UserInformation.m in Sources */,
 				099A644B1B1FE74D00EFF47E /* RadarFrequencyViewController.m in Sources */,
 				099A643D1B1FDDD200EFF47E /* AlarmDistanceViewController.m in Sources */,
+				099A64521B200AAE00EFF47E /* AlarmModeViewController.m in Sources */,
 				09066ED61ADCED8300FF56BB /* AppDelegate.m in Sources */,
 				099A64441B1FE17600EFF47E /* RadarUnitViewController.m in Sources */,
 				09066EFD1ADCF2EC00FF56BB /* MainViewController.m in Sources */,
@@ -658,7 +676,7 @@
 			children = (
 				09066EDB1ADCED8300FF56BB /* Base */,
 				092AB9F31B1F4C9A00B99E3D /* zh-Hans */,
-				092AB9FA1B1F4CBF00B99E3D /* en */,
+				099A64551B20192C00EFF47E /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

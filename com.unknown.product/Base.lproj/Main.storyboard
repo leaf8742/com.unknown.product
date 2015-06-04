@@ -449,6 +449,100 @@
             </objects>
             <point key="canvasLocation" x="1411" y="1001"/>
         </scene>
+        <!--Alarm Mode View Controller-->
+        <scene sceneID="vVt-LI-ZgE">
+            <objects>
+                <viewController storyboardIdentifier="AlarmModeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vxK-7g-0V7" customClass="AlarmModeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l0g-jv-1ux"/>
+                        <viewControllerLayoutGuide type="bottom" id="XT8-j9-0yt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yy8-nW-Uqp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1IE-yS-rX2">
+                                <rect key="frame" x="16" y="84" width="568" height="41"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="启用声音" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mt9-eD-wxA">
+                                        <rect key="frame" x="8" y="10" width="552" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fJx-h7-f7Y">
+                                        <rect key="frame" x="511" y="5" width="51" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="49" id="6ly-h6-VLm"/>
+                                            <constraint firstAttribute="height" constant="31" id="Ieb-rX-zzk"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="audioEnabled:" destination="vxK-7g-0V7" eventType="valueChanged" id="TAF-hL-azS"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Mt9-eD-wxA" firstAttribute="top" secondItem="1IE-yS-rX2" secondAttribute="top" constant="10" id="1of-Sn-uR0"/>
+                                    <constraint firstAttribute="height" constant="41" id="HC1-hF-tfb"/>
+                                    <constraint firstAttribute="trailing" secondItem="fJx-h7-f7Y" secondAttribute="trailing" constant="8" id="Zfb-4j-CBs"/>
+                                    <constraint firstItem="Mt9-eD-wxA" firstAttribute="leading" secondItem="1IE-yS-rX2" secondAttribute="leading" constant="8" id="ap5-xC-xI8"/>
+                                    <constraint firstAttribute="bottom" secondItem="Mt9-eD-wxA" secondAttribute="bottom" constant="10" id="dCk-G5-GRR"/>
+                                    <constraint firstAttribute="trailing" secondItem="Mt9-eD-wxA" secondAttribute="trailing" constant="8" id="u5T-QH-5TK"/>
+                                    <constraint firstAttribute="centerY" secondItem="fJx-h7-f7Y" secondAttribute="centerY" id="v1M-ax-NcM"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YOU-gy-GR7">
+                                <rect key="frame" x="16" y="133" width="568" height="41"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="启用震动" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6t-8X-rtT">
+                                        <rect key="frame" x="8" y="10" width="552" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S59-Cm-W7Q">
+                                        <rect key="frame" x="511" y="5" width="51" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="49" id="RMh-SU-5X1"/>
+                                            <constraint firstAttribute="height" constant="31" id="ViK-1E-r9i"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="vibrateEnabled:" destination="vxK-7g-0V7" eventType="valueChanged" id="SMi-0G-s7w"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="S59-Cm-W7Q" secondAttribute="trailing" constant="8" id="1Me-4W-Ifb"/>
+                                    <constraint firstItem="h6t-8X-rtT" firstAttribute="leading" secondItem="YOU-gy-GR7" secondAttribute="leading" constant="8" id="1rT-y2-6xP"/>
+                                    <constraint firstAttribute="bottom" secondItem="h6t-8X-rtT" secondAttribute="bottom" constant="10" id="IRx-Qz-Lrn"/>
+                                    <constraint firstAttribute="trailing" secondItem="h6t-8X-rtT" secondAttribute="trailing" constant="8" id="e0H-ux-9qj"/>
+                                    <constraint firstAttribute="height" constant="41" id="kRM-2T-axI"/>
+                                    <constraint firstAttribute="centerY" secondItem="S59-Cm-W7Q" secondAttribute="centerY" id="rs6-bo-fuO"/>
+                                    <constraint firstItem="h6t-8X-rtT" firstAttribute="top" secondItem="YOU-gy-GR7" secondAttribute="top" constant="10" id="y25-xq-y9o"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1IE-yS-rX2" firstAttribute="top" secondItem="l0g-jv-1ux" secondAttribute="bottom" constant="64" id="9Zu-XG-08w"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1IE-yS-rX2" secondAttribute="trailing" id="Pck-rw-evT"/>
+                            <constraint firstItem="YOU-gy-GR7" firstAttribute="leading" secondItem="yy8-nW-Uqp" secondAttribute="leadingMargin" id="RLw-bp-V5D"/>
+                            <constraint firstItem="YOU-gy-GR7" firstAttribute="top" secondItem="1IE-yS-rX2" secondAttribute="bottom" constant="8" id="U4c-rw-GfL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YOU-gy-GR7" secondAttribute="trailing" id="UAM-Lv-f7e"/>
+                            <constraint firstItem="1IE-yS-rX2" firstAttribute="leading" secondItem="yy8-nW-Uqp" secondAttribute="leadingMargin" id="cHO-Tl-3mu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="audioEnabled" destination="fJx-h7-f7Y" id="JDA-WJ-h2h"/>
+                        <outlet property="vibrateEnabled" destination="S59-Cm-W7Q" id="GDq-pg-Rgc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AVw-WJ-hfO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2052" y="1001"/>
+        </scene>
         <!--Recorder View Controller-->
         <scene sceneID="OlX-EP-j25">
             <objects>
