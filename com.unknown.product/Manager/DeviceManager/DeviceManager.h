@@ -4,6 +4,7 @@
  * @date 2015-05-11
  */
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
 FOUNDATION_EXPORT NSString *const StopScan;
@@ -31,5 +32,8 @@ FOUNDATION_EXPORT NSString *const KeyStateService;
 
 /// @brief 防丢距离
 @property (assign, nonatomic) NSInteger alarmDistance;
+
+/// @brief 雷达单位
+@property (assign, nonatomic) CGFloat radarUnit;
 
 @end

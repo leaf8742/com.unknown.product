@@ -27,7 +27,6 @@
     return self;
 }
 
-
 - (id)init {
     if (self = [super init]) {
         [self addObserver:self forKeyPath:@"RSSI" options:NSKeyValueObservingOptionNew context:nil];
@@ -50,7 +49,8 @@
 - (CGFloat)distance {
     NSInteger rssi = labs([self.RSSI integerValue]);
     CGFloat ci = (rssi - 49) / (10 * 4.);
-    return pow(10,ci);
+    CGFloat result = pow(10, ci);
+    return floor(result / [DeviceManager sharedInstance].radarUnit) * [DeviceManager sharedInstance].radarUnit;
 }
 
 #pragma mark - NSKeyValueObserving

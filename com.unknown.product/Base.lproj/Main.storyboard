@@ -232,6 +232,32 @@
             </objects>
             <point key="canvasLocation" x="140" y="1001"/>
         </scene>
+        <!--Radar Unit View Controller-->
+        <scene sceneID="PnI-ea-x8q">
+            <objects>
+                <tableViewController storyboardIdentifier="RadarUnitViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sa6-AR-NaM" customClass="RadarUnitViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="IJg-9J-oSp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RadarUnitCell" id="QnS-rR-bxa">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QnS-rR-bxa" id="nFI-hJ-jtK">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="sa6-AR-NaM" id="n4D-Vz-nlr"/>
+                            <outlet property="delegate" destination="sa6-AR-NaM" id="gPC-ed-4St"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="85i-9z-jR2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="764" y="1001"/>
+        </scene>
         <!--Location View Controller-->
         <scene sceneID="8Ub-qD-TBn">
             <objects>
@@ -396,6 +422,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RYX-0t-fTi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1411" y="309"/>
+        </scene>
+        <!--Radar Frequency View Controller-->
+        <scene sceneID="iYt-qa-FfK">
+            <objects>
+                <tableViewController storyboardIdentifier="RadarFrequencyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="m89-zs-n1I" customClass="RadarFrequencyViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="phU-nB-zS5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RadarFrequencyCell" id="weK-73-X88">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="weK-73-X88" id="c0F-Ju-NTQ">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="m89-zs-n1I" id="DFu-ID-VR5"/>
+                            <outlet property="delegate" destination="m89-zs-n1I" id="J2l-8d-YY4"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c1y-b6-kcN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1411" y="1001"/>
         </scene>
         <!--Recorder View Controller-->
         <scene sceneID="OlX-EP-j25">

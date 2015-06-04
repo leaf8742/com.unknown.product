@@ -35,15 +35,23 @@ NSString *const KeyStateService = @"KeyStateService";
 @implementation DeviceManager
 
 @synthesize alarmDistance = _alarmDistance;
+@synthesize radarUnit = _radarUnit;
 
 - (id)init {
     if (self = [super init]) {
         self.manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-        id alertDistance = [[NSUserDefaults standardUserDefaults] valueForKey:@"alertDistance"];
-        if (alertDistance) {
-            self.alarmDistance = [alertDistance integerValue];
+        id alarmDistance = [[NSUserDefaults standardUserDefaults] valueForKey:@"alarmDistance"];
+        if (alarmDistance) {
+            self.alarmDistance = [alarmDistance integerValue];
         } else {
             self.alarmDistance = 100;
+        }
+        
+        id radarUnit = [[NSUserDefaults standardUserDefaults] valueForKey:@"radarUnit"];
+        if (radarUnit) {
+            self.radarUnit = [radarUnit floatValue];
+        } else {
+            self.radarUnit = 0.1;
         }
     }
     return self;
@@ -54,10 +62,21 @@ NSString *const KeyStateService = @"KeyStateService";
 }
 
 - (void)setAlarmDistance:(NSInteger)alertDistance {
-    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInteger:alertDistance] forKey:@"alertDistance"];
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInteger:alertDistance] forKey:@"alarmDistance"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     _alarmDistance = alertDistance;
+}
+
+- (CGFloat)radarUnit {
+    return _radarUnit;
+}
+
+- (void)setRadarUnit:(CGFloat)radarUnit {
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithFloat:radarUnit] forKey:@"radarUnit"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    _radarUnit = radarUnit;
 }
 
 + (void)scan {

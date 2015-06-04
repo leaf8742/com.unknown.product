@@ -2,6 +2,8 @@
 #import "LocalizationManager.h"
 #import "LanguageViewController.h"
 #import "AlarmDistanceViewController.h"
+#import "RadarUnitViewController.h"
+#import "RadarFrequencyViewController.h"
 
 @interface SettingViewController()
 
@@ -37,11 +39,11 @@
 }
 
 - (void)radarRate {
-    
+    [[CoordinatingController sharedInstance] pushViewControllerWithClass:[RadarFrequencyViewController class] animated:YES];
 }
 
 - (void)radarUnit {
-    
+    [[CoordinatingController sharedInstance] pushViewControllerWithClass:[RadarUnitViewController class] animated:YES];
 }
 
 - (void)distance {
