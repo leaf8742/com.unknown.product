@@ -13,9 +13,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [LocalizationManager localizedStringForKey:@"Anti lost distance" comment:nil];
+    self.title = [LocalizationManager localizedStringForKey:@"Radar Frequency" comment:nil];
     
-    self.numbers = @[@10, @20, @50, @100];
+    self.numbers = @[@0.5, @1, @5, @10];
 }
 
 #pragma mark - CoordinatingControllerDelegate

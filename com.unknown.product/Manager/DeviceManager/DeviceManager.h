@@ -36,4 +36,7 @@ FOUNDATION_EXPORT NSString *const KeyStateService;
 /// @brief 雷达单位
 @property (assign, nonatomic) CGFloat radarUnit;
 
+/// @brief 雷达频率
+@property (assign, nonatomic) CGFloat radarFrequency;
+
 @end

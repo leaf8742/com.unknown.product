@@ -30,14 +30,11 @@
 - (id)init {
     if (self = [super init]) {
         [self addObserver:self forKeyPath:@"RSSI" options:NSKeyValueObservingOptionNew context:nil];
-        self.timer = [NSTimer timerWithTimeInterval:.5 target:self selector:@selector(readBLEServiceRSSI) userInfo:nil repeats:YES];
+        self.timer = [NSTimer timerWithTimeInterval:[DeviceManager sharedInstance].radarFrequency target:self selector:@selector(readBLEServiceRSSI) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+        [[DeviceManager sharedInstance] addObserver:self forKeyPath:@"radarFrequency" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
-}
-
-- (void)dealloc {
-    [self removeObserver:self forKeyPath:@"RSSI"];
 }
 
 - (void)readBLEServiceRSSI {
@@ -57,9 +54,20 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 //    id newValue = [change objectForKey:NSKeyValueChangeNewKey];
     
-    if (self.distance > [DeviceManager sharedInstance].alarmDistance) {
-        [DeviceManager alert:self.peripheral];
+    if ([keyPath isEqualToString:@"radarFrequency"]) {
+        [self.timer invalidate];
+        self.timer = [NSTimer timerWithTimeInterval:[DeviceManager sharedInstance].radarFrequency target:self selector:@selector(readBLEServiceRSSI) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    } else {
+        if (self.distance > [DeviceManager sharedInstance].alarmDistance) {
+            [DeviceManager alert:self.peripheral];
+        }
     }
+}
+
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:@"RSSI"];
+    [[DeviceManager sharedInstance] removeObserver:self forKeyPath:@"radarFrequency"];
 }
 
 @end

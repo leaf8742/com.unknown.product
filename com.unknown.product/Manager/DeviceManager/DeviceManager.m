@@ -36,6 +36,7 @@ NSString *const KeyStateService = @"KeyStateService";
 
 @synthesize alarmDistance = _alarmDistance;
 @synthesize radarUnit = _radarUnit;
+@synthesize radarFrequency = _radarFrequency;
 
 - (id)init {
     if (self = [super init]) {
@@ -52,6 +53,13 @@ NSString *const KeyStateService = @"KeyStateService";
             self.radarUnit = [radarUnit floatValue];
         } else {
             self.radarUnit = 0.1;
+        }
+        
+        id radarFrequency = [[NSUserDefaults standardUserDefaults] valueForKey:@"radarFrequency"];
+        if (radarFrequency) {
+            self.radarFrequency = [radarFrequency floatValue];
+        } else {
+            self.radarFrequency = 0.5;
         }
     }
     return self;
@@ -77,6 +85,17 @@ NSString *const KeyStateService = @"KeyStateService";
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     _radarUnit = radarUnit;
+}
+
+- (CGFloat)radarFrequency {
+    return _radarFrequency;
+}
+
+- (void)setRadarFrequency:(CGFloat)radarFrequency {
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithFloat:radarFrequency] forKey:@"radarFrequency"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    _radarFrequency = radarFrequency;
 }
 
 + (void)scan {
