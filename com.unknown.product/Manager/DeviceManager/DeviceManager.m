@@ -231,9 +231,9 @@ NSString *const KeyStateService = @"KeyStateService";
     switch (central.state) {
         case CBCentralManagerStatePoweredOn:
             // Scans for any peripheral
-//            [self.manager scanForPeripheralsWithServices:nil
-//                                                 options:@{CBCentralManagerScanOptionAllowDuplicatesKey :
-//                                                               @YES}];
+            [self.manager scanForPeripheralsWithServices:nil
+                                                 options:@{CBCentralManagerScanOptionAllowDuplicatesKey :
+                                                               @YES}];
             break;
         default:
             NSLog(@"Central Manager did change state");

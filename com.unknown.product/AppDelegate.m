@@ -40,7 +40,7 @@
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:115 / 255.0 green:221 / 255.0 blue:248 / 255.0 alpha:1]];
 //    [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
     
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:146 / 255.0 alpha:1],
                                                         NSFontAttributeName:[UIFont boldSystemFontOfSize:12.0]}
                                              forState: UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:115 / 255.0 green:221 / 255.0 blue:248 / 255.0 alpha:1],
