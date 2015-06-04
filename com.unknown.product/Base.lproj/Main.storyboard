@@ -206,6 +206,32 @@
             </objects>
             <point key="canvasLocation" x="-502" y="1001"/>
         </scene>
+        <!--Alarm Distance View Controller-->
+        <scene sceneID="lYh-vh-cUT">
+            <objects>
+                <tableViewController storyboardIdentifier="AlarmDistanceViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tGL-AR-ddP" customClass="AlarmDistanceViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="62g-ZV-huO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlarmDistanceCell" id="wfo-Yc-EXQ">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wfo-Yc-EXQ" id="1jr-ox-4OK">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="tGL-AR-ddP" id="8NM-d5-IH9"/>
+                            <outlet property="delegate" destination="tGL-AR-ddP" id="hOI-f3-Xpl"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l1D-J1-1n4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140" y="1001"/>
+        </scene>
         <!--Location View Controller-->
         <scene sceneID="8Ub-qD-TBn">
             <objects>

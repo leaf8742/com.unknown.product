@@ -52,8 +52,8 @@
     NSArray *languages = @[@"跟随系统", @"中文", @"English"];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LanguageCell" forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.text = languages[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if ([[LocalizationManager language] isEqualToString:localizations[indexPath.row]]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {

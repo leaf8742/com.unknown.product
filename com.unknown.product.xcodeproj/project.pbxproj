@@ -37,6 +37,7 @@
 		098399991AEDA71D00EDE6EF /* yinyutian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 098399941AEDA71D00EDE6EF /* yinyutian@2x.png */; };
 		0983999A1AEDA71D00EDE6EF /* yutian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 098399951AEDA71D00EDE6EF /* yutian@2x.png */; };
 		099A64361B1FD34900EFF47E /* LanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 099A64351B1FD34900EFF47E /* LanguageViewController.m */; };
+		099A643D1B1FDDD200EFF47E /* AlarmDistanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 099A643C1B1FDDD200EFF47E /* AlarmDistanceViewController.m */; };
 		099F3C2E1AE9E4760083D387 /* RecorderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 099F3C2D1AE9E4760083D387 /* RecorderViewController.m */; };
 		099F3C331AE9EDFB0083D387 /* capturePhoto_large_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099F3C311AE9EDFB0083D387 /* capturePhoto_large_highlighted@2x.png */; };
 		099F3C341AE9EDFB0083D387 /* capturePhoto_large_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099F3C321AE9EDFB0083D387 /* capturePhoto_large_normal@2x.png */; };
@@ -121,6 +122,8 @@
 		098399951AEDA71D00EDE6EF /* yutian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yutian@2x.png"; sourceTree = "<group>"; };
 		099A64341B1FD34900EFF47E /* LanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageViewController.h; sourceTree = "<group>"; };
 		099A64351B1FD34900EFF47E /* LanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageViewController.m; sourceTree = "<group>"; };
+		099A643B1B1FDDD200EFF47E /* AlarmDistanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmDistanceViewController.h; sourceTree = "<group>"; };
+		099A643C1B1FDDD200EFF47E /* AlarmDistanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmDistanceViewController.m; sourceTree = "<group>"; };
 		099F3C2C1AE9E4760083D387 /* RecorderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecorderViewController.h; sourceTree = "<group>"; };
 		099F3C2D1AE9E4760083D387 /* RecorderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecorderViewController.m; sourceTree = "<group>"; };
 		099F3C311AE9EDFB0083D387 /* capturePhoto_large_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "capturePhoto_large_highlighted@2x.png"; sourceTree = "<group>"; };
@@ -238,6 +241,7 @@
 		09066EF91ADCF2EC00FF56BB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				099A643A1B1FDDD200EFF47E /* AlarmDistanceViewController */,
 				099A64331B1FD34900EFF47E /* LanguageViewController */,
 				09D8D6111ADDF4A800AB939D /* LocationViewController */,
 				09BC2BF61ADE11BF00DC4F2E /* MainMenuViewController */,
@@ -282,6 +286,15 @@
 				099A64351B1FD34900EFF47E /* LanguageViewController.m */,
 			);
 			path = LanguageViewController;
+			sourceTree = "<group>";
+		};
+		099A643A1B1FDDD200EFF47E /* AlarmDistanceViewController */ = {
+			isa = PBXGroup;
+			children = (
+				099A643B1B1FDDD200EFF47E /* AlarmDistanceViewController.h */,
+				099A643C1B1FDDD200EFF47E /* AlarmDistanceViewController.m */,
+			);
+			path = AlarmDistanceViewController;
 			sourceTree = "<group>";
 		};
 		099F3C2B1AE9E4760083D387 /* RecorderViewController */ = {
@@ -590,6 +603,7 @@
 				099F3C2E1AE9E4760083D387 /* RecorderViewController.m in Sources */,
 				09D8D61C1ADDF64B00AB939D /* LocationManager.m in Sources */,
 				09BC2C041ADE16B500DC4F2E /* UserInformation.m in Sources */,
+				099A643D1B1FDDD200EFF47E /* AlarmDistanceViewController.m in Sources */,
 				09066ED61ADCED8300FF56BB /* AppDelegate.m in Sources */,
 				09066EFD1ADCF2EC00FF56BB /* MainViewController.m in Sources */,
 				09DC3DAA1B008C3800602B2A /* DeviceManager.m in Sources */,

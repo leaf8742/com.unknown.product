@@ -1,6 +1,7 @@
 #import "SettingViewController.h"
 #import "LocalizationManager.h"
 #import "LanguageViewController.h"
+#import "AlarmDistanceViewController.h"
 
 @interface SettingViewController()
 
@@ -29,8 +30,8 @@
                     [LocalizationManager localizedStringForKey:@"Radar Frequency" comment:nil],
                     [LocalizationManager localizedStringForKey:@"Radar Unit" comment:nil],
                     [LocalizationManager localizedStringForKey:@"Anti lost distance" comment:nil],
-                                          [LocalizationManager localizedStringForKey:@"Alarm Way" comment:nil],
-                                          [LocalizationManager localizedStringForKey:@"Language" comment:nil]];
+                    [LocalizationManager localizedStringForKey:@"Alarm Way" comment:nil],
+                    [LocalizationManager localizedStringForKey:@"Language" comment:nil]];
     self.selectors = @[@"radarRate", @"radarUnit", @"distance", @"alertMode", @"language"];
     self.images = @[@"radarRate", @"radarUnit", @"distance", @"alertMode", @"language"];
 }
@@ -44,7 +45,7 @@
 }
 
 - (void)distance {
-    
+    [[CoordinatingController sharedInstance] pushViewControllerWithClass:[AlarmDistanceViewController class] animated:YES];
 }
 
 - (void)alertMode {

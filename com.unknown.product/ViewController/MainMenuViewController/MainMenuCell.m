@@ -17,6 +17,7 @@
     self.title.text = object.title;
     
     [self.object addObserver:self forKeyPath:@"RSSI" options:NSKeyValueObservingOptionNew context:nil];
+    [[DeviceManager sharedInstance] addObserver:self forKeyPath:@"alarmDistance" options:NSKeyValueObservingOptionNew context:nil];
 
     self.currentDistance.text = [NSString stringWithFormat:[LocalizationManager localizedStringForKey:@"How long ... from the mobile" comment:nil], [(CameraInformation *)self.object distance]];
     self.alertDistance.text = [NSString stringWithFormat:[LocalizationManager localizedStringForKey:@"Distance for How long ... from the mobile alarm" comment:nil], [DeviceManager sharedInstance].alarmDistance];
@@ -36,8 +37,14 @@
 
 #pragma mark - NSKeyValueObserving
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
     self.currentDistance.text = [NSString stringWithFormat:[LocalizationManager localizedStringForKey:@"How long ... from the mobile" comment:nil], [(CameraInformation *)self.object distance]];
+    self.alertDistance.text = [NSString stringWithFormat:[LocalizationManager localizedStringForKey:@"Distance for How long ... from the mobile alarm" comment:nil], [DeviceManager sharedInstance].alarmDistance];
+}
+
+#pragma mark - Memory Management
+- (void)dealloc {
+    [self.object removeObserver:self forKeyPath:@"RSSI"];
+    [[DeviceManager sharedInstance] removeObserver:self forKeyPath:@"alarmDistance"];
 }
 
 @end
