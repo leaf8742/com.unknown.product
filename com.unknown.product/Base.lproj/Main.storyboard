@@ -312,9 +312,9 @@
                                 </connections>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距离" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28D-Rz-UyP">
-                                <rect key="frame" x="194" y="149" width="48" height="21"/>
+                                <rect key="frame" x="162" y="149" width="80" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="J9B-jC-LH9"/>
+                                    <constraint firstAttribute="width" constant="80" id="J9B-jC-LH9"/>
                                     <constraint firstAttribute="height" constant="21" id="kYB-Li-h10"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -332,9 +332,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="米" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pqx-Of-GiN">
-                                <rect key="frame" x="358" y="149" width="24" height="21"/>
+                                <rect key="frame" x="358" y="149" width="80" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="OH1-c8-6y4"/>
+                                    <constraint firstAttribute="width" constant="80" id="OH1-c8-6y4"/>
                                     <constraint firstAttribute="height" constant="21" id="mPf-5E-Lmy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -342,16 +342,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1m1-91-NTM">
-                                <rect key="frame" x="255" y="267" width="90" height="25"/>
+                                <rect key="frame" x="220" y="267" width="160" height="25"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="距离数值" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCB-v7-xeU">
-                                        <rect key="frame" x="8" y="5" width="61" height="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距离数值" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCB-v7-xeU">
+                                        <rect key="frame" x="8" y="5" width="121" height="16"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="8ys-Jm-lah">
-                                        <rect key="frame" x="67" y="5" width="15" height="15"/>
+                                        <rect key="frame" x="137" y="5" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="2fx-nj-WZe"/>
                                             <constraint firstAttribute="width" constant="15" id="LNX-jE-38N"/>
@@ -360,10 +360,14 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.70980392156862748" green="0.84705882352941175" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="90" id="9W4-Pw-lAH"/>
+                                    <constraint firstAttribute="width" constant="160" id="9W4-Pw-lAH"/>
+                                    <constraint firstItem="8ys-Jm-lah" firstAttribute="leading" secondItem="RCB-v7-xeU" secondAttribute="trailing" constant="8" id="HE5-WF-m7B"/>
+                                    <constraint firstItem="RCB-v7-xeU" firstAttribute="leading" secondItem="1m1-91-NTM" secondAttribute="leading" constant="8" id="JOj-qJ-Nvv"/>
                                     <constraint firstAttribute="trailing" secondItem="8ys-Jm-lah" secondAttribute="trailing" constant="8" id="ada-a8-ldK"/>
                                     <constraint firstAttribute="height" constant="25" id="kit-gl-VfJ"/>
                                     <constraint firstAttribute="centerY" secondItem="8ys-Jm-lah" secondAttribute="centerY" id="sdi-8C-0p4"/>
+                                    <constraint firstItem="RCB-v7-xeU" firstAttribute="top" secondItem="1m1-91-NTM" secondAttribute="top" constant="5" id="wMJ-al-Zjd"/>
+                                    <constraint firstAttribute="bottom" secondItem="RCB-v7-xeU" secondAttribute="bottom" constant="4" id="yDr-eF-u05"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

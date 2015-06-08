@@ -1,21 +1,27 @@
 
-/* Class = "UILabel"; text = "距离"; ObjectID = "28D-Rz-UyP"; */
+/* Class = "UILabel"; text = "Distance"; ObjectID = "28D-Rz-UyP"; */
 "28D-Rz-UyP.text" = "Distance";
 
-/* Class = "UIButton"; normalTitle = "报警"; ObjectID = "Cxn-Ad-Pny"; */
+/* Class = "UIButton"; normalTitle = "Alarm"; ObjectID = "Cxn-Ad-Pny"; */
 "Cxn-Ad-Pny.normalTitle" = "Alarm";
+
+/* Class = "UILabel"; text = "启用声音"; ObjectID = "Mt9-eD-wxA"; */
+"Mt9-eD-wxA.text" = "Enable Audio";
 
 /* Class = "UILabel"; text = "999"; ObjectID = "OWc-si-Tv6"; */
 "OWc-si-Tv6.text" = "999";
 
-/* Class = "UILabel"; text = "米"; ObjectID = "Pqx-Of-GiN"; */
+/* Class = "UILabel"; text = "metre"; ObjectID = "Pqx-Of-GiN"; */
 "Pqx-Of-GiN.text" = "metre";
 
 /* Class = "UILabel"; text = "距离数值"; ObjectID = "RCB-v7-xeU"; */
-"RCB-v7-xeU.text" = "距离数值";
+"RCB-v7-xeU.text" = "Range Values";
 
-/* Class = "UIButton"; normalTitle = "距离"; ObjectID = "oRs-Wa-S7s"; */
+/* Class = "UILabel"; text = "启用震动"; ObjectID = "h6t-8X-rtT"; */
+"h6t-8X-rtT.text" = "Enable Vibrate";
+
+/* Class = "UIButton"; normalTitle = "Distance"; ObjectID = "oRs-Wa-S7s"; */
 "oRs-Wa-S7s.normalTitle" = "Distance";
 
-/* Class = "UIButton"; normalTitle = "寻找"; ObjectID = "vwC-gX-npG"; */
+/* Class = "UIButton"; normalTitle = "Search"; ObjectID = "vwC-gX-npG"; */
 "vwC-gX-npG.normalTitle" = "Search";

@@ -46,9 +46,8 @@
                 cell.accessoryView = [[UISwitch alloc] init];
                 break;
             case 2:
-#warning TODO 天气模式英文
                 cell.imageView.image = [UIImage imageNamed:@"moshi"];
-                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"天气模式" comment:nil];
+                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Weather Mode" comment:nil];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             default:
                 break;

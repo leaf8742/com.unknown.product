@@ -2,7 +2,7 @@
 #import "MainViewController.h"
 #import "DeviceManager.h"
 #import <CoordinatingController/CoordinatingController.h>
-
+#import "LocalizationManager.h"
 #import <LELocation/LELocationManager.h>
 #import <LELocation/LELocationManagerDelegate.h>
 
@@ -22,6 +22,11 @@
     [DeviceManager sharedInstance];
     [self appearance];
     [[CoordinatingController sharedInstance] pushViewControllerWithClass:[MainViewController class] animated:NO];
+    
+    NSString *language = [LocalizationManager language];
+    if (![language isEqualToString:@"default"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObject:language] forKey:@"AppleLanguages"];
+    }
     
     return YES;
 }
