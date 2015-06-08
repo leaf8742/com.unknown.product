@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SCAssetExportSession.h"
+#import "SCRecorderTools.h"
 
 #define EnsureSuccess(error, x) if (error != nil) { _error = error; if (x != nil) x(); return; }
 #define kVideoPixelFormatTypeForCI kCVPixelFormatType_32BGRA
@@ -30,6 +31,8 @@
     BOOL _animationsWereEnabled;
     uint32_t _pixelFormat;
     CMTime _nextAllowedVideoFrame;
+    Float64 _totalDuration;
+    SCFilter *_watermarkFilter;
 }
 
 @end
@@ -82,17 +85,25 @@
         if (_eaglContext == nil) {
             CVPixelBufferLockBaseAddress(pixelBuffer, 0);
         }
-
+        
         CIImage *image = [CIImage imageWithCVPixelBuffer:pixelBuffer];
-        CIImage *result = [_videoConfiguration.filter imageByProcessingImage:image];
-
+        
+        
+        CMTime time = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
+        CIImage *result = [_videoConfiguration.filter imageByProcessingImage:image atTime:CMTimeGetSeconds(time)];
+        
+        if (_watermarkFilter != nil) {
+            [_watermarkFilter setParameterValue:result forKey:kCIInputBackgroundImageKey];
+            result = [_watermarkFilter parameterValueForKey:kCIOutputImageKey];
+        }
+    
         CVPixelBufferRef outputPixelBuffer = nil;
         CVReturn ret = CVPixelBufferPoolCreatePixelBuffer(NULL, [_videoPixelAdaptor pixelBufferPool], &outputPixelBuffer);
 
         if (ret == kCVReturnSuccess) {
             CVPixelBufferLockBaseAddress(outputPixelBuffer, 0);
             
-            [_ciContext render:result toCVPixelBuffer:outputPixelBuffer];
+            [_ciContext render:result toCVPixelBuffer:outputPixelBuffer bounds:result.extent colorSpace:CGColorSpaceCreateDeviceRGB()];
             
             BOOL success = [self processPixelBuffer:outputPixelBuffer presentationTime:CMSampleBufferGetPresentationTimeStamp(sampleBuffer)];
             
@@ -134,6 +145,8 @@
             return;
         }
         
+        BOOL shouldNotifyProgress = input == _videoInput || _videoInput == nil;
+        
         dispatch_group_enter(_dispatchGroup);
         [input requestMediaDataWhenReadyOnQueue:_dispatchQueue usingBlock:^{
             BOOL shouldReadNextBuffer = YES;
@@ -141,20 +154,25 @@
                 CMSampleBufferRef buffer = [output copyNextSampleBuffer];
                 
                 if (buffer != nil) {
+                    CMTime currentTime = CMSampleBufferGetPresentationTimeStamp(buffer);
                     if (input == _videoInput) {
-                        CMTime currentVideoTime = CMSampleBufferGetPresentationTimeStamp(buffer);
-                        if (CMTIME_COMPARE_INLINE(currentVideoTime, >=, _nextAllowedVideoFrame)) {
+                        if (CMTIME_COMPARE_INLINE(currentTime, >=, _nextAllowedVideoFrame)) {
 //                            NSLog(@"Appending at %fs (%fs)", CMTimeGetSeconds(currentVideoTime), CMTimeGetSeconds(CMSampleBufferGetOutputDuration(buffer)));
                             shouldReadNextBuffer = [self processSampleBuffer:buffer];
                             
                             if (_videoConfiguration.maxFrameRate > 0) {
-                                _nextAllowedVideoFrame = CMTimeAdd(currentVideoTime, CMTimeMake(1, _videoConfiguration.maxFrameRate));
+                                _nextAllowedVideoFrame = CMTimeAdd(currentTime, CMTimeMake(1, _videoConfiguration.maxFrameRate));
                             }
                         } else {
 //                            NSLog(@"Skipping at %fs (%fs)", CMTimeGetSeconds(currentVideoTime), CMTimeGetSeconds(CMSampleBufferGetOutputDuration(buffer)));
                         }
                     } else {
                         shouldReadNextBuffer = [input appendSampleBuffer:buffer];
+                    }
+                    
+                    if (shouldNotifyProgress) {
+                        float progress = CMTimeGetSeconds(currentTime) / _totalDuration;
+                        [self _setProgress:progress];
                     }
                     
                     CFRelease(buffer);
@@ -172,7 +190,22 @@
     }
 }
 
+- (void)_setProgress:(float)progress {
+    [self willChangeValueForKey:@"progress"];
+    
+    _progress = progress;
+    
+    [self didChangeValueForKey:@"progress"];
+    
+    id<SCAssetExportSessionDelegate> delegate = self.delegate;
+    if ([delegate respondsToSelector:@selector(assetExportSessionDidProgress:)]) {
+        [delegate assetExportSessionDidProgress:self];
+    }
+}
+
 - (void)callCompletionHandler:(void (^)())completionHandler {
+    [self _setProgress:1];
+    
     if (completionHandler != nil) {
         dispatch_async(dispatch_get_main_queue(), ^{
             completionHandler();
@@ -219,11 +252,15 @@
 }
 
 - (BOOL)needsCIContext {
-    return _videoConfiguration.filter != nil;
+    return _videoConfiguration.filter != nil || _videoConfiguration.watermarkImage != nil;
 }
 
 - (void)setupPixelBufferAdaptor:(CGSize)videoSize {
     if ([self needsInputPixelBufferAdaptor] && _videoInput != nil) {
+        if (!CGSizeEqualToSize(self.videoConfiguration.bufferSize, CGSizeZero)) {
+            videoSize = self.videoConfiguration.bufferSize;
+        }
+        
         NSDictionary *pixelBufferAttributes = @{
                                                 (id)kCVPixelBufferPixelFormatTypeKey : [NSNumber numberWithInt:_pixelFormat],
                                                 (id)kCVPixelBufferWidthKey : [NSNumber numberWithFloat:videoSize.width],
@@ -234,56 +271,44 @@
     }
 }
 
-- (AVVideoComposition *)_buildVideoCompositionOfVideoTrack:(AVAssetTrack *)videoTrack {
+- (SCFilter *)_buildWatermarkFilterForVideoTrack:(AVAssetTrack *)videoTrack {
     UIImage *watermarkImage = self.videoConfiguration.watermarkImage;
     
     if (watermarkImage != nil) {
         CGSize videoSize = videoTrack.naturalSize;
-        CALayer *aLayer = [CALayer layer];
-        aLayer.contents = (id)watermarkImage.CGImage;
         
         CGRect watermarkFrame = self.videoConfiguration.watermarkFrame;
         
         switch (self.videoConfiguration.watermarkAnchorLocation) {
             case SCWatermarkAnchorLocationTopLeft:
-                watermarkFrame.origin.y += videoSize.height - watermarkFrame.size.height;
+
                 break;
             case SCWatermarkAnchorLocationTopRight:
-                watermarkFrame.origin.y += videoSize.height - watermarkFrame.size.height;
                 watermarkFrame.origin.x = videoSize.width - watermarkFrame.size.width - watermarkFrame.origin.x;
                 break;
             case SCWatermarkAnchorLocationBottomLeft:
+                watermarkFrame.origin.y = videoSize.height - watermarkFrame.size.height - watermarkFrame.origin.y;
                 
                 break;
             case SCWatermarkAnchorLocationBottomRight:
+                watermarkFrame.origin.y = videoSize.height - watermarkFrame.size.height - watermarkFrame.origin.y;
                 watermarkFrame.origin.x = videoSize.width - watermarkFrame.size.width - watermarkFrame.origin.x;
                 break;
         }
         
-        aLayer.frame = watermarkFrame;
+        UIGraphicsBeginImageContextWithOptions(videoSize, NO, 1);
         
-        CALayer *parentLayer = [CALayer layer];
-        CALayer *videoLayer = [CALayer layer];
-        parentLayer.frame = CGRectMake(0, 0, videoSize.width, videoSize.height);
-        videoLayer.frame = CGRectMake(0, 0, videoSize.width, videoSize.height);
-        [parentLayer addSublayer:videoLayer];
-        [parentLayer addSublayer:aLayer];
+        [watermarkImage drawInRect:watermarkFrame];
         
-        AVMutableVideoComposition* videoComp = [AVMutableVideoComposition videoComposition];
-        videoComp.renderSize = videoSize;
-        videoComp.frameDuration = CMTimeMake(1, (int)videoTrack.nominalFrameRate);
+        UIImage *generatedWatermarkImage = UIGraphicsGetImageFromCurrentImageContext();
         
-        videoComp.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
+        UIGraphicsEndImageContext();
         
-        /// instruction
-        AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-        instruction.timeRange = CMTimeRangeMake(kCMTimeZero, [self.inputAsset duration]);
-        AVMutableVideoCompositionLayerInstruction *layerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
+        SCFilter *watermarkFilter = [SCFilter filterWithCIFilterName:@"CISourceOverCompositing"];
+        CIImage *watermarkCIImage = [CIImage imageWithCGImage:generatedWatermarkImage.CGImage];
+        [watermarkFilter setParameterValue:watermarkCIImage forKey:kCIInputImageKey];
         
-        instruction.layerInstructions = [NSArray arrayWithObject:layerInstruction];
-        videoComp.instructions = [NSArray arrayWithObject:instruction];
-                
-        return videoComp;
+        return watermarkFilter;
     }
     
     return nil;
@@ -296,6 +321,7 @@
     [[NSFileManager defaultManager] removeItemAtURL:self.outputUrl error:nil];
     
     _writer = [AVAssetWriter assetWriterWithURL:self.outputUrl fileType:self.outputFileType error:&error];
+    _writer.metadata = [SCRecorderTools assetWriterMetadata];
 
     EnsureSuccess(error, completionHandler);
     
@@ -352,15 +378,13 @@
         // Output
         _pixelFormat = [self needsCIContext] ? kVideoPixelFormatTypeForCI : kVideoPixelFormatTypeDefault;
         NSDictionary *settings = @{
-                               (id)kCVPixelBufferPixelFormatTypeKey     : [NSNumber numberWithUnsignedInt:_pixelFormat],
-                               (id)kCVPixelBufferIOSurfacePropertiesKey : [NSDictionary dictionary]
-                               };
+                                   (id)kCVPixelBufferPixelFormatTypeKey     : [NSNumber numberWithUnsignedInt:_pixelFormat],
+                                   (id)kCVPixelBufferIOSurfacePropertiesKey : [NSDictionary dictionary]
+                                   };
         
         AVVideoComposition *videoComposition = self.videoConfiguration.composition;
         
-        if (videoComposition == nil) {
-            videoComposition = [self _buildVideoCompositionOfVideoTrack:videoTrack];
-        }
+        _watermarkFilter = [self _buildWatermarkFilterForVideoTrack:videoTrack];
         
         AVAssetReaderOutput *reader = nil;
         
@@ -400,6 +424,8 @@
     }
     
     [_writer startSessionAtSourceTime:kCMTimeZero];
+    
+    _totalDuration = CMTimeGetSeconds(_inputAsset.duration);
     
     [self beginReadWriteOnInput:_videoInput fromOutput:_videoOutput];
     [self beginReadWriteOnInput:_audioInput fromOutput:_audioOutput];

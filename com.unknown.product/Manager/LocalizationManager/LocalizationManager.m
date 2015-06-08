@@ -17,7 +17,6 @@ NSString *const kEnglishLanguage = @"en";
     self = [super init];
     if (self) {
         NSString *localization = [[NSUserDefaults standardUserDefaults] valueForKey:@"localizationLanguage"];
-//        localization = kChineseSimplifiedLanguage;
         if (!localization || [localization isEqualToString:@"default"]) {
             NSArray* languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
             NSString *defaultLanguage = [languages objectAtIndex:0];
@@ -60,27 +59,20 @@ NSString *const kEnglishLanguage = @"en";
     }
 }
 
-+ (NSString *)sysLanguageFrom:(NSString *)appLanguage {
-    NSString *language = appLanguage;
-    
-    if ([language isEqualToString:kDefaultLanguage]) {
-        NSArray *languages = [[NSUserDefaults standardUserDefaults] valueForKey:@"AppleLanguages"];
-        language = languages.firstObject;
-    }
-    
-    return language;
-}
-
 + (void)setLanguage:(NSString *)language {
     if ([language isEqualToString:kDefaultLanguage]) {
-        NSArray* languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
-        NSString *defaultLanguage = [languages objectAtIndex:0];
-        NSString *path = [[NSBundle mainBundle] pathForResource:defaultLanguage ofType:@"lproj"];
-        [[LocalizationManager sharedInstance] setBundle:[NSBundle bundleWithPath:path]];
+        [[NSUserDefaults standardUserDefaults] setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"NSLanguages"] forKey:@"AppleLanguages"];
     } else {
-        NSString *path = [[NSBundle mainBundle] pathForResource:language ofType:@"lproj"];
-        [[LocalizationManager sharedInstance] setBundle:[NSBundle bundleWithPath:path]];
+        NSMutableArray *array = [NSMutableArray arrayWithObjects:language, nil];
+        for (NSString *languageItem in [[NSUserDefaults standardUserDefaults] objectForKey:@"NSLanguages"]) {
+            if (![languageItem isEqualToString:language]) {
+                [array addObject:languageItem];
+            }
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setValue:array forKey:@"AppleLanguages"];
     }
+    
     [[NSUserDefaults standardUserDefaults] setValue:language forKey:@"localizationLanguage"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

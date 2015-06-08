@@ -23,11 +23,6 @@
     [self appearance];
     [[CoordinatingController sharedInstance] pushViewControllerWithClass:[MainViewController class] animated:NO];
     
-    NSString *language = [LocalizationManager language];
-    if (![language isEqualToString:@"default"]) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObject:language] forKey:@"AppleLanguages"];
-    }
-    
     return YES;
 }
 

@@ -40,6 +40,7 @@
 }
 
 - (void)dealloc {
+    
 }
 
 - (void)commonInit {
@@ -66,12 +67,27 @@
 
 - (void)updateScrollViewContentSize {
     _selectFilterScrollView.contentSize = CGSizeMake(self.filters.count * self.frame.size.width * 2, self.frame.size.height);
+    
+    if (self.selectedFilter != nil) {
+        [self scrollToFilter:self.selectedFilter animated:NO];
+    }
 }
 
 static CGRect CGRectTranslate(CGRect rect, CGFloat width, CGFloat maxWidth) {
     rect.origin.x += width;
 
     return rect;
+}
+
+- (void)scrollToFilter:(SCFilter *)filter animated:(BOOL)animated {
+    NSInteger index = [self.filters indexOfObject:filter];
+    if (index >= 0) {
+        CGPoint contentOffset = CGPointMake(_selectFilterScrollView.frame.size.width * index, 0);
+        [_selectFilterScrollView setContentOffset:contentOffset animated:animated];
+        [self updateCurrentSelected];
+    } else {
+        [NSException raise:@"InvalidFilterException" format:@"This filter is not present in the filters array"];
+    }
 }
 
 - (void)updateCurrentSelected {
@@ -134,6 +150,7 @@ static CGRect CGRectTranslate(CGRect rect, CGFloat width, CGFloat maxWidth) {
     
     CGFloat xOutputRect = rect.size.width * -remainingRatio;
     CGFloat xImage = extent.size.width * -remainingRatio;
+    CFTimeInterval imageTime = self.CIImageTime;
     
     while (index <= upIndex) {
         NSInteger currentIndex = index % filterGroups.count;
@@ -141,7 +158,7 @@ static CGRect CGRectTranslate(CGRect rect, CGFloat width, CGFloat maxWidth) {
         CIImage *imageToUse = image;
         
         if ([obj isKindOfClass:[SCFilter class]]) {
-            imageToUse = [((SCFilter *)obj) imageByProcessingImage:imageToUse];
+            imageToUse = [((SCFilter *)obj) imageByProcessingImage:imageToUse atTime:imageTime];
         }
         
         CGRect outputRect = CGRectTranslate(rect, xOutputRect, rect.size.width);

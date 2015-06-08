@@ -32,7 +32,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RadarFrequencyCell" forIndexPath:indexPath];
-    NSString *minute = [LocalizationManager localizedStringForKey:@"Minute" comment:nil];
+    NSString *minute = [LocalizationManager localizedStringForKey:@"Second" comment:nil];
     [cell.textLabel setText:[NSString stringWithFormat:@"%@%@", self.numbers[indexPath.row], minute]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if ([DeviceManager sharedInstance].alarmDistance == [self.numbers[indexPath.row] integerValue]) {

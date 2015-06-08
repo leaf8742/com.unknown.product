@@ -26,9 +26,6 @@ FOUNDATION_EXPORT NSString *const kEnglishLanguage;
 /// @brief 当前语言
 + (NSString *)language;
 
-/// @brief 根据app语言Key获取系统语言
-+ (NSString *)sysLanguageFrom:(NSString *)appLanguage;
-
 /// @brief 设置当前语言
 + (void)setLanguage:(NSString *)language;
 

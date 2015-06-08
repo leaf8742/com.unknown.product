@@ -44,12 +44,12 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray *localizations = @[kDefaultLanguage, kChineseSimplifiedLanguage, kEnglishLanguage];
-    NSArray *languages = @[@"跟随系统", @"中文", @"English"];
+    NSArray *localizations = @[kChineseSimplifiedLanguage, kEnglishLanguage];
+    NSArray *languages = @[@"中文", @"English"];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LanguageCell" forIndexPath:indexPath];
     cell.textLabel.text = languages[indexPath.row];
@@ -65,7 +65,7 @@
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray *localizations = @[kDefaultLanguage, kChineseSimplifiedLanguage, kEnglishLanguage];
+    NSArray *localizations = @[kChineseSimplifiedLanguage, kEnglishLanguage];
     self.localization = localizations[indexPath.row];
     if ([[LocalizationManager language] isEqualToString:localizations[indexPath.row]]) {
         return;

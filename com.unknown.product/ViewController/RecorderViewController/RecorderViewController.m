@@ -38,6 +38,8 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 
 @property (strong, nonatomic) NSMutableArray *assets;
 
+@property (strong, nonatomic) UIButton *switchCaptureDevice;
+
 @end
 
 
@@ -92,13 +94,13 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
     
     self.recorder = [SCRecorder recorder];
     self.recorder.captureSessionPreset = [SCRecorderTools bestCaptureSessionPresetCompatibleWithAllDevices];
-    self.recorder.maxRecordDuration = CMTimeMake(10, 1);
+//    self.recorder.maxRecordDuration = CMTimeMake(10, 1);
     self.recorder.delegate = self;
     self.recorder.autoSetVideoOrientation = YES;
     self.recorder.previewView = self.preview;
-    self.recorder.initializeSessionLazily = NO;
+    self.recorder.initializeSessionLazily = YES;
     SCRecordSession *session = [SCRecordSession recordSession];
-    session.fileType = AVFileTypeQuickTimeMovie;
+    session.fileType = AVFileTypeMPEG4;
     self.recorder.session = session;
 
     NSError *error;
@@ -106,18 +108,16 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
         NSLog(@"Prepare error: %@", error.localizedDescription);
     }
     
-    [self.navigationController.navigationItem setHidesBackButton:YES];
-    UIButton *switchCaptureDevice = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    [switchCaptureDevice setBackgroundImage:[UIImage imageNamed:@"zhuanhuan"] forState:UIControlStateNormal];
-    [switchCaptureDevice addTarget:self action:@selector(switchCaptureDevices:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:switchCaptureDevice];
+    self.switchCaptureDevice = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [self.switchCaptureDevice setBackgroundImage:[UIImage imageNamed:@"zhuanhuan"] forState:UIControlStateNormal];
+    [self.switchCaptureDevice addTarget:self action:@selector(switchCaptureDevices:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.switchCaptureDevice];
     [self.navigationItem setRightBarButtonItem:barButtonItem animated:YES];
     
     UIButton *titleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
     [titleButton setBackgroundImage:[UIImage imageNamed:@"setting"] forState:UIControlStateNormal];
     [titleButton addTarget:self action:@selector(setting:) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationItem setTitleView:titleButton];
-    [self.navigationItem setHidesBackButton:YES];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithWhite:0.2 alpha:1]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
@@ -148,7 +148,8 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:71 / 255.0 green:149 / 255.0 blue:201 / 255.0 alpha:1]];
 }
 
-- (void)switchCaptureDevices:(id)sender {
+- (void)switchCaptureDevices:(UIBarButtonItem *)sender {
+    sender.enabled = NO;
     [self.recorder switchCaptureDevices];
 }
 
@@ -241,6 +242,11 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
     [browser setCurrentPhotoIndex:[groupForCell numberOfAssets] - 1];
     
     [[CoordinatingController sharedInstance].rootViewController pushViewController:browser animated:YES];
+}
+
+- (IBAction)focus:(UIControl *)sender forEvent:(UIEvent *)event {
+    CGPoint point = [(UITouch *)[[event allTouches] anyObject] locationInView:self.view];
+    [self.recorder autoFocusAtPoint:point];
 }
 
 - (void)setting:(id)sender {
@@ -337,6 +343,10 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 - (void)recorder:(SCRecorder *)recorder didCompleteSegment:(SCRecordSessionSegment *)segment inSession:(SCRecordSession *)recordSession error:(NSError *)error {
     NSLog(@"Completed record segment at %@: %@ (frameRate: %f)", segment.url, error, segment.frameRate);
     UISaveVideoAtPathToSavedPhotosAlbum(segment.url.path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)recorder:(SCRecorder *)recorder didReconfigureVideoInput:(NSError *)videoInputError {
+    self.switchCaptureDevice.enabled = YES;
 }
 
 #pragma mark - Memory Management

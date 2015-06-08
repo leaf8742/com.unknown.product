@@ -20,7 +20,7 @@
         case 0:
             return 3;
         default:
-            return 5;
+            return 4;
     }
 }
 
@@ -59,22 +59,22 @@
                 cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Overcast" comment:nil];
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 break;
+//            case 1:
+//                cell.imageView.image = [UIImage imageNamed:@"yinyutian"];
+//                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Rain Days" comment:nil];
+//                cell.accessoryType = UITableViewCellAccessoryNone;
+//                break;
             case 1:
-                cell.imageView.image = [UIImage imageNamed:@"yinyutian"];
-                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Rain Days" comment:nil];
-                cell.accessoryType = UITableViewCellAccessoryNone;
-                break;
-            case 2:
                 cell.imageView.image = [UIImage imageNamed:@"yutian"];
                 cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Wet" comment:nil];
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 break;
-            case 3:
+            case 2:
                 cell.imageView.image = [UIImage imageNamed:@"bangwan"];
                 cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Dusk" comment:nil];
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 break;
-            case 4:
+            case 3:
                 cell.imageView.image = [UIImage imageNamed:@"yewan"];
                 cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Night" comment:nil];
                 cell.accessoryType = UITableViewCellAccessoryNone;

@@ -8,6 +8,7 @@
 
 #import "CIImageRendererUtils.h"
 #import "SCFilterSelectorViewInternal.h"
+#import "SCContext.h"
 
 @implementation SCFilterSelectorView
 
@@ -32,18 +33,22 @@
 }
 
 - (void)commonInit {
-    EAGLContext *context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    _glkView = [[GLKView alloc] initWithFrame:self.bounds context:context];
+    _glkView = [[GLKView alloc] initWithFrame:self.bounds context:nil];
     _glkView.backgroundColor = [UIColor clearColor];
-    
-    NSDictionary *options = @{ kCIContextWorkingColorSpace : [NSNull null], kCIContextOutputColorSpace : [NSNull null] };
-    _CIContext = [CIContext contextWithEAGLContext:context options:options];
     
     _glkView.delegate = self;
     
     _sampleBufferHolder = [SCSampleBufferHolder new];
     
     [self addSubview:_glkView];
+}
+
+- (void)_loadContext {
+    if (_CIContext == nil) {
+        SCContext *context = [SCContext context];
+        _CIContext = context.CIContext;
+        _glkView.context = context.EAGLContext;
+    }
 }
 
 - (void)layoutSubviews {
@@ -65,7 +70,7 @@
     CGRect extent = [image extent];
     
     if (_selectedFilter != nil) {
-        image = [_selectedFilter imageByProcessingImage:image];
+        image = [_selectedFilter imageByProcessingImage:image atTime:_CIImageTime];
     }
     
     CGRect outputRect = [CIImageRendererUtils processRect:rect withImageSize:extent.size contentScale:self.contentScaleFactor contentMode:self.contentMode];
@@ -87,10 +92,10 @@
             [_imageTransformFilter setValue:outputImage forKey:kCIInputImageKey];
             outputImage = [_imageTransformFilter valueForKey:kCIOutputImageKey];
         }
-
+        
         rect = [CIImageRendererUtils processRect:rect withImageSize:outputImage.extent.size contentScale:_glkView.contentScaleFactor contentMode:self.contentMode];
-
-
+        
+        
         [self render:outputImage toContext:_CIContext inRect:rect];
     }
 }
@@ -108,13 +113,15 @@
         _selectedFilter = selectedFilter;
         
         [self didChangeValueForKey:@"selectedFilter"];
+        
+        [self setNeedsLayout];
     }
 }
 
 - (UIImage *)currentlyDisplayedImageWithScale:(CGFloat)scale orientation:(UIImageOrientation)imageOrientation {
     CIImage *inputImage = self.CIImage;
     
-    CIImage *processedImage = [self.selectedFilter imageByProcessingImage:inputImage];
+    CIImage *processedImage = [self.selectedFilter imageByProcessingImage:inputImage atTime:_CIImageTime];
     
     if (processedImage == nil) {
         processedImage = inputImage;
@@ -135,6 +142,10 @@
 
 - (void)setCIImage:(CIImage *)CIImage {
     _CIImage = CIImage;
+    
+    if (CIImage != nil) {
+        [self _loadContext];
+    }
     [_glkView setNeedsDisplay];
 }
 
@@ -145,8 +156,8 @@
 - (void)setPreferredCIImageTransform:(CGAffineTransform)preferredCIImageTransform {
     _imageTransformFilter = [CIFilter filterWithName:@"CIAffineTransform"];
     [_imageTransformFilter setValue:[NSValue valueWithBytes:&preferredCIImageTransform
-                                      objCType:@encode(CGAffineTransform)]
-                forKey:@"inputTransform"];
+                                                   objCType:@encode(CGAffineTransform)]
+                             forKey:@"inputTransform"];
 }
 
 @end

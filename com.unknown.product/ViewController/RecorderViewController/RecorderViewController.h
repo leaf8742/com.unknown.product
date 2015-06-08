@@ -17,7 +17,7 @@
 @interface RecorderViewController : UIViewController<CoordinatingControllerDelegate>
 
 /// @brief 图像页面
-@property (weak, nonatomic) IBOutlet UIView *preview;
+@property (weak, nonatomic) IBOutlet UIControl *preview;
 
 @property (weak, nonatomic) IBOutlet UIView *cameraToolsPanel;
 
@@ -74,5 +74,8 @@
 
 /// @brief 浏览图库
 - (IBAction)browse:(UIButton *)sender;
+
+/// @brief 触摸
+- (IBAction)focus:(UIControl *)sender forEvent:(UIEvent *)event;
 
 @end
