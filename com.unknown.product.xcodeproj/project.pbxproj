@@ -24,7 +24,6 @@
 		0954D1381AED1E6700431477 /* location_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0954D1361AED1E6700431477 /* location_normal@2x.png */; };
 		0954D13B1AED1F9400431477 /* bluetooth_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0954D1391AED1F9400431477 /* bluetooth_highlighted@2x.png */; };
 		0954D13C1AED1F9400431477 /* bluetooth_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0954D13A1AED1F9400431477 /* bluetooth_normal@2x.png */; };
-		096C728B1B1EEBAF00839D8A /* LELocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096C728A1B1EEBAF00839D8A /* LELocation.framework */; };
 		098399841AED95D100EDE6EF /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 098399831AED95D100EDE6EF /* setting@2x.png */; };
 		098399871AED97D500EDE6EF /* VideoMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 098399861AED97D500EDE6EF /* VideoMenu.m */; };
 		0983998A1AED9AFE00EDE6EF /* CapturePhotoMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 098399891AED9AFE00EDE6EF /* CapturePhotoMenu.m */; };
@@ -36,6 +35,14 @@
 		098399981AEDA71D00EDE6EF /* yintian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 098399931AEDA71D00EDE6EF /* yintian@2x.png */; };
 		098399991AEDA71D00EDE6EF /* yinyutian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 098399941AEDA71D00EDE6EF /* yinyutian@2x.png */; };
 		0983999A1AEDA71D00EDE6EF /* yutian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 098399951AEDA71D00EDE6EF /* yutian@2x.png */; };
+		098B92581B292BE200F0C443 /* aurio_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 098B924B1B292BE200F0C443 /* aurio_helper.cpp */; };
+		098B92591B292BE200F0C443 /* FFTBufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 098B924E1B292BE200F0C443 /* FFTBufferManager.cpp */; };
+		098B925A1B292BE200F0C443 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 098B92511B292BE200F0C443 /* CADebugMacros.cpp */; };
+		098B925B1B292BE200F0C443 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 098B92541B292BE200F0C443 /* CAStreamBasicDescription.cpp */; };
+		098B925C1B292BE200F0C443 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 098B92561B292BE200F0C443 /* CAXException.cpp */; };
+		098B92621B292C5300F0C443 /* rad2fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 098B925E1B292C5300F0C443 /* rad2fft.c */; };
+		098B92631B292C5300F0C443 /* SpectrumAnalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 098B92601B292C5300F0C443 /* SpectrumAnalysis.cpp */; };
+		098B93321B298F0800F0C443 /* CommunicationMgr.mm in Sources */ = {isa = PBXBuildFile; fileRef = 098B93311B298F0800F0C443 /* CommunicationMgr.mm */; };
 		099A64361B1FD34900EFF47E /* LanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 099A64351B1FD34900EFF47E /* LanguageViewController.m */; };
 		099A643D1B1FDDD200EFF47E /* AlarmDistanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 099A643C1B1FDDD200EFF47E /* AlarmDistanceViewController.m */; };
 		099A64441B1FE17600EFF47E /* RadarUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 099A64431B1FE17600EFF47E /* RadarUnitViewController.m */; };
@@ -108,7 +115,6 @@
 		0954D1361AED1E6700431477 /* location_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location_normal@2x.png"; sourceTree = "<group>"; };
 		0954D1391AED1F9400431477 /* bluetooth_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth_highlighted@2x.png"; sourceTree = "<group>"; };
 		0954D13A1AED1F9400431477 /* bluetooth_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth_normal@2x.png"; sourceTree = "<group>"; };
-		096C728A1B1EEBAF00839D8A /* LELocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LELocation.framework; sourceTree = "<group>"; };
 		098399831AED95D100EDE6EF /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		098399851AED97D500EDE6EF /* VideoMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoMenu.h; sourceTree = "<group>"; };
 		098399861AED97D500EDE6EF /* VideoMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoMenu.m; sourceTree = "<group>"; };
@@ -122,6 +128,24 @@
 		098399931AEDA71D00EDE6EF /* yintian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yintian@2x.png"; sourceTree = "<group>"; };
 		098399941AEDA71D00EDE6EF /* yinyutian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yinyutian@2x.png"; sourceTree = "<group>"; };
 		098399951AEDA71D00EDE6EF /* yutian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yutian@2x.png"; sourceTree = "<group>"; };
+		098B924B1B292BE200F0C443 /* aurio_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aurio_helper.cpp; sourceTree = "<group>"; };
+		098B924C1B292BE200F0C443 /* aurio_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aurio_helper.h; sourceTree = "<group>"; };
+		098B924E1B292BE200F0C443 /* FFTBufferManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFTBufferManager.cpp; sourceTree = "<group>"; };
+		098B924F1B292BE200F0C443 /* FFTBufferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTBufferManager.h; sourceTree = "<group>"; };
+		098B92511B292BE200F0C443 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
+		098B92521B292BE200F0C443 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
+		098B92531B292BE200F0C443 /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
+		098B92541B292BE200F0C443 /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
+		098B92551B292BE200F0C443 /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
+		098B92561B292BE200F0C443 /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
+		098B92571B292BE200F0C443 /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
+		098B925E1B292C5300F0C443 /* rad2fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rad2fft.c; sourceTree = "<group>"; };
+		098B925F1B292C5300F0C443 /* rad2fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rad2fft.h; sourceTree = "<group>"; };
+		098B92601B292C5300F0C443 /* SpectrumAnalysis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpectrumAnalysis.cpp; sourceTree = "<group>"; };
+		098B92611B292C5300F0C443 /* SpectrumAnalysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpectrumAnalysis.h; sourceTree = "<group>"; };
+		098B93301B298F0800F0C443 /* CommunicationMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationMgr.h; sourceTree = "<group>"; };
+		098B93311B298F0800F0C443 /* CommunicationMgr.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CommunicationMgr.mm; sourceTree = "<group>"; };
+		098B93331B298FC100F0C443 /* Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
 		099A64341B1FD34900EFF47E /* LanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageViewController.h; sourceTree = "<group>"; };
 		099A64351B1FD34900EFF47E /* LanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageViewController.m; sourceTree = "<group>"; };
 		099A643B1B1FDDD200EFF47E /* AlarmDistanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmDistanceViewController.h; sourceTree = "<group>"; };
@@ -194,7 +218,6 @@
 				091909641AEDC4950009183E /* AssetsLibrary.framework in Frameworks */,
 				09DC3DA31B0088D500602B2A /* CoreBluetooth.framework in Frameworks */,
 				09BC2C0A1ADE19F500DC4F2E /* CoreGraphics.framework in Frameworks */,
-				096C728B1B1EEBAF00839D8A /* LELocation.framework in Frameworks */,
 				09066F081ADD0F6400FF56BB /* CoreLocation.framework in Frameworks */,
 				09066F061ADD058600FF56BB /* MapKit.framework in Frameworks */,
 				6302DE4E30958E9CDB773FA6 /* libPods.a in Frameworks */,
@@ -289,9 +312,65 @@
 		096C72891B1EEBAF00839D8A /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				096C728A1B1EEBAF00839D8A /* LELocation.framework */,
+				098B924A1B292BE200F0C443 /* aurio_helper */,
+				098B925D1B292C5300F0C443 /* fft */,
+				098B924D1B292BE200F0C443 /* FFTBufferManager */,
+				098B92501B292BE200F0C443 /* iPublicUtility */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		098B924A1B292BE200F0C443 /* aurio_helper */ = {
+			isa = PBXGroup;
+			children = (
+				098B924B1B292BE200F0C443 /* aurio_helper.cpp */,
+				098B924C1B292BE200F0C443 /* aurio_helper.h */,
+			);
+			path = aurio_helper;
+			sourceTree = "<group>";
+		};
+		098B924D1B292BE200F0C443 /* FFTBufferManager */ = {
+			isa = PBXGroup;
+			children = (
+				098B924E1B292BE200F0C443 /* FFTBufferManager.cpp */,
+				098B924F1B292BE200F0C443 /* FFTBufferManager.h */,
+			);
+			path = FFTBufferManager;
+			sourceTree = "<group>";
+		};
+		098B92501B292BE200F0C443 /* iPublicUtility */ = {
+			isa = PBXGroup;
+			children = (
+				098B92511B292BE200F0C443 /* CADebugMacros.cpp */,
+				098B92521B292BE200F0C443 /* CADebugMacros.h */,
+				098B92531B292BE200F0C443 /* CAMath.h */,
+				098B92541B292BE200F0C443 /* CAStreamBasicDescription.cpp */,
+				098B92551B292BE200F0C443 /* CAStreamBasicDescription.h */,
+				098B92561B292BE200F0C443 /* CAXException.cpp */,
+				098B92571B292BE200F0C443 /* CAXException.h */,
+			);
+			path = iPublicUtility;
+			sourceTree = "<group>";
+		};
+		098B925D1B292C5300F0C443 /* fft */ = {
+			isa = PBXGroup;
+			children = (
+				098B925E1B292C5300F0C443 /* rad2fft.c */,
+				098B925F1B292C5300F0C443 /* rad2fft.h */,
+				098B92601B292C5300F0C443 /* SpectrumAnalysis.cpp */,
+				098B92611B292C5300F0C443 /* SpectrumAnalysis.h */,
+			);
+			path = fft;
+			sourceTree = "<group>";
+		};
+		098B932F1B298F0800F0C443 /* CommunicationMgr */ = {
+			isa = PBXGroup;
+			children = (
+				098B93331B298FC100F0C443 /* Defines.h */,
+				098B93301B298F0800F0C443 /* CommunicationMgr.h */,
+				098B93311B298F0800F0C443 /* CommunicationMgr.mm */,
+			);
+			path = CommunicationMgr;
 			sourceTree = "<group>";
 		};
 		099A64331B1FD34900EFF47E /* LanguageViewController */ = {
@@ -451,6 +530,7 @@
 		09D8D6181ADDF64B00AB939D /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				098B932F1B298F0800F0C443 /* CommunicationMgr */,
 				09DC3DA71B008C3800602B2A /* DeviceManager */,
 				092AB9E11B1F491100B99E3D /* LocalizationManager */,
 				09D8D6191ADDF64B00AB939D /* LocationManager */,
@@ -643,14 +723,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				098B925C1B292BE200F0C443 /* CAXException.cpp in Sources */,
 				099F3C2E1AE9E4760083D387 /* RecorderViewController.m in Sources */,
 				09D8D61C1ADDF64B00AB939D /* LocationManager.m in Sources */,
+				098B92591B292BE200F0C443 /* FFTBufferManager.cpp in Sources */,
 				09BC2C041ADE16B500DC4F2E /* UserInformation.m in Sources */,
 				099A644B1B1FE74D00EFF47E /* RadarFrequencyViewController.m in Sources */,
 				099A643D1B1FDDD200EFF47E /* AlarmDistanceViewController.m in Sources */,
 				099A64521B200AAE00EFF47E /* AlarmModeViewController.m in Sources */,
 				09066ED61ADCED8300FF56BB /* AppDelegate.m in Sources */,
 				099A64441B1FE17600EFF47E /* RadarUnitViewController.m in Sources */,
+				098B92631B292C5300F0C443 /* SpectrumAnalysis.cpp in Sources */,
+				098B925B1B292BE200F0C443 /* CAStreamBasicDescription.cpp in Sources */,
 				09066EFD1ADCF2EC00FF56BB /* MainViewController.m in Sources */,
 				09DC3DAA1B008C3800602B2A /* DeviceManager.m in Sources */,
 				09BC2C081ADE18B900DC4F2E /* CameraInformation.m in Sources */,
@@ -658,12 +742,16 @@
 				092AB9E41B1F491100B99E3D /* LocalizationManager.m in Sources */,
 				09BC2C0D1ADE1C9E00DC4F2E /* MainMenuCell.m in Sources */,
 				09066ED31ADCED8300FF56BB /* main.m in Sources */,
+				098B93321B298F0800F0C443 /* CommunicationMgr.mm in Sources */,
 				09D8D6101ADDF43F00AB939D /* RadarViewController.m in Sources */,
+				098B92621B292C5300F0C443 /* rad2fft.c in Sources */,
 				0954D1341AED173B00431477 /* SCRecordSessionManager.m in Sources */,
+				098B925A1B292BE200F0C443 /* CADebugMacros.cpp in Sources */,
 				09D8D6141ADDF4A800AB939D /* LocationViewController.m in Sources */,
 				0983998A1AED9AFE00EDE6EF /* CapturePhotoMenu.m in Sources */,
 				09BC2C141ADE580400DC4F2E /* SettingViewController.m in Sources */,
 				099A64361B1FD34900EFF47E /* LanguageViewController.m in Sources */,
+				098B92581B292BE200F0C443 /* aurio_helper.cpp in Sources */,
 				09BC2BF91ADE11BF00DC4F2E /* MainMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -799,6 +887,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/com.unknown.product/Component",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = "COCOAPODS=1";
 				INFOPLIST_FILE = com.unknown.product/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

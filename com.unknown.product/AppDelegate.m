@@ -3,14 +3,10 @@
 #import "DeviceManager.h"
 #import <CoordinatingController/CoordinatingController.h>
 #import "LocalizationManager.h"
-#import <LELocation/LELocationManager.h>
-#import <LELocation/LELocationManagerDelegate.h>
-
 
 @interface AppDelegate ()
 
 @end
-
 
 @implementation AppDelegate
 
