@@ -3,6 +3,7 @@
 #import "DeviceManager.h"
 #import <CoordinatingController/CoordinatingController.h>
 #import "LocalizationManager.h"
+#import "CommunicationMgr.h"
 
 @interface AppDelegate ()
 
@@ -18,6 +19,10 @@
     [DeviceManager sharedInstance];
     [self appearance];
     [[CoordinatingController sharedInstance] pushViewControllerWithClass:[MainViewController class] animated:NO];
+    
+    [[CommunicationMgr sharedInstance] commnunicationInit];
+    [[CommunicationMgr sharedInstance] startDetect];
+    [[CommunicationMgr sharedInstance] sendStartDetectReq];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(volumeChanged:)
