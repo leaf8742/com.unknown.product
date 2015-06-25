@@ -101,7 +101,7 @@ typedef struct RecieveDataStruct {
 @synthesize mute;
 @synthesize unitIsRunning;
 
-static uint8_t startDetectBytes[5] = {0x57, 0x02, 0xff,};
+static uint8_t startDetectBytes[] = {0x57, 0x02, 0xff,};
 //static uint8_t getDataBytes[5] = {0xbb, 0xad, 0xca, 0xad ^ 0xca, 0xaa};
 static uint8_t finishDetectBytes[5] = {0xbb, 0xa0, 0xca, 0xa0 ^ 0xca, 0xaa};
 
@@ -676,6 +676,8 @@ static OSStatus	PerformThru(
 
 - (void)handleRecivedData:(uint8_t)byte {
     printf("*****receive data: 0x%x\n", byte);
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReceiveData" object:[NSString stringWithFormat:@"%x", byte]];
     
     if (self.isStartRecievePakage) {
         if (byte == 0xbb) {

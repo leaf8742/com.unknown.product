@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 
 @property (strong, nonatomic) SCRecorder *recorder;
 
-@property (strong, nonatomic) SCRecorderToolsView *focusView;
+//@property (strong, nonatomic) SCRecorderToolsView *focusView;
 
 @property (assign, nonatomic) kCameraMode cameraMode;
 
@@ -92,6 +92,10 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UITapGestureRecognizer *doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doubleTap:)];
+    [doubleTapGestureRecognizer setNumberOfTapsRequired:2];
+    [self.preview addGestureRecognizer:doubleTapGestureRecognizer];
+    
     self.recorder = [SCRecorder recorder];
     self.recorder.captureSessionPreset = [SCRecorderTools bestCaptureSessionPresetCompatibleWithAllDevices];
 //    self.recorder.maxRecordDuration = CMTimeMake(10, 1);
@@ -154,6 +158,8 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 }
 
 - (IBAction)capturePhoto:(UIButton *)sender {
+    
+    
     self.videoMenu.hidden = YES;
     self.capturePhotoMenu.hidden = YES;
     if (self.cameraMode == kCameraModePhoto) {
@@ -163,7 +169,8 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
             } else {
                 NSLog(@"Failed to capture photo: %@", error.localizedDescription);
             }
-            [self library];
+//            [self library];
+            [self.browse setBackgroundImage:image forState:UIControlStateNormal];
         }];
     } else {
         [UIView animateWithDuration:0.4 animations:^{
@@ -245,8 +252,16 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 }
 
 - (IBAction)focus:(UIControl *)sender forEvent:(UIEvent *)event {
-    CGPoint point = [(UITouch *)[[event allTouches] anyObject] locationInView:self.view];
-    [self.recorder autoFocusAtPoint:point];
+    CGPoint point = [(UITouch *)[[event allTouches] anyObject] locationInView:self.preview];
+    [self.recorder continuousFocusAtPoint:point];
+    self.focusView.center = point;
+    [UIView animateWithDuration:0.4 animations:^{
+        self.focusView.alpha = 1;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.4 animations:^{
+            self.focusView.alpha = 0;
+        }];
+    }];
 }
 
 - (void)setting:(id)sender {
@@ -311,6 +326,14 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
             default:
                 [self recordVideo:nil];
         }
+    }
+}
+
+- (void)doubleTap:(id)sender {
+    if ([self.recorder videoZoomFactor] == 1) {
+        [self.recorder setVideoZoomFactor:2];
+    } else {
+        [self.recorder setVideoZoomFactor:1];
     }
 }
 

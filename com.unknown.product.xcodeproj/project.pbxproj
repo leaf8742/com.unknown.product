@@ -19,11 +19,13 @@
 		091909641AEDC4950009183E /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 091909631AEDC4950009183E /* AssetsLibrary.framework */; };
 		092AB9E41B1F491100B99E3D /* LocalizationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 092AB9E31B1F491100B99E3D /* LocalizationManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		092AB9EF1B1F4C6A00B99E3D /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 092AB9F11B1F4C6A00B99E3D /* Localization.strings */; };
+		0935E7E71B3A4CAA007B16CD /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0935E7E61B3A4CAA007B16CD /* TextViewController.m */; };
 		0954D1341AED173B00431477 /* SCRecordSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0954D1331AED173B00431477 /* SCRecordSessionManager.m */; };
 		0954D1371AED1E6700431477 /* location_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0954D1351AED1E6700431477 /* location_highlighted@2x.png */; };
 		0954D1381AED1E6700431477 /* location_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0954D1361AED1E6700431477 /* location_normal@2x.png */; };
 		0954D13B1AED1F9400431477 /* bluetooth_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0954D1391AED1F9400431477 /* bluetooth_highlighted@2x.png */; };
 		0954D13C1AED1F9400431477 /* bluetooth_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0954D13A1AED1F9400431477 /* bluetooth_normal@2x.png */; };
+		096B02931B3BE02200563C67 /* FocusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096B02921B3BE02200563C67 /* FocusView.m */; };
 		098399841AED95D100EDE6EF /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 098399831AED95D100EDE6EF /* setting@2x.png */; };
 		098399871AED97D500EDE6EF /* VideoMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 098399861AED97D500EDE6EF /* VideoMenu.m */; };
 		0983998A1AED9AFE00EDE6EF /* CapturePhotoMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 098399891AED9AFE00EDE6EF /* CapturePhotoMenu.m */; };
@@ -108,6 +110,8 @@
 		092AB9F51B1F4C9A00B99E3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localization.strings"; sourceTree = "<group>"; };
 		092AB9F61B1F4CAF00B99E3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
 		092AB9F81B1F4CB700B99E3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		0935E7E51B3A4CAA007B16CD /* TextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
+		0935E7E61B3A4CAA007B16CD /* TextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewController.m; sourceTree = "<group>"; };
 		0942ECD51B15B74200DF3028 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		0954D1321AED173B00431477 /* SCRecordSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRecordSessionManager.h; sourceTree = "<group>"; };
 		0954D1331AED173B00431477 /* SCRecordSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRecordSessionManager.m; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 		0954D1361AED1E6700431477 /* location_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location_normal@2x.png"; sourceTree = "<group>"; };
 		0954D1391AED1F9400431477 /* bluetooth_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth_highlighted@2x.png"; sourceTree = "<group>"; };
 		0954D13A1AED1F9400431477 /* bluetooth_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetooth_normal@2x.png"; sourceTree = "<group>"; };
+		096B02911B3BE02200563C67 /* FocusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusView.h; sourceTree = "<group>"; };
+		096B02921B3BE02200563C67 /* FocusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusView.m; sourceTree = "<group>"; };
 		098399831AED95D100EDE6EF /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		098399851AED97D500EDE6EF /* VideoMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoMenu.h; sourceTree = "<group>"; };
 		098399861AED97D500EDE6EF /* VideoMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoMenu.m; sourceTree = "<group>"; };
@@ -276,6 +282,7 @@
 		09066EF91ADCF2EC00FF56BB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0935E7E41B3A4CAA007B16CD /* TextViewController */,
 				099A643A1B1FDDD200EFF47E /* AlarmDistanceViewController */,
 				099A644F1B200AAE00EFF47E /* AlarmModeViewController */,
 				099A64331B1FD34900EFF47E /* LanguageViewController */,
@@ -307,6 +314,15 @@
 				092AB9E31B1F491100B99E3D /* LocalizationManager.m */,
 			);
 			path = LocalizationManager;
+			sourceTree = "<group>";
+		};
+		0935E7E41B3A4CAA007B16CD /* TextViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0935E7E51B3A4CAA007B16CD /* TextViewController.h */,
+				0935E7E61B3A4CAA007B16CD /* TextViewController.m */,
+			);
+			path = TextViewController;
 			sourceTree = "<group>";
 		};
 		096C72891B1EEBAF00839D8A /* Component */ = {
@@ -429,6 +445,8 @@
 				0954D1331AED173B00431477 /* SCRecordSessionManager.m */,
 				098399851AED97D500EDE6EF /* VideoMenu.h */,
 				098399861AED97D500EDE6EF /* VideoMenu.m */,
+				096B02911B3BE02200563C67 /* FocusView.h */,
+				096B02921B3BE02200563C67 /* FocusView.m */,
 			);
 			path = RecorderViewController;
 			sourceTree = "<group>";
@@ -724,6 +742,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				098B925C1B292BE200F0C443 /* CAXException.cpp in Sources */,
+				096B02931B3BE02200563C67 /* FocusView.m in Sources */,
 				099F3C2E1AE9E4760083D387 /* RecorderViewController.m in Sources */,
 				09D8D61C1ADDF64B00AB939D /* LocationManager.m in Sources */,
 				098B92591B292BE200F0C443 /* FFTBufferManager.cpp in Sources */,
@@ -740,6 +759,7 @@
 				09BC2C081ADE18B900DC4F2E /* CameraInformation.m in Sources */,
 				098399871AED97D500EDE6EF /* VideoMenu.m in Sources */,
 				092AB9E41B1F491100B99E3D /* LocalizationManager.m in Sources */,
+				0935E7E71B3A4CAA007B16CD /* TextViewController.m in Sources */,
 				09BC2C0D1ADE1C9E00DC4F2E /* MainMenuCell.m in Sources */,
 				09066ED31ADCED8300FF56BB /* main.m in Sources */,
 				098B93321B298F0800F0C443 /* CommunicationMgr.mm in Sources */,
@@ -892,6 +912,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -911,6 +932,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

@@ -7,6 +7,7 @@
 #import <CoordinatingController/CoordinatingController.h>
 #import "VideoMenu.h"
 #import "CapturePhotoMenu.h"
+#import "FocusView.h"
 
 /**
  * @class RecorderViewController
@@ -59,6 +60,9 @@
 
 /// @brief 录相机居中
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *recordVideoYCenter;
+
+/// @brief 调焦页面
+@property (weak, nonatomic) IBOutlet FocusView *focusView;
 
 /// @brief 照相按钮
 - (IBAction)capturePhoto:(UIButton *)sender;

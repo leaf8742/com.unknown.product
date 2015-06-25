@@ -38,6 +38,12 @@
  */
 - (void)player:(SCPlayer *)player itemReadyToPlay:(AVPlayerItem *)item;
 
+/**
+ Called when the player has setup the renderer so it can receive the image in the
+ proper orientation.
+ */
+- (void)player:(SCPlayer *)player didSetupRenderer:(id<CIImageRenderer>)renderer;
+
 @end
 
 /**
@@ -65,6 +71,11 @@
  Whether this instance is currently playing.
  */
 @property (readonly, nonatomic) BOOL isPlaying;
+
+/**
+ Whether this instance displays default rendered video
+ */
+@property (assign, nonatomic) BOOL shouldSuppressPlayerRendering;
 
 /**
  The actual item duration.
