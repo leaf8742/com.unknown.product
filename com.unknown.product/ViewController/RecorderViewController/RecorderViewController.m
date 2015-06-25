@@ -92,9 +92,15 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
+    [singleTapGestureRecognizer setNumberOfTapsRequired:1];
+    [self.preview addGestureRecognizer:singleTapGestureRecognizer];
+    
     UITapGestureRecognizer *doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doubleTap:)];
     [doubleTapGestureRecognizer setNumberOfTapsRequired:2];
     [self.preview addGestureRecognizer:doubleTapGestureRecognizer];
+    
+    [singleTapGestureRecognizer requireGestureRecognizerToFail:doubleTapGestureRecognizer];
     
     self.recorder = [SCRecorder recorder];
     self.recorder.captureSessionPreset = [SCRecorderTools bestCaptureSessionPresetCompatibleWithAllDevices];
@@ -327,6 +333,19 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
                 [self recordVideo:nil];
         }
     }
+}
+
+- (void)singleTap:(UITapGestureRecognizer *)sender {
+    CGPoint point = [sender locationInView:self.preview];
+    [self.recorder continuousFocusAtPoint:point];
+    self.focusView.center = point;
+    [UIView animateWithDuration:0.4 animations:^{
+        self.focusView.alpha = 1;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.4 animations:^{
+            self.focusView.alpha = 0;
+        }];
+    }];
 }
 
 - (void)doubleTap:(id)sender {

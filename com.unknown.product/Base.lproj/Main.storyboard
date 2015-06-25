@@ -660,9 +660,6 @@
                                     <constraint firstAttribute="centerY" secondItem="4E7-EZ-HPX" secondAttribute="centerY" id="fnP-nn-VZa"/>
                                     <constraint firstAttribute="centerX" secondItem="BtB-pg-pGS" secondAttribute="centerX" id="rBD-d7-ZR0"/>
                                 </constraints>
-                                <connections>
-                                    <action selector="focus:forEvent:" destination="uPO-gk-HHB" eventType="touchDown" id="RdH-jJ-41H"/>
-                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emd-il-vdF" userLabel="Camera Tools Panel">
                                 <rect key="frame" x="0.0" y="500" width="600" height="100"/>

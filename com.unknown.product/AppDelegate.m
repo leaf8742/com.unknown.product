@@ -4,6 +4,7 @@
 #import <CoordinatingController/CoordinatingController.h>
 #import "LocalizationManager.h"
 #import "CommunicationMgr.h"
+#import "RecorderViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,15 +20,16 @@
     [DeviceManager sharedInstance];
     [self appearance];
     [[CoordinatingController sharedInstance] pushViewControllerWithClass:[MainViewController class] animated:NO];
+    [[CoordinatingController sharedInstance] pushViewControllerWithClass:[RecorderViewController class] animated:NO];
     
 //    [[CommunicationMgr sharedInstance] commnunicationInit];
 //    [[CommunicationMgr sharedInstance] startDetect];
 //    [[CommunicationMgr sharedInstance] sendStartDetectReq];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(volumeChanged:)
-                                                 name:@"AVSystemController_SystemVolumeDidChangeNotification"
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(volumeChanged:)
+//                                                 name:@"AVSystemController_SystemVolumeDidChangeNotification"
+//                                               object:nil];
     return YES;
 }
 
