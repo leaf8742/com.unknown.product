@@ -63,8 +63,8 @@
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(camera:)];
     [self.navigationItem setLeftBarButtonItem:barButtonItem];
     
-    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
-    [self.navigationItem setRightBarButtonItem:rightBarButtonItem];
+//    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
+//    [self.navigationItem setRightBarButtonItem:rightBarButtonItem];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bluetoothObject:) name:BluetoothObject object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(radarObject:) name:RadarObject object:nil];

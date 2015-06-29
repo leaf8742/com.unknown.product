@@ -48,7 +48,7 @@ NSString *const KeyStateService = @"KeyStateService";
         if (alarmDistance) {
             self.alarmDistance = [alarmDistance integerValue];
         } else {
-            self.alarmDistance = 100;
+            self.alarmDistance = 10;
         }
         
         id radarUnit = [[NSUserDefaults standardUserDefaults] valueForKey:@"radarUnit"];
