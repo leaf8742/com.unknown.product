@@ -44,6 +44,5 @@
 - (void)sendNight;
 - (void)sendPattern4;
 - (void)sendSOS;
-//- (void)sendStartDetectReq;
 
 @end
