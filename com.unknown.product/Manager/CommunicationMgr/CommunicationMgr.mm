@@ -101,12 +101,12 @@ typedef struct RecieveDataStruct {
 @synthesize mute;
 @synthesize unitIsRunning;
 
-static uint8_t pattern0[7] = {0x23, 0x02, 0x57, 0x00, 0x00, (uint8_t)(~(0x02 ^ 0x57 ^ 0x00 ^ 0x00)), 0x05};
-static uint8_t pattern1[7] = {0x23, 0x02, 0x57, 0x01, 0x00, (uint8_t)(~(0x02 ^ 0x57 ^ 0x01 ^ 0x00)), 0x05};
-static uint8_t pattern2[7] = {0x23, 0x02, 0x57, 0x02, 0x00, (uint8_t)(~(0x02 ^ 0x57 ^ 0x02 ^ 0x00)), 0x05};
-static uint8_t pattern3[7] = {0x23, 0x02, 0x57, 0x03, 0x00, (uint8_t)(~(0x02 ^ 0x57 ^ 0x03 ^ 0x00)), 0x05};
-static uint8_t pattern4[7] = {0x23, 0x02, 0x57, 0x04, 0x00, (uint8_t)(~(0x02 ^ 0x57 ^ 0x04 ^ 0x00)), 0x05};
-static uint8_t pattern5[7] = {0x23, 0x02, 0x57, 0x05, 0x00, (uint8_t)(~(0x02 ^ 0x57 ^ 0x05 ^ 0x00)), 0x05};
+static uint8_t pattern0[] = {0x00, 0x23, 0x02, 0x57, 0x00, 0x00, (uint8_t)(~(0x02 ^ 0x57 ^ 0x00 ^ 0x00)), 0x05};
+static uint8_t pattern1[] = {0x00, 0x23, 0x02, 0x57, 0x01, 0x00, (uint8_t)(~(0x02 ^ 0x57 ^ 0x01 ^ 0x00)), 0x05};
+static uint8_t pattern2[] = {0x00, 0x23, 0x02, 0x57, 0x02, 0x00, (uint8_t)(~(0x02 ^ 0x57 ^ 0x02 ^ 0x00)), 0x05};
+static uint8_t pattern3[] = {0x00, 0x23, 0x02, 0x57, 0x03, 0x00, (uint8_t)(~(0x02 ^ 0x57 ^ 0x03 ^ 0x00)), 0x05};
+static uint8_t pattern4[] = {0x00, 0x23, 0x02, 0x57, 0x04, 0x00, (uint8_t)(~(0x02 ^ 0x57 ^ 0x04 ^ 0x00)), 0x05};
+static uint8_t pattern5[] = {0x00, 0x23, 0x02, 0x57, 0x05, 0x00, (uint8_t)(~(0x02 ^ 0x57 ^ 0x05 ^ 0x00)), 0x05};
 
 static uint8_t finishDetectBytes[5] = {0xbb, 0xa0, 0xca, 0xa0 ^ 0xca, 0xaa};
 
@@ -815,10 +815,9 @@ static OSStatus	PerformThru(
 //    _sendReq = SendRequestConnection;
     _sendReq = SendRequestGetData;
     sendTXPtr = 0;
-    sendData.sendDataSize = 7;
+    sendData.sendDataSize = sizeof(pattern0) / sizeof(pattern0[0]);
     sendData.sendBytes = (uint8_t *)malloc(sendData.sendDataSize * sizeof(uint8_t));
     memcpy(sendData.sendBytes, pattern0, sendData.sendDataSize * sizeof(uint8_t));
-    NSLog(@"%d", sendData.sendDataSize * sizeof(uint8_t));
     self.isDetecting = YES;
     self.mute = YES;
 }
@@ -829,7 +828,7 @@ static OSStatus	PerformThru(
 //    _sendReq = SendRequestConnection;
     _sendReq = SendRequestGetData;
     sendTXPtr = 0;
-    sendData.sendDataSize = 7;
+    sendData.sendDataSize = sizeof(pattern1) / sizeof(pattern1[0]);
     sendData.sendBytes = (uint8_t *)malloc(sendData.sendDataSize * sizeof(uint8_t));
     memcpy(sendData.sendBytes, pattern1, sendData.sendDataSize * sizeof(uint8_t));
     self.isDetecting = YES;
@@ -842,7 +841,7 @@ static OSStatus	PerformThru(
 //    _sendReq = SendRequestConnection;
     _sendReq = SendRequestGetData;
     sendTXPtr = 0;
-    sendData.sendDataSize = 7;
+    sendData.sendDataSize = sizeof(pattern2) / sizeof(pattern2[0]);
     sendData.sendBytes = (uint8_t *)malloc(sendData.sendDataSize * sizeof(uint8_t));
     memcpy(sendData.sendBytes, pattern2, sendData.sendDataSize * sizeof(uint8_t));
     self.isDetecting = YES;
@@ -855,7 +854,7 @@ static OSStatus	PerformThru(
 //    _sendReq = SendRequestConnection;
     _sendReq = SendRequestGetData;
     sendTXPtr = 0;
-    sendData.sendDataSize = 7;
+    sendData.sendDataSize = sizeof(pattern3) / sizeof(pattern3[0]);
     sendData.sendBytes = (uint8_t *)malloc(sendData.sendDataSize * sizeof(uint8_t));
     memcpy(sendData.sendBytes, pattern3, sendData.sendDataSize * sizeof(uint8_t));
     self.isDetecting = YES;
@@ -868,7 +867,7 @@ static OSStatus	PerformThru(
 //    _sendReq = SendRequestConnection;
     _sendReq = SendRequestGetData;
     sendTXPtr = 0;
-    sendData.sendDataSize = 7;
+    sendData.sendDataSize = sizeof(pattern4) / sizeof(pattern4[0]);
     sendData.sendBytes = (uint8_t *)malloc(sendData.sendDataSize * sizeof(uint8_t));
     memcpy(sendData.sendBytes, pattern4, sendData.sendDataSize * sizeof(uint8_t));
     self.isDetecting = YES;
@@ -881,7 +880,7 @@ static OSStatus	PerformThru(
 //    _sendReq = SendRequestConnection;
     _sendReq = SendRequestGetData;
     sendTXPtr = 0;
-    sendData.sendDataSize = 7;
+    sendData.sendDataSize = sizeof(pattern5) / sizeof(pattern5[0]);
     sendData.sendBytes = (uint8_t *)malloc(sendData.sendDataSize * sizeof(uint8_t));
     memcpy(sendData.sendBytes, pattern5, sendData.sendDataSize * sizeof(uint8_t));
     self.isDetecting = YES;
