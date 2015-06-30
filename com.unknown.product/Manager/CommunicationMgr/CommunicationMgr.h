@@ -37,6 +37,13 @@
 - (void)clear;
 - (void)startDetect;
 - (void)stopDetect;
-- (void)sendStartDetectReq;
+
+- (void)sendOvercast;
+- (void)sendWet;
+- (void)sendDusk;
+- (void)sendNight;
+- (void)sendPattern4;
+- (void)sendSOS;
+//- (void)sendStartDetectReq;
 
 @end

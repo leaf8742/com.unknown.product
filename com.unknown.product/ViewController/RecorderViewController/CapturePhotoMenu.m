@@ -1,5 +1,6 @@
 #import "CapturePhotoMenu.h"
 #import "LocalizationManager.h"
+#import "WeatherModeManager.h"
 
 @interface CapturePhotoMenu()<UITableViewDataSource, UITableViewDelegate>
 
@@ -57,7 +58,7 @@
             case 0:
                 cell.imageView.image = [UIImage imageNamed:@"yintian"];
                 cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Overcast" comment:nil];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+//                cell.accessoryType = UITableViewCellAccessoryNone;
                 break;
 //            case 1:
 //                cell.imageView.image = [UIImage imageNamed:@"yinyutian"];
@@ -67,22 +68,23 @@
             case 1:
                 cell.imageView.image = [UIImage imageNamed:@"yutian"];
                 cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Wet" comment:nil];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+//                cell.accessoryType = UITableViewCellAccessoryNone;
                 break;
             case 2:
                 cell.imageView.image = [UIImage imageNamed:@"bangwan"];
                 cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Dusk" comment:nil];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+//                cell.accessoryType = UITableViewCellAccessoryNone;
                 break;
             case 3:
                 cell.imageView.image = [UIImage imageNamed:@"yewan"];
                 cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Night" comment:nil];
-                cell.accessoryType = UITableViewCellAccessoryNone;
+//                cell.accessoryType = UITableViewCellAccessoryNone;
                 break;
             default:
                 break;
         }
     }
+    cell.accessoryType = [[WeatherModeManager sharedInstance] weatherMode] == [indexPath row] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     return cell;
 }
 
@@ -97,12 +99,12 @@
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:1]];
             if (idx == [indexPath row]) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                [[WeatherModeManager sharedInstance] setWeatherMode:[indexPath row]];
             } else {
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
         }
     }
-//    cellForRowAtIndexPath
 }
 
 @end

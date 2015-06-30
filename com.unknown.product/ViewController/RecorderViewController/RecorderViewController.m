@@ -6,6 +6,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
 #import <CoordinatingController/CoordinatingController.h>
+#import "CommunicationMgr.h"
+#import "WeatherModeManager.h"
 
 /**
  * @enum kCameraMode
@@ -164,8 +166,6 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 }
 
 - (IBAction)capturePhoto:(UIButton *)sender {
-    
-    
     self.videoMenu.hidden = YES;
     self.capturePhotoMenu.hidden = YES;
     if (self.cameraMode == kCameraModePhoto) {
@@ -175,10 +175,12 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
             } else {
                 NSLog(@"Failed to capture photo: %@", error.localizedDescription);
             }
-//            [self library];
+            [WeatherModeManager sendPattern];
             [self.browse setBackgroundImage:image forState:UIControlStateNormal];
         }];
     } else {
+        [[CommunicationMgr sharedInstance] stopDetect];
+
         [UIView animateWithDuration:0.4 animations:^{
             self.capturePhotoWidth.constant = 75;
             self.capturePhotoHeight.constant = 75;

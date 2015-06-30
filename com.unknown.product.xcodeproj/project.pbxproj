@@ -32,6 +32,7 @@
 		0967ACE81B40CEAE000D5A20 /* icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0967ACE21B40CEAE000D5A20 /* icon-60@2x.png */; };
 		0967ACE91B40CEAE000D5A20 /* icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0967ACE31B40CEAE000D5A20 /* icon-60@3x.png */; };
 		0967ACEB1B40D089000D5A20 /* Welcome@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0967ACEA1B40D089000D5A20 /* Welcome@2x.png */; };
+		0967ACF61B42851C000D5A20 /* WeatherModeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0967ACF51B42851B000D5A20 /* WeatherModeManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		096B02931B3BE02200563C67 /* FocusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096B02921B3BE02200563C67 /* FocusView.m */; };
 		096B02A21B3BE5B100563C67 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 096B02A11B3BE5B100563C67 /* InterfaceController.m */; };
 		096B02A41B3BE5B100563C67 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 096B02A31B3BE5B100563C67 /* Images.xcassets */; };
@@ -170,6 +171,8 @@
 		0967ACE21B40CEAE000D5A20 /* icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60@2x.png"; sourceTree = "<group>"; };
 		0967ACE31B40CEAE000D5A20 /* icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60@3x.png"; sourceTree = "<group>"; };
 		0967ACEA1B40D089000D5A20 /* Welcome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Welcome@2x.png"; sourceTree = "<group>"; };
+		0967ACF41B42851B000D5A20 /* WeatherModeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherModeManager.h; sourceTree = "<group>"; };
+		0967ACF51B42851B000D5A20 /* WeatherModeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherModeManager.m; sourceTree = "<group>"; };
 		096B02911B3BE02200563C67 /* FocusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusView.h; sourceTree = "<group>"; };
 		096B02921B3BE02200563C67 /* FocusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusView.m; sourceTree = "<group>"; };
 		096B029C1B3BE5B100563C67 /* com.unknown.product WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "com.unknown.product WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -394,6 +397,15 @@
 				0935E7E61B3A4CAA007B16CD /* TextViewController.m */,
 			);
 			path = TextViewController;
+			sourceTree = "<group>";
+		};
+		0967ACF31B42851B000D5A20 /* WeatherModeManager */ = {
+			isa = PBXGroup;
+			children = (
+				0967ACF41B42851B000D5A20 /* WeatherModeManager.h */,
+				0967ACF51B42851B000D5A20 /* WeatherModeManager.m */,
+			);
+			path = WeatherModeManager;
 			sourceTree = "<group>";
 		};
 		096B029D1B3BE5B100563C67 /* com.unknown.product WatchKit Extension */ = {
@@ -667,6 +679,7 @@
 				09DC3DA71B008C3800602B2A /* DeviceManager */,
 				092AB9E11B1F491100B99E3D /* LocalizationManager */,
 				09D8D6191ADDF64B00AB939D /* LocationManager */,
+				0967ACF31B42851B000D5A20 /* WeatherModeManager */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -943,6 +956,7 @@
 				09BC2C081ADE18B900DC4F2E /* CameraInformation.m in Sources */,
 				098399871AED97D500EDE6EF /* VideoMenu.m in Sources */,
 				092AB9E41B1F491100B99E3D /* LocalizationManager.m in Sources */,
+				0967ACF61B42851C000D5A20 /* WeatherModeManager.m in Sources */,
 				0935E7E71B3A4CAA007B16CD /* TextViewController.m in Sources */,
 				09BC2C0D1ADE1C9E00DC4F2E /* MainMenuCell.m in Sources */,
 				09066ED31ADCED8300FF56BB /* main.m in Sources */,

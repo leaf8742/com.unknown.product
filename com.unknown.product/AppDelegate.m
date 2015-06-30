@@ -22,8 +22,8 @@
     [[CoordinatingController sharedInstance] pushViewControllerWithClass:[MainViewController class] animated:NO];
     [[CoordinatingController sharedInstance] pushViewControllerWithClass:[RecorderViewController class] animated:NO];
     
-//    [[CommunicationMgr sharedInstance] commnunicationInit];
-//    [[CommunicationMgr sharedInstance] startDetect];
+    [[CommunicationMgr sharedInstance] commnunicationInit];
+    [[CommunicationMgr sharedInstance] startDetect];
 //    [[CommunicationMgr sharedInstance] sendStartDetectReq];
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self

@@ -46,7 +46,7 @@
 }
 
 - (IBAction)send:(UIButton *)sender {
-    [[CommunicationMgr sharedInstance] sendStartDetectReq];
+//    [[CommunicationMgr sharedInstance] sendStartDetectReq];
 }
 
 #pragma mark - Memory Management

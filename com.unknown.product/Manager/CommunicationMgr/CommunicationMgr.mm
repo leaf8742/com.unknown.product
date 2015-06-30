@@ -101,6 +101,13 @@ typedef struct RecieveDataStruct {
 @synthesize mute;
 @synthesize unitIsRunning;
 
+static uint8_t pattern0[] = {0x23, 0x02, 0x57, 0x00, 0x00, static_cast<uint8_t>(~(0x02 ^ 0x57 ^ 0x00 ^ 0x00)), 0x05};
+static uint8_t pattern1[] = {0x23, 0x02, 0x57, 0x01, 0x00, static_cast<uint8_t>(~(0x02 ^ 0x57 ^ 0x01 ^ 0x00)), 0x05};
+static uint8_t pattern2[] = {0x23, 0x02, 0x57, 0x02, 0x00, static_cast<uint8_t>(~(0x02 ^ 0x57 ^ 0x02 ^ 0x00)), 0x05};
+static uint8_t pattern3[] = {0x23, 0x02, 0x57, 0x03, 0x00, static_cast<uint8_t>(~(0x02 ^ 0x57 ^ 0x03 ^ 0x00)), 0x05};
+static uint8_t pattern4[] = {0x23, 0x02, 0x57, 0x04, 0x00, static_cast<uint8_t>(~(0x02 ^ 0x57 ^ 0x04 ^ 0x00)), 0x05};
+static uint8_t pattern5[] = {0x23, 0x02, 0x57, 0x05, 0x00, static_cast<uint8_t>(~(0x02 ^ 0x57 ^ 0x05 ^ 0x00)), 0x05};
+
 static uint8_t startDetectBytes[] = {0x57, 0x02, 0xff,};
 //static uint8_t getDataBytes[5] = {0xbb, 0xad, 0xca, 0xad ^ 0xca, 0xaa};
 static uint8_t finishDetectBytes[5] = {0xbb, 0xa0, 0xca, 0xa0 ^ 0xca, 0xaa};
@@ -802,6 +809,84 @@ static OSStatus	PerformThru(
     }
     
     [self.avAudioSession setActive:NO error:nil];
+}
+
+- (void)sendOvercast {
+    [self startCountingTimeOut];
+    
+//    _sendReq = SendRequestConnection;
+    _sendReq = SendRequestGetData;
+    sendTXPtr = 0;
+    sendData.sendDataSize = 5;
+    sendData.sendBytes = (uint8_t *)malloc(sendData.sendDataSize * sizeof(uint8_t));
+    memcpy(sendData.sendBytes, pattern0, sendData.sendDataSize * sizeof(uint8_t));
+    self.isDetecting = YES;
+    self.mute = YES;
+}
+
+- (void)sendWet {
+    [self startCountingTimeOut];
+    
+//    _sendReq = SendRequestConnection;
+    _sendReq = SendRequestGetData;
+    sendTXPtr = 0;
+    sendData.sendDataSize = 5;
+    sendData.sendBytes = (uint8_t *)malloc(sendData.sendDataSize * sizeof(uint8_t));
+    memcpy(sendData.sendBytes, pattern1, sendData.sendDataSize * sizeof(uint8_t));
+    self.isDetecting = YES;
+    self.mute = YES;
+}
+
+- (void)sendDusk {
+    [self startCountingTimeOut];
+    
+//    _sendReq = SendRequestConnection;
+    _sendReq = SendRequestGetData;
+    sendTXPtr = 0;
+    sendData.sendDataSize = 5;
+    sendData.sendBytes = (uint8_t *)malloc(sendData.sendDataSize * sizeof(uint8_t));
+    memcpy(sendData.sendBytes, pattern2, sendData.sendDataSize * sizeof(uint8_t));
+    self.isDetecting = YES;
+    self.mute = YES;
+}
+
+- (void)sendNight {
+    [self startCountingTimeOut];
+    
+//    _sendReq = SendRequestConnection;
+    _sendReq = SendRequestGetData;
+    sendTXPtr = 0;
+    sendData.sendDataSize = 5;
+    sendData.sendBytes = (uint8_t *)malloc(sendData.sendDataSize * sizeof(uint8_t));
+    memcpy(sendData.sendBytes, pattern3, sendData.sendDataSize * sizeof(uint8_t));
+    self.isDetecting = YES;
+    self.mute = YES;
+}
+
+- (void)sendPattern4 {
+    [self startCountingTimeOut];
+    
+//    _sendReq = SendRequestConnection;
+    _sendReq = SendRequestGetData;
+    sendTXPtr = 0;
+    sendData.sendDataSize = 5;
+    sendData.sendBytes = (uint8_t *)malloc(sendData.sendDataSize * sizeof(uint8_t));
+    memcpy(sendData.sendBytes, pattern4, sendData.sendDataSize * sizeof(uint8_t));
+    self.isDetecting = YES;
+    self.mute = YES;
+}
+
+- (void)sendSOS {
+    [self startCountingTimeOut];
+    
+//    _sendReq = SendRequestConnection;
+    _sendReq = SendRequestGetData;
+    sendTXPtr = 0;
+    sendData.sendDataSize = 5;
+    sendData.sendBytes = (uint8_t *)malloc(sendData.sendDataSize * sizeof(uint8_t));
+    memcpy(sendData.sendBytes, pattern5, sendData.sendDataSize * sizeof(uint8_t));
+    self.isDetecting = YES;
+    self.mute = YES;
 }
 
 - (void)sendStartDetectReq {

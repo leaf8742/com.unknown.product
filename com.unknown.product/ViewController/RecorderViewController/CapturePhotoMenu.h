@@ -4,6 +4,7 @@
  * @date 2015-04-26
  */
 #import <UIKit/UIKit.h>
+#import "WeatherModeManager.h"
 
 /**
  * @class CapturePhotoMenu
