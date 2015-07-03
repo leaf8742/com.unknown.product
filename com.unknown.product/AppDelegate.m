@@ -26,20 +26,7 @@
     [[CommunicationMgr sharedInstance] startDetect];
 //    [[CommunicationMgr sharedInstance] sendStartDetectReq];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(volumeChanged:)
-//                                                 name:@"AVSystemController_SystemVolumeDidChangeNotification"
-//                                               object:nil];
     return YES;
-}
-
-- (void)volumeChanged:(NSNotification *)notification {
-    float volume =
-    [[[notification userInfo]
-      objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"]
-     floatValue];
-    
-    NSLog(@"current volume = %f", volume);
 }
 
 - (void)appearance {

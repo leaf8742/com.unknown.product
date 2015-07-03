@@ -139,6 +139,16 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
     [self library];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyStateService:) name:KeyStateService object:nil];
+    [NSTimer scheduledTimerWithTimeInterval:4.0f target:self selector:@selector(DelayNotification) userInfo:nil repeats:NO];
+
+}
+
+- (void)DelayNotification{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(volumeChanged:)
+                                                 name:@"AVSystemController_SystemVolumeDidChangeNotification"
+                                               object:nil];
+
 }
 
 - (void)viewDidLayoutSubviews {
@@ -168,6 +178,11 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 - (IBAction)capturePhoto:(UIButton *)sender {
     self.videoMenu.hidden = YES;
     self.capturePhotoMenu.hidden = YES;
+    if ([[WeatherModeManager sharedInstance] weatherMode] == kWeatherModeWet ||
+        [[WeatherModeManager sharedInstance] weatherMode] == kWeatherModeDusk) {
+        [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(DelaycapturePhoto) userInfo:nil repeats:NO];
+        return;
+    }
     if (self.cameraMode == kCameraModePhoto) {
         [self.recorder capturePhoto:^(NSError *error, UIImage *image) {
             if (image != nil) {
@@ -194,6 +209,35 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
         }];
     }
 }
+
+- (void)DelaycapturePhoto{
+    if (self.cameraMode == kCameraModePhoto) {
+        [self.recorder capturePhoto:^(NSError *error, UIImage *image) {
+            if (image != nil) {
+                UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+            } else {
+                NSLog(@"Failed to capture photo: %@", error.localizedDescription);
+            }
+            [WeatherModeManager sendPattern];
+            [self.browse setBackgroundImage:image forState:UIControlStateNormal];
+        }];
+    } else {
+        [[CommunicationMgr sharedInstance] stopDetect];
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.capturePhotoWidth.constant = 75;
+            self.capturePhotoHeight.constant = 75;
+            self.capturePhotoYCenter.constant = 0;
+            
+            self.recordVideoWidth.constant = 40;
+            self.recordVideoHeight.constant = 40;
+            self.recordVideoYCenter.constant = -74;
+            
+            [self setPhotoModeImage];
+        }];
+    }
+}
+
 
 - (IBAction)recordVideo:(UIButton *)sender {
     self.videoMenu.hidden = YES;
@@ -393,6 +437,17 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
     self.switchCaptureDevice.enabled = YES;
 }
 
+- (void)volumeChanged:(NSNotification *)notification {
+    float volume =
+    [[[notification userInfo]
+      objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"]
+     floatValue];
+    NSLog(@"%f",volume);
+    [self capturePhoto:nil];
+
+}
+
+
 #pragma mark - Memory Management
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -400,6 +455,7 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AVSystemController_SystemVolumeDidChangeNotification" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
