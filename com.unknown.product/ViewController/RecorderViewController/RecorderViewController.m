@@ -139,16 +139,13 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
     [self library];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyStateService:) name:KeyStateService object:nil];
-    [NSTimer scheduledTimerWithTimeInterval:4.0f target:self selector:@selector(DelayNotification) userInfo:nil repeats:NO];
-
-}
-
-- (void)DelayNotification{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(volumeChanged:)
-                                                 name:@"AVSystemController_SystemVolumeDidChangeNotification"
-                                               object:nil];
-
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(volumeChanged:)
+                                                     name:@"AVSystemController_SystemVolumeDidChangeNotification"
+                                                   object:nil];
+    });
 }
 
 - (void)viewDidLayoutSubviews {
@@ -455,7 +452,6 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AVSystemController_SystemVolumeDidChangeNotification" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
