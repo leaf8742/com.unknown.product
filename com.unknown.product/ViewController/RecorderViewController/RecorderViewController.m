@@ -168,7 +168,6 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 }
 
 - (void)switchCaptureDevices:(UIBarButtonItem *)sender {
-    sender.enabled = NO;
     [self.recorder switchCaptureDevices];
 }
 
@@ -184,11 +183,11 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
         [self.recorder capturePhoto:^(NSError *error, UIImage *image) {
             if (image != nil) {
                 UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+                [WeatherModeManager sendPattern];
+                [self.browse setBackgroundImage:image forState:UIControlStateNormal];
             } else {
                 NSLog(@"Failed to capture photo: %@", error.localizedDescription);
             }
-            [WeatherModeManager sendPattern];
-            [self.browse setBackgroundImage:image forState:UIControlStateNormal];
         }];
     } else {
         [[CommunicationMgr sharedInstance] stopDetect];
@@ -399,6 +398,12 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
     }
 }
 
+- (void)volumeChanged:(NSNotification *)notification {
+    float volume = [[[notification userInfo] objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"] floatValue];
+    NSLog(@"%f", volume);
+    [self capturePhoto:nil];
+}
+
 #pragma mark - MWPhotoBrowserDelegate
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
     ALAssetsGroup *groupForCell = [self.groups lastObject];
@@ -430,20 +435,9 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
     UISaveVideoAtPathToSavedPhotosAlbum(segment.url.path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 }
 
-- (void)recorder:(SCRecorder *)recorder didReconfigureVideoInput:(NSError *)videoInputError {
-    self.switchCaptureDevice.enabled = YES;
+- (void)recorder:(SCRecorder *)recorder didCompleteSession:(SCRecordSession *)recordSession {
+    [[SCRecordSessionManager sharedInstance] saveRecordSession:recordSession];
 }
-
-- (void)volumeChanged:(NSNotification *)notification {
-    float volume =
-    [[[notification userInfo]
-      objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"]
-     floatValue];
-    NSLog(@"%f",volume);
-    [self capturePhoto:nil];
-
-}
-
 
 #pragma mark - Memory Management
 - (void)didReceiveMemoryWarning {
