@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 
 @interface RecorderViewController ()<SCRecorderDelegate, MWPhotoBrowserDelegate>
 
+@property (strong, nonatomic) SCRecordSession *recordSession;
+
 @property (strong, nonatomic) SCRecorder *recorder;
 
 //@property (strong, nonatomic) SCRecorderToolsView *focusView;
@@ -111,9 +113,9 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
     self.recorder.autoSetVideoOrientation = YES;
     self.recorder.previewView = self.preview;
     self.recorder.initializeSessionLazily = YES;
-    SCRecordSession *session = [SCRecordSession recordSession];
-    session.fileType = AVFileTypeMPEG4;
-    self.recorder.session = session;
+    self.recordSession = [SCRecordSession recordSession];
+    self.recordSession.fileType = AVFileTypeMPEG4;
+    self.recorder.session = self.recordSession;
 
     NSError *error;
     if (![self.recorder prepare:&error]) {
@@ -244,7 +246,7 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
         [self.recordVideo setBackgroundImage:[UIImage imageNamed:@"recordVideo_large_highlighted"] forState:UIControlStateNormal];
     } else if (self.cameraMode == kCameraModeRecording) {
         [self.recorder pause];
-        [[SCRecordSessionManager sharedInstance] saveRecordSession:self.recorder.session];
+        [[SCRecordSessionManager sharedInstance] saveRecordSession:self.recordSession];
         self.cameraMode = kCameraModeVideo;
         [self.recordVideo setBackgroundImage:[UIImage imageNamed:@"recordVideo_large_normal"] forState:UIControlStateNormal];
         [self library];
@@ -401,7 +403,16 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 - (void)volumeChanged:(NSNotification *)notification {
     float volume = [[[notification userInfo] objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"] floatValue];
     NSLog(@"%f", volume);
-    [self capturePhoto:nil];
+    
+    if (![[[notification userInfo] objectForKeyedSubscript:@"AVSystemController_AudioVolumeChangeReasonNotificationParameter"] isEqualToString:@"ExplicitVolumeChange"]) {
+        return;
+    }
+    
+    if (self.cameraMode == kCameraModePhoto) {
+        [self capturePhoto:nil];
+    } else {
+        [self recordVideo:nil];
+    }
 }
 
 #pragma mark - MWPhotoBrowserDelegate
@@ -436,6 +447,7 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 }
 
 - (void)recorder:(SCRecorder *)recorder didCompleteSession:(SCRecordSession *)recordSession {
+    self.recordSession = recordSession;
     [[SCRecordSessionManager sharedInstance] saveRecordSession:recordSession];
 }
 
