@@ -3,7 +3,6 @@
 #import "DeviceManager.h"
 #import <CoordinatingController/CoordinatingController.h>
 #import "LocalizationManager.h"
-#import "CommunicationMgr.h"
 #import "RecorderViewController.h"
 
 @interface AppDelegate ()
@@ -21,10 +20,6 @@
     [self appearance];
     [[CoordinatingController sharedInstance] pushViewControllerWithClass:[MainViewController class] animated:NO];
     [[CoordinatingController sharedInstance] pushViewControllerWithClass:[RecorderViewController class] animated:NO];
-    
-    [[CommunicationMgr sharedInstance] commnunicationInit];
-    [[CommunicationMgr sharedInstance] startDetect];
-//    [[CommunicationMgr sharedInstance] sendStartDetectReq];
     
     return YES;
 }

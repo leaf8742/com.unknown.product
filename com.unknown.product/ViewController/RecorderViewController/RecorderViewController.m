@@ -158,12 +158,17 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    [[CommunicationMgr sharedInstance] commnunicationInit];
+    [[CommunicationMgr sharedInstance] startDetect];
+
     [self.recorder startRunning];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithWhite:0.2 alpha:1]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    [[CommunicationMgr sharedInstance] stopDetect];
     
     [self.recorder stopRunning];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:71 / 255.0 green:149 / 255.0 blue:201 / 255.0 alpha:1]];
@@ -176,49 +181,25 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 - (IBAction)capturePhoto:(UIButton *)sender {
     self.videoMenu.hidden = YES;
     self.capturePhotoMenu.hidden = YES;
-    if ([[WeatherModeManager sharedInstance] weatherMode] == kWeatherModeWet ||
-        [[WeatherModeManager sharedInstance] weatherMode] == kWeatherModeDusk) {
-        [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(DelaycapturePhoto) userInfo:nil repeats:NO];
-        return;
-    }
-    if (self.cameraMode == kCameraModePhoto) {
-        [self.recorder capturePhoto:^(NSError *error, UIImage *image) {
-            if (image != nil) {
-                UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-                [WeatherModeManager sendPattern];
-                [self.browse setBackgroundImage:image forState:UIControlStateNormal];
-            } else {
-                NSLog(@"Failed to capture photo: %@", error.localizedDescription);
-            }
-        }];
-    } else {
-        [[CommunicationMgr sharedInstance] stopDetect];
 
-        [UIView animateWithDuration:0.4 animations:^{
-            self.capturePhotoWidth.constant = 75;
-            self.capturePhotoHeight.constant = 75;
-            self.capturePhotoYCenter.constant = 0;
-            
-            self.recordVideoWidth.constant = 40;
-            self.recordVideoHeight.constant = 40;
-            self.recordVideoYCenter.constant = -74;
-            
-            [self setPhotoModeImage];
-        }];
-    }
-}
-
-- (void)DelaycapturePhoto{
     if (self.cameraMode == kCameraModePhoto) {
-        [self.recorder capturePhoto:^(NSError *error, UIImage *image) {
-            if (image != nil) {
-                UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-            } else {
-                NSLog(@"Failed to capture photo: %@", error.localizedDescription);
-            }
-            [WeatherModeManager sendPattern];
-            [self.browse setBackgroundImage:image forState:UIControlStateNormal];
-        }];
+        NSTimeInterval timeInterval = 0;
+        if ([[WeatherModeManager sharedInstance] weatherMode] == kWeatherModeWet ||
+            [[WeatherModeManager sharedInstance] weatherMode] == kWeatherModeDusk) {
+            timeInterval = 0.3f;
+        }
+        
+        [WeatherModeManager sendPattern];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.recorder capturePhoto:^(NSError *error, UIImage *image) {
+                if (image != nil) {
+                    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+                    [self.browse setBackgroundImage:image forState:UIControlStateNormal];
+                } else {
+                    NSLog(@"Failed to capture photo: %@", error.localizedDescription);
+                }
+            }];
+        });
     } else {
         [[CommunicationMgr sharedInstance] stopDetect];
         
@@ -235,7 +216,6 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
         }];
     }
 }
-
 
 - (IBAction)recordVideo:(UIButton *)sender {
     self.videoMenu.hidden = YES;
