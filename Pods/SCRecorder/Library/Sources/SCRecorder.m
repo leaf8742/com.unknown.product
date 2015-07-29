@@ -9,10 +9,6 @@
 #import "SCRecorder.h"
 #import "SCRecordSession_Internal.h"
 #define dispatch_handler(x) if (x != nil) dispatch_async(dispatch_get_main_queue(), x)
-#define SCRecorderFocusContext ((void*)0x1)
-#define SCRecorderVideoEnabledContext ((void*)0x2)
-#define SCRecorderAudioEnabledContext ((void*)0x3)
-#define SCRecorderPhotoOptionsContext ((void*)0x3)
 #define kSCRecorderRecordSessionQueueKey "SCRecorderRecordSessionQueue"
 #define kMinTimeBetweenAppend 0.004
 
@@ -48,6 +44,12 @@
 @end
 
 @implementation SCRecorder
+
+static char* SCRecorderFocusContext = "FocusContext";
+static char* SCRecorderExposureContext = "ExposureContext";
+static char* SCRecorderVideoEnabledContext = "VideoEnabledContext";
+static char* SCRecorderAudioEnabledContext = "AudioEnabledContext";
+static char* SCRecorderPhotoOptionsContext = "PhotoOptionsContext";
 
 - (id)init {
     self = [super init];
@@ -333,7 +335,11 @@
 }
 
 - (void)_subjectAreaDidChange {
-    [self focusCenter];
+    id<SCRecorderDelegate> delegate = self.delegate;
+    
+    if (![delegate respondsToSelector:@selector(recorderShouldAutomaticallyRefocus:)] || [delegate recorderShouldAutomaticallyRefocus:self]) {
+        [self focusCenter];        
+    }
 }
 
 - (UIImage *)_imageFromSampleBufferHolder:(SCSampleBufferHolder *)sampleBufferHolder {
@@ -846,6 +852,21 @@
     return segmentInfo;
 }
 
+- (void)_focusDidComplete {
+    id<SCRecorderDelegate> delegate = self.delegate;
+
+    [self setAdjustingFocus:NO];
+    
+    if ([delegate respondsToSelector:@selector(recorderDidEndFocus:)]) {
+        [delegate recorderDidEndFocus:self];
+    }
+    
+    if (_needsSwitchBackToContinuousFocus) {
+        _needsSwitchBackToContinuousFocus = NO;
+        [self continuousFocusAtPoint:self.focusPointOfInterest];
+    }
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     id<SCRecorderDelegate> delegate = self.delegate;
     
@@ -858,17 +879,21 @@
                 [delegate recorderDidStartFocus:self];
             }
         } else {
-            [self setAdjustingFocus:NO];
-            
-            if ([delegate respondsToSelector:@selector(recorderDidEndFocus:)]) {
-                [delegate recorderDidEndFocus:self];
+            [self _focusDidComplete];
+        }
+    } else if (context == SCRecorderExposureContext) {
+        BOOL isAdjustingExposure = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+        
+        [self setAdjustingExposure:isAdjustingExposure];
+
+        if (isAdjustingExposure) {
+            if ([delegate respondsToSelector:@selector(recorderDidStartAdjustingExposure:)]) {
+                [delegate recorderDidStartAdjustingExposure:self];
+            }            
+        } else {
+            if ([delegate respondsToSelector:@selector(recorderDidEndAdjustingExposure:)]) {
+                [delegate recorderDidEndAdjustingExposure:self];
             }
-            
-            if (_needsSwitchBackToContinuousFocus) {
-                _needsSwitchBackToContinuousFocus = NO;
-                [self continuousFocusAtPoint:self.focusPointOfInterest];
-            }
-            
         }
     } else if (context == SCRecorderAudioEnabledContext) {
         if ([NSThread isMainThread]) {
@@ -893,10 +918,12 @@
 
 - (void)addVideoObservers:(AVCaptureDevice*)videoDevice {
     [videoDevice addObserver:self forKeyPath:@"adjustingFocus" options:NSKeyValueObservingOptionNew context:SCRecorderFocusContext];
+    [videoDevice addObserver:self forKeyPath:@"adjustingExposure" options:NSKeyValueObservingOptionNew context:SCRecorderExposureContext];
 }
 
 - (void)removeVideoObservers:(AVCaptureDevice*)videoDevice {
     [videoDevice removeObserver:self forKeyPath:@"adjustingFocus"];
+    [videoDevice removeObserver:self forKeyPath:@"adjustingExposure"];
 }
 
 - (void)configureDevice:(AVCaptureDevice*)newDevice mediaType:(NSString*)mediaType error:(NSError**)error {
@@ -1062,38 +1089,48 @@
     AVCaptureExposureMode exposureMode = continuousMode ? AVCaptureExposureModeContinuousAutoExposure : AVCaptureExposureModeAutoExpose;
     AVCaptureWhiteBalanceMode whiteBalanceMode = continuousMode ? AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance : AVCaptureWhiteBalanceModeAutoWhiteBalance;
     
-    if ([device isFocusPointOfInterestSupported] && [device isFocusModeSupported:focusMode]) {
-        CGPoint currentPointOfInterest = device.focusPointOfInterest;
-        AVCaptureFocusMode currentFocusMode = device.focusMode;
+    NSError *error;
+    if ([device lockForConfiguration:&error]) {
+        BOOL focusing = NO;
+        BOOL adjustingExposure = NO;
         
-        NSError *error;
-        if (!CGPointEqualToPoint(point, currentPointOfInterest) || currentFocusMode != focusMode) {
-            if ([device lockForConfiguration:&error]) {
-                [device setFocusPointOfInterest:point];
-                [device setFocusMode:focusMode];
-                
-                if ([device isExposurePointOfInterestSupported]) {
-                    [device setExposurePointOfInterest:point];
-                }
-                
-                if ([device isExposureModeSupported:exposureMode]) {
-                    [device setExposureMode:exposureMode];
-                }
-                
-                if ([device isWhiteBalanceModeSupported:whiteBalanceMode]) {
-                    [device setWhiteBalanceMode:whiteBalanceMode];
-                }
-                
-                [device unlockForConfiguration];
-                
-                if (focusMode != AVCaptureFocusModeContinuousAutoFocus) {
-                    id<SCRecorderDelegate> delegate = self.delegate;
-                    if ([delegate respondsToSelector:@selector(recorderWillStartFocus:)]) {
-                        [delegate recorderWillStartFocus:self];
-                    }
-                    
-                    [self setAdjustingFocus:YES];
-                }
+        if (device.isFocusPointOfInterestSupported) {
+            device.focusPointOfInterest = point;
+        }
+        if ([device isFocusModeSupported:focusMode]) {
+            device.focusMode = focusMode;
+            focusing = YES;
+        }
+        
+        if (device.isExposurePointOfInterestSupported) {
+            device.exposurePointOfInterest = point;
+        }
+        
+        if ([device isExposureModeSupported:exposureMode]) {
+            device.exposureMode = exposureMode;
+            adjustingExposure = YES;
+        }
+        
+        if ([device isWhiteBalanceModeSupported:whiteBalanceMode]) {
+            device.whiteBalanceMode = whiteBalanceMode;
+        }
+        
+        [device unlockForConfiguration];
+        
+        id<SCRecorderDelegate> delegate = self.delegate;
+        if (focusMode != AVCaptureFocusModeContinuousAutoFocus && focusing) {
+            if ([delegate respondsToSelector:@selector(recorderWillStartFocus:)]) {
+                [delegate recorderWillStartFocus:self];
+            }
+            
+            [self setAdjustingFocus:YES];
+        }
+        
+        if (exposureMode != AVCaptureExposureModeContinuousAutoExposure && adjustingExposure) {
+            [self setAdjustingExposure:YES];
+            
+            if ([delegate respondsToSelector:@selector(recorderWillStartAdjustingExposure:)]) {
+                [delegate recorderWillStartAdjustingExposure:self];
             }
         }
     }
@@ -1117,6 +1154,14 @@
 - (void)refocus {
     _needsSwitchBackToContinuousFocus = YES;
     [self autoFocusAtPoint:self.focusPointOfInterest];
+}
+
+- (CGPoint)exposurePointOfInterest {
+    return [self.currentVideoDeviceInput device].exposurePointOfInterest;
+}
+
+- (BOOL)exposureSupported {
+    return [self.currentVideoDeviceInput device].isExposurePointOfInterestSupported;
 }
 
 - (CGPoint)focusPointOfInterest {
@@ -1217,6 +1262,8 @@
 }
 
 - (void)setDevice:(AVCaptureDevicePosition)device {
+    [self willChangeValueForKey:@"device"];
+    
     _device = device;
     if (_resetZoomOnChangeDevice) {
         self.videoZoomFactor = 1;
@@ -1224,6 +1271,8 @@
     if (_captureSession != nil) {
         [self reconfigureVideoInput:self.videoConfiguration.enabled audioInput:NO];
     }
+    
+    [self didChangeValueForKey:@"device"];
 }
 
 - (void)setFlashMode:(SCFlashMode)flashMode {
@@ -1309,6 +1358,16 @@
 
 - (BOOL)isAdjustingFocus {
     return _adjustingFocus;
+}
+
+- (void)setAdjustingExposure:(BOOL)adjustingExposure {
+    if (_isAdjustingExposure != adjustingExposure) {
+        [self willChangeValueForKey:@"isAdjustingExposure"];
+        
+        _isAdjustingExposure = adjustingExposure;
+        
+        [self didChangeValueForKey:@"isAdjustingExposure"];
+    }
 }
 
 - (void)setAdjustingFocus:(BOOL)adjustingFocus {

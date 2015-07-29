@@ -21,7 +21,7 @@
         case 0:
             return 3;
         default:
-            return 4;
+            return 5;
     }
 }
 
@@ -79,6 +79,10 @@
                 cell.imageView.image = [UIImage imageNamed:@"yewan"];
                 cell.textLabel.text = [LocalizationManager localizedStringForKey:@"Night" comment:nil];
 //                cell.accessoryType = UITableViewCellAccessoryNone;
+                break;
+            case 4:
+                cell.imageView.image = [UIImage imageNamed:@"yewan"];
+                cell.textLabel.text = [LocalizationManager localizedStringForKey:@"SOSMode" comment:nil];
                 break;
             default:
                 break;
