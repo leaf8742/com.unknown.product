@@ -93,7 +93,6 @@
 		09BC2C301ADE7ABD00DC4F2E /* radarTab_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09BC2C281ADE7ABD00DC4F2E /* radarTab_selected@2x.png */; };
 		09BC2C311ADE7ABD00DC4F2E /* settingTab_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09BC2C291ADE7ABD00DC4F2E /* settingTab_normal@2x.png */; };
 		09BC2C321ADE7ABD00DC4F2E /* settingTab_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09BC2C2A1ADE7ABD00DC4F2E /* settingTab_selected@2x.png */; };
-		09C8518A1B7797CA008A5AFF /* BatteryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C851891B7797CA008A5AFF /* BatteryView.m */; };
 		09D8D6101ADDF43F00AB939D /* RadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D8D60F1ADDF43F00AB939D /* RadarViewController.m */; };
 		09D8D6141ADDF4A800AB939D /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D8D6131ADDF4A800AB939D /* LocationViewController.m */; };
 		09D8D61C1ADDF64B00AB939D /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D8D61B1ADDF64B00AB939D /* LocationManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -264,8 +263,6 @@
 		09BC2C281ADE7ABD00DC4F2E /* radarTab_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radarTab_selected@2x.png"; sourceTree = "<group>"; };
 		09BC2C291ADE7ABD00DC4F2E /* settingTab_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingTab_normal@2x.png"; sourceTree = "<group>"; };
 		09BC2C2A1ADE7ABD00DC4F2E /* settingTab_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingTab_selected@2x.png"; sourceTree = "<group>"; };
-		09C851881B7797CA008A5AFF /* BatteryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatteryView.h; sourceTree = "<group>"; };
-		09C851891B7797CA008A5AFF /* BatteryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatteryView.m; sourceTree = "<group>"; };
 		09D8D60E1ADDF43F00AB939D /* RadarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadarViewController.h; sourceTree = "<group>"; };
 		09D8D60F1ADDF43F00AB939D /* RadarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadarViewController.m; sourceTree = "<group>"; };
 		09D8D6121ADDF4A800AB939D /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationViewController.h; sourceTree = "<group>"; };
@@ -342,8 +339,6 @@
 				09066EDF1ADCED8300FF56BB /* LaunchScreen.xib */,
 				09066EDD1ADCED8300FF56BB /* Images.xcassets */,
 				09066ED01ADCED8300FF56BB /* Supporting Files */,
-				09C851881B7797CA008A5AFF /* BatteryView.h */,
-				09C851891B7797CA008A5AFF /* BatteryView.m */,
 			);
 			path = com.unknown.product;
 			sourceTree = "<group>";
@@ -947,7 +942,6 @@
 				096B02931B3BE02200563C67 /* FocusView.m in Sources */,
 				099F3C2E1AE9E4760083D387 /* RecorderViewController.m in Sources */,
 				09D8D61C1ADDF64B00AB939D /* LocationManager.m in Sources */,
-				09C8518A1B7797CA008A5AFF /* BatteryView.m in Sources */,
 				098B92591B292BE200F0C443 /* FFTBufferManager.cpp in Sources */,
 				09BC2C041ADE16B500DC4F2E /* UserInformation.m in Sources */,
 				099A644B1B1FE74D00EFF47E /* RadarFrequencyViewController.m in Sources */,

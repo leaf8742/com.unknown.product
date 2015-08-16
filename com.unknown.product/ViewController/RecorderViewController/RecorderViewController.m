@@ -1,3 +1,5 @@
+#import <AudioToolbox/AudioToolbox.h>
+#import <AudioToolbox/AudioSession.h>
 #import "RecorderViewController.h"
 #import "SCRecordSessionManager.h"
 #import "MainMenuViewController.h"
@@ -26,7 +28,7 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
     kCameraModeRecording,
 };
 
-@interface RecorderViewController ()<SCRecorderDelegate, MWPhotoBrowserDelegate>
+@interface RecorderViewController ()<SCRecorderDelegate, MWPhotoBrowserDelegate, AVAudioSessionDelegate>
 
 @property (strong, nonatomic) SCRecordSession *recordSession;
 
@@ -148,6 +150,36 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
                                                      name:@"AVSystemController_SystemVolumeDidChangeNotification"
                                                    object:nil];
     });
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(handleRouteChange:)
+                                                 name: AVAudioSessionRouteChangeNotification
+                                               object: [AVAudioSession sharedInstance]];
+}
+
+- (void)handleRouteChange:(NSNotification *)notification {
+//    NSString *inputType = [[[notification.userInfo[@"AVAudioSessionRouteChangePreviousRouteKey"] inputs] objectAtIndex:0] portType];
+    NSString *outputType = [[[notification.userInfo[@"AVAudioSessionRouteChangePreviousRouteKey"] outputs] objectAtIndex:0] portType];
+//    NSLog(@"inputType: %@", inputType);
+//    NSLog(@"outputType: %@", outputType);
+    
+    if ([outputType isEqualToString:@"Speaker"]) {
+        // 插入了耳机
+        [[CommunicationMgr sharedInstance] commnunicationInit];
+        [[CommunicationMgr sharedInstance] startDetect];
+    } else if ([outputType isEqualToString:@"Headphones"]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVAudioSessionRouteChangeNotification object:[AVAudioSession sharedInstance]];
+        
+        // 拔出了耳机
+        [[CommunicationMgr sharedInstance] stopDetect];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] addObserver: self
+                                                     selector: @selector(handleRouteChange:)
+                                                         name: AVAudioSessionRouteChangeNotification
+                                                       object: [AVAudioSession sharedInstance]];
+        });
+    }
 }
 
 - (void)viewDidLayoutSubviews {
