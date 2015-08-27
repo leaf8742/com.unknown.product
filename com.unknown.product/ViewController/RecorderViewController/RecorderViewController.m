@@ -158,16 +158,12 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 }
 
 - (void)handleRouteChange:(NSNotification *)notification {
-//    NSString *inputType = [[[notification.userInfo[@"AVAudioSessionRouteChangePreviousRouteKey"] inputs] objectAtIndex:0] portType];
-    NSString *outputType = [[[notification.userInfo[@"AVAudioSessionRouteChangePreviousRouteKey"] outputs] objectAtIndex:0] portType];
-//    NSLog(@"inputType: %@", inputType);
-//    NSLog(@"outputType: %@", outputType);
-    
-    if ([outputType isEqualToString:@"Speaker"]) {
+
+    if ([[notification.object availableInputs] count] == 2) {
         // 插入了耳机
         [[CommunicationMgr sharedInstance] commnunicationInit];
         [[CommunicationMgr sharedInstance] startDetect];
-    } else if ([outputType isEqualToString:@"Headphones"]) {
+    } else {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:AVAudioSessionRouteChangeNotification object:[AVAudioSession sharedInstance]];
         
         // 拔出了耳机
@@ -190,8 +186,8 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [[CommunicationMgr sharedInstance] commnunicationInit];
-    [[CommunicationMgr sharedInstance] startDetect];
+//    [[CommunicationMgr sharedInstance] commnunicationInit];
+//    [[CommunicationMgr sharedInstance] startDetect];
 
     [self.recorder startRunning];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithWhite:0.2 alpha:1]];
@@ -200,7 +196,7 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [[CommunicationMgr sharedInstance] stopDetect];
+//    [[CommunicationMgr sharedInstance] stopDetect];
     
     [self.recorder stopRunning];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:71 / 255.0 green:149 / 255.0 blue:201 / 255.0 alpha:1]];
@@ -470,6 +466,7 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
 }
 
 - (void)dealloc {
+    [[CommunicationMgr sharedInstance] stopDetect];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
