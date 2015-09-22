@@ -4,6 +4,7 @@
 #import <CoordinatingController/CoordinatingController.h>
 #import "LocalizationManager.h"
 #import "RecorderViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface AppDelegate ()
 

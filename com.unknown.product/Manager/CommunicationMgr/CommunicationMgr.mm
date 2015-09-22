@@ -12,6 +12,7 @@
 #import "FFTBufferManager.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import "DeviceManager.h"
 
 enum uart_state {
     STARTBIT = 0,
@@ -811,6 +812,7 @@ static OSStatus	PerformThru(
 
 - (void)sendOvercast {
     [self startCountingTimeOut];
+    [DeviceManager resetVolume];
     
 //    _sendReq = SendRequestConnection;
     _sendReq = SendRequestGetData;
@@ -824,7 +826,8 @@ static OSStatus	PerformThru(
 
 - (void)sendWet {
     [self startCountingTimeOut];
-    
+    [DeviceManager resetVolume];
+
 //    _sendReq = SendRequestConnection;
     _sendReq = SendRequestGetData;
     sendTXPtr = 0;
@@ -837,7 +840,8 @@ static OSStatus	PerformThru(
 
 - (void)sendDusk {
     [self startCountingTimeOut];
-    
+    [DeviceManager resetVolume];
+
 //    _sendReq = SendRequestConnection;
     _sendReq = SendRequestGetData;
     sendTXPtr = 0;
@@ -850,7 +854,8 @@ static OSStatus	PerformThru(
 
 - (void)sendNight {
     [self startCountingTimeOut];
-    
+    [DeviceManager resetVolume];
+
 //    _sendReq = SendRequestConnection;
     _sendReq = SendRequestGetData;
     sendTXPtr = 0;
@@ -863,7 +868,8 @@ static OSStatus	PerformThru(
 
 - (void)sendPattern4 {
     [self startCountingTimeOut];
-    
+    [DeviceManager resetVolume];
+
 //    _sendReq = SendRequestConnection;
     _sendReq = SendRequestGetData;
     sendTXPtr = 0;
@@ -876,7 +882,8 @@ static OSStatus	PerformThru(
 
 - (void)sendSOS {
     [self startCountingTimeOut];
-    
+    [DeviceManager resetVolume];
+
 //    _sendReq = SendRequestConnection;
     _sendReq = SendRequestGetData;
     sendTXPtr = 0;

@@ -2,6 +2,7 @@
 #import "Model.h"
 #import "MainMenuViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 NSString *const StopScan = @"StopScan";
 NSString *const KeyStateService = @"KeyStateService";
@@ -186,6 +187,21 @@ NSString *const KeyStateService = @"KeyStateService";
     if ([DeviceManager sharedInstance].audioEnabled) {
         AudioServicesPlaySystemSound(1005);
     }
+}
+
++ (void)resetVolume {
+    MPVolumeView* volumeView = [[MPVolumeView alloc] init];
+    
+    //find the volumeSlider
+    UISlider* volumeViewSlider = nil;
+    for (UIView *view in [volumeView subviews]){
+        if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
+            volumeViewSlider = (UISlider*)view;
+            break;
+        }
+    }
+    
+    [volumeViewSlider setValue:0.3 animated:YES];
 }
 
 #pragma mark - Signleton Implementation

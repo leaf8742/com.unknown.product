@@ -32,6 +32,8 @@ FOUNDATION_EXPORT NSString *const KeyStateService;
 
 + (void)playAudio;
 
++ (void)resetVolume;
+
 /// @brief 防丢距离
 @property (assign, nonatomic) NSInteger alarmDistance;
 

@@ -143,7 +143,7 @@ typedef NS_ENUM(NSInteger, kCameraMode) {
     [self library];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyStateService:) name:KeyStateService object:nil];
-    
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(volumeChanged:)
